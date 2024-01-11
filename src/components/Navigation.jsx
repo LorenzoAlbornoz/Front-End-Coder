@@ -3,13 +3,12 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { FaUser, FaShoppingCart } from 'react-icons/fa';
-import { FormControl, InputGroup } from 'react-bootstrap';
 
 const Navigation = () => {
   return (
     <Navbar expand="lg" bg='light' className="nav-header">
     <Container>
-      <Navbar.Brand href="/">E-commerce</Navbar.Brand>
+      <Navbar.Brand><img src='https://res.cloudinary.com/dcwpf7ghu/image/upload/v1704945934/fravega_fgkexe.png'  height="100"/></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto"> 

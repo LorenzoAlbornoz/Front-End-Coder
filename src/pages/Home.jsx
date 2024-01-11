@@ -10,8 +10,7 @@ const Home = () => {
             <div className='container home-container'>
                 <div className='row'>
                     <div className='col-6'>
-                        <h1>La plataforma de aprendizaje para desarrolladores</h1>
-                        <a href="#" className='btn btn-outline-info mt-3'></a>
+                        {/* <a href="#" className='btn btn-outline-info mt-3'></a> */}
                     </div>
                 </div>
             </div>
