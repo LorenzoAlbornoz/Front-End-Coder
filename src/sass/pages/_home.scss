@@ -1,0 +1,43 @@
+.ShippingType {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: flex-start;
+    background-color: var(--c-mainColor);
+
+    &__container {
+        width: 60%;
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: var(--c-white);
+
+        @media screen and (max-width: 844px) {
+            width: 70%;
+            font-size: 1.5rem;
+        }
+
+        @media screen and (max-width: 576px) {
+            width: 90%;
+            font-size: 0.7rem;
+        }
+    }
+
+    &__icons {
+        font-size: 3rem;
+        margin-right: 1rem;
+
+        @media screen and (max-width: 768px) {
+            font-size: 1.5rem;
+        }
+    }
+
+    &__text {
+        align-self: center;
+        text-transform: uppercase;
+    }
+}

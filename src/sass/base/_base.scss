@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px; 
+}
+  
+body{
+    height: 100vh;
+    background-color: white;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+
+
+a{
+    text-decoration: none;
+}
+
+::placeholder {
+    color: var(--c-white);
+}
