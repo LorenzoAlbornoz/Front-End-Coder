@@ -37,10 +37,10 @@ const Navigation = () => {
           </Nav>
           <Nav className="ml-auto">
             <Nav.Link href="/login">
-              <FaUser /> Iniciar sesión
+              <FaUser /> 
             </Nav.Link>
             <Nav.Link href="/cart">
-              <FaShoppingCart /> Carrito
+              <FaShoppingCart /> 
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

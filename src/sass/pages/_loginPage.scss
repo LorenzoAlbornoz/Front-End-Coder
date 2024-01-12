@@ -1,5 +1,5 @@
 .login-container {
-    background-image: url();
+    background-image: url(https://img.freepik.com/vector-gratis/composicion-realista-electrodomesticos_1284-65307.jpg?w=1060&t=st=1705027229~exp=1705027829~hmac=ec7902e9a70c6878da8605af60af320e67b512187dc4d841456692682c4a8043);
     background-size: cover; 
     background-repeat: no-repeat; 
     background-attachment: fixed; 
@@ -20,7 +20,9 @@
     &__form {
         width: 60rem;
         padding: 8rem;
-        margin: auto;
+        margin: 0; // Reinicia el margen a 0
+        margin-left: auto; // Alinea el formulario a la derecha
+        margin-right: 10rem;
         text-align: center;
         border-radius: 0.6rem;
     }
@@ -30,6 +32,7 @@
         padding: 2.7rem 0;
         font-size: 2.7rem;
         font-family: var(--font-PTSans);
+        font-weight: bold;
     }
 
     &__iconos {
@@ -61,6 +64,7 @@
         font-family: var(--font-PTSans);
         margin-top: 1.5rem;
         font-size: 2rem;
+        font-weight: bold;
     }
 
     &__enlace:hover {
@@ -69,7 +73,8 @@
 
     &__link {
         text-decoration: none;
-        color:  var(--c-mainColor);
+        color:  var(--c-secondColor);
+        font-weight: bold;
     }
     &__custom-loading-text {
         color: var(--c-mainColor);
