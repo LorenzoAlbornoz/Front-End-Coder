@@ -1,31 +1,38 @@
-import React from 'react'
-import { PiCertificateDuotone, PiTruck,PiCreditCardThin } from 'react-icons/pi';
+import React from 'react';
 
 const ShippingType = () => {
   return (
     <>
-    <section className='ShippingType'>
+      <section className='ShippingType'>
         <div className="ShippingType__container">
-            <div className='ShippingType__item'>
-                <PiCertificateDuotone className='ShippingType__icons'/>
-                <span className='ShippingType__text'>Garantía oficial</span>
-
-            </div>
-            <div className='ShippingType__item'>
-                <PiTruck className='ShippingType__icons'/>
-                <span className='ShippingType__text'>Envíos a todo el país</span>
-
-            </div>
-            <div className='ShippingType__item'>
-                <PiCreditCardThin className='ShippingType__icons'/>
-                <span className='ShippingType__text'>3, 6, 12 y 18 Cuotas</span>
-
-            </div>
+          <div className='ShippingType__item'>
+            <img
+              src='https://res.cloudinary.com/dcwpf7ghu/image/upload/v1705068382/cart_gfixuf.png'
+              alt='Tarjeta de crédito y débito'
+              className='ShippingType__card'
+            />
+            <span className='ShippingType__text'>Pagá con crédito y débito</span>
+          </div>
+          <div className='ShippingType__item'>
+            <img
+              src='https://res.cloudinary.com/dcwpf7ghu/image/upload/v1705068382/shipping_t43xk9.png'
+              alt='Envíos a todo el país y retiro gratis'
+              className='ShippingType__img'
+            />
+            <span className='ShippingType__text'>Envíos a todo el país y retiro gratis</span>
+          </div>
+          <div className='ShippingType__item'>
+            <img
+              src='https://res.cloudinary.com/dcwpf7ghu/image/upload/v1705068382/quota_xt4q2z.png'
+              alt='3, 6, 12 y 18 Cuotas'
+              className='ShippingType__img'
+            />
+            <span className='ShippingType__text'>3, 6, 12 y 18 Cuotas</span>
+          </div>
         </div>
-    </section>
-
+      </section>
     </>
-  )
-}
+  );
+};
 
-export default ShippingType
+export default ShippingType;

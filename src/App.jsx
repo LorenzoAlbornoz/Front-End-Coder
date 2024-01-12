@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Navigation from './components/Navigation/Navigation';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
+import Footer from './components/Footer/Footer.jsx';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/registro' element={<RegisterPage />} />
       </Routes>
+      <Footer/>
     </>
   );
 }
