@@ -1,8 +1,8 @@
 .register-container {
-    background-image: url();
+    background-image: url(https://img.freepik.com/vector-gratis/composicion-realista-electrodomesticos_1284-65307.jpg?w=1060&t=st=1705027229~exp=1705027829~hmac=ec7902e9a70c6878da8605af60af320e67b512187dc4d841456692682c4a8043);
     background-size: cover; 
     background-repeat: no-repeat; 
-    background-attachment: fixed; 
+    background-attachment: fixed;
     height: 90vh; 
     display: flex;
     justify-content: center;
@@ -19,7 +19,9 @@
     &__form {
         width: 60rem;
         padding: 8rem;
-        margin: auto;
+        margin: 0; // Reinicia el margen a 0
+        margin-left: auto; // Alinea el formulario a la derecha
+        margin-right: 10rem;
         text-align: center;
         border-radius: 0.6rem;
     }
@@ -29,35 +31,7 @@
         padding: 2.7rem 0;
         font-size: 2.7rem;
         font-family: var(--font-PTSans);
-    }
-
-
-    &__iconos {
-        display: flex;
-        justify-content: center;
-        gap: 1.25rem;
-        margin-top: 0.6rem;
-        margin-bottom: 1.25rem;
-        align-items: center;
-    }
-
-    &__borderIcon {
-        height: 5rem;
-        width: 5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 3.5rem;
-        cursor: pointer;
-        margin-bottom: 1.5rem;
-    }
-
-    &__facebook {
-        color: #1877F2;
-    }
-
-    &__apple {
-        color: var(--c-black);
+        font-weight: bold;
     }
 
     &__enlace {
@@ -65,6 +39,7 @@
         font-family: var(--font-PTSans);
         margin-top: 1.5rem;
         font-size: 2rem;
+        font-weight: bold;
     }
 
     &__enlace:hover {
@@ -73,12 +48,14 @@
 
     &__link {
         text-decoration: none;
-        color: var(--c-mainColor);
+        color: var(--c-secondColor);
+        font-weight: bold;
     }
 
     &__error-message {
-        font-size: 1rem;
+        font-size: 2rem;
         color: var(--c-wrong);
+        font-weight: 400;
     }
     &__custom-loading-text {
         color: var(--c-mainColor);
