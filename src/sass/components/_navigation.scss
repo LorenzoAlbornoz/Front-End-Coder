@@ -4,3 +4,26 @@
       color: black;
     }
   }
+
+  .search-form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-form input {
+    width: 30rem; /* Ajusta el ancho según tus preferencias */
+    height: 4rem; /* Ajusta la altura según tus preferencias */
+    font-size: 1.5rem;
+    color: var(--c-grey);
+    padding-left: 1rem;
+  }
+  
+  .search-form button {
+    background-color: var(--c-mainColor); /* Puedes ajustar el color de fondo según tus preferencias */
+    color: var(--c-white);
+    border: none;
+    height: 4rem;
+    padding: 0.5rem;
+    width: 3rem;
+    cursor: pointer;
+  }
