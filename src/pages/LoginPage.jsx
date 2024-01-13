@@ -26,7 +26,7 @@ const LoginPage = () => {
             <Login />
             <div className="loginPage__enlace">
               <span >
-                ¿Aún no tienes una cuenta? <Link to="/registro" className="loginPage__link">Registrate</Link>
+                ¿Aún no tienes una cuenta? <Link to="/register" className="loginPage__link">Registrate</Link>
               </span>
             </div>
           </div>

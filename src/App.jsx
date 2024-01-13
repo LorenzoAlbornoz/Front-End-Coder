@@ -13,7 +13,12 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
-        <Route path='/registro' element={<RegisterPage />} />
+        <Route path='/register' element={<RegisterPage />} />
+        {/* <Route path='/repassword' element={<RecoverPasswordPage />} />
+        <Route path='/product/:_id' element={<DetailPage />} />
+        <Route path='/products' element={<Products />} /> 
+         <Route path='*' element={<Error404/>} />*/
+        }
       </Routes>
       <Footer/>
     </>
