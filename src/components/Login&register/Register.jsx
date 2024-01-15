@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { REGISTRO_SCHEMA } from "../../helpers/validationsSchemas";
+import { REGISTER_SCHEMA } from "../../helpers/validationsSchemas";
 import { useNavigate } from 'react-router-dom';
 // import { axiosInstance } from "../config/axiosInstance";
 import Swal from "sweetalert2";
@@ -9,7 +9,7 @@ import styled, { keyframes } from "styled-components";
 
 const Register = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
-    resolver: yupResolver(REGISTRO_SCHEMA)
+    resolver: yupResolver(REGISTER_SCHEMA)
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,6 +37,10 @@ const Register = () => {
       }, 1000);
     }
   };
+
+  const handlePaste = (e) => {
+    e.preventDefault()
+  }
 
   const rotate360 = keyframes`
   from {
@@ -87,13 +91,13 @@ const Register = () => {
         <div>
           <input
             type="email"
-            name="username"
+            name="email"
             placeholder="Email"
             className="register__input"
-            {...register("username")}
+            {...register("email")}
           />
-          {errors.username && (
-            <p className="register__error-message">{errors.username.message}</p>
+          {errors.email && (
+            <p className="register__error-message">{errors.email.message}</p>
           )}
         </div>
         <div>
@@ -126,6 +130,7 @@ const Register = () => {
             name="repassword"
             placeholder="Repetir Contraseña"
             className="register__input"
+            onPaste={handlePaste}
             {...register("repassword")}
           />
           {errors.repassword && (
