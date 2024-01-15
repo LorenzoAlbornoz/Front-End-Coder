@@ -1,7 +1,7 @@
 import * as yup from "yup"
 
-export const REGISTRO_SCHEMA = yup.object({
-    username: yup
+export const REGISTER_SCHEMA = yup.object({
+    email: yup
         .string()
         .required("El correo electrónico es requerido")
         .matches(
@@ -33,7 +33,7 @@ export const REGISTRO_SCHEMA = yup.object({
 })
 
 export const LOGIN_SCHEMA = yup.object({
-    username: yup
+    email: yup
         .string()
         .required("El correo electrónico es requerido")
         .matches(
@@ -50,7 +50,7 @@ export const LOGIN_SCHEMA = yup.object({
 })
 
 export const RECOVERPASSWORD_SCHEMA = yup.object({
-    username: yup.string().required("El email es requerido")
+    email: yup.string().required("El email es requerido")
         .matches(
             /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
             "Ingresa una dirección de correo electrónico válida"

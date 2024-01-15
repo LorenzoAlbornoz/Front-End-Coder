@@ -107,13 +107,13 @@ const CustomLoader = () => (
           <div>
             <input
               type="email"
-              name="username"
+              name="email"
               placeholder="Email"
               className="login__input"
-              {...register("username")}
+              {...register("email")}
             />
-            {errors.username && (
-              <p className="register__error-message">{errors.username.message}</p>
+            {errors.email && (
+              <p className="register__error-message">{errors.email.message}</p>
             )}
           </div>
           <div>
