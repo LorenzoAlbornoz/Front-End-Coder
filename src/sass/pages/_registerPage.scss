@@ -48,9 +48,13 @@
 
     &__link {
         text-decoration: none;
-        color: var(--c-secondColor);
+        color: var(--c-mainColor);
         font-weight: bold;
     }
+
+    &__link:hover{
+        color: var(--c-secondColor);
+        }
 
     &__error-message {
         font-size: 2rem;

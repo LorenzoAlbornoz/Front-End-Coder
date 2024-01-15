@@ -20,18 +20,13 @@
         color: white;
       }
 
-    &__link {
-        text-decoration: none;
-        color: var(--c-mainColor);
-    }
-
-    &__button {
+      &__button {
         width: 100%;
-        max-width: 25rem;
+        max-width: 30rem;
         margin: 0 auto;
         padding: 0.8rem 1rem;
         border: none;
-        border-radius: 2rem;
+        border-radius: 1rem;
         background-color: var(--c-mainColor);
         font-weight: 600;
         font-size: 1.5rem;
