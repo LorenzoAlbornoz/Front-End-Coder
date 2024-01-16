@@ -8,6 +8,7 @@ import RecoverPasswordPage from './pages/RecoverPasswordPage.jsx'
 import Footer from './components/Footer/Footer.jsx';
 import Products from './pages/Products.jsx';
 import Product from './pages/Product.jsx';
+import Admin from './pages/Admin.jsx';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         {/* <Route path='*' element={<Error404/>} /> */}
         <Route path='/product/:id' element={<Product />} />
         <Route path='/products' element={<Products />} /> 
+        <Route path='/admin' element={<Admin/>}/>
       </Routes>
       <Footer/>
     </>
