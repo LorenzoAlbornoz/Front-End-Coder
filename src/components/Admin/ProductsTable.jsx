@@ -1,8 +1,34 @@
 import React from 'react'
 import Datable from 'react-data-table-component'
-import { products } from '../../helpers/data'
+import { axiosInstance } from "../../config/axiosInstance.js";
+import Swal from "sweetalert2";
 
-const ProductsTable = () => {
+const ProductsTable = ({allProducts, getProducts}) => {
+
+    const deleteCurso = async (row) => {
+        try {
+            Swal.fire({
+                title: "¿Estas seguro?",
+                text: "No podrás revertir esto!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#F8A126",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, eliminar!",
+                cancelButtonText: "Cancelar",
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    await axiosInstance.delete(`/product/${row}`);
+                    getProducts();
+                }
+            });
+        } catch (error) {
+            console.log(error);
+        } finally {
+            getProducts();
+        }
+    };
+
 
     const columns = [
         {
@@ -34,7 +60,7 @@ const ProductsTable = () => {
         },
         {
             name: "Categoria",
-            selector: (row) => row.category,
+            selector: (row) => row.category.name,
             sortable: true,
             hide: "sm",
             width: "10%",
@@ -75,7 +101,7 @@ const ProductsTable = () => {
     <Datable
     title="Administración de Productos"
     columns={columns}
-    data={products}
+    data={allProducts}
     pagination
     />
   )

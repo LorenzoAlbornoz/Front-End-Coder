@@ -23,6 +23,7 @@ function App() {
         {/* <Route path='*' element={<Error404/>} /> */}
         <Route path='/product/:id' element={<Product />} />
         <Route path='/products' element={<Products />} /> 
+        {/* agregar carrito, favorite, etc */}
         <Route element={<PrivateRoutes />}>
           <Route path='/admin' element={<Admin />} />
         </Route>

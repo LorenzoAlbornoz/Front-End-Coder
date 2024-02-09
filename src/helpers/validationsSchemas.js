@@ -20,7 +20,7 @@ export const REGISTER_SCHEMA = yup.object({
         .matches(
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,20}$/,
             "Ingresa una constraseña válida"
-            )
+        )
         .min(8, "La contraseña debe tener al menos 8 caracteres")
         .max(20, "La contraseña debe tener como máximo 20 caracteres"),
     repassword: yup
@@ -59,22 +59,22 @@ export const RECOVERPASSWORD_SCHEMA = yup.object({
 
 export const FORM_SCHEMA = yup.object().shape({
     title: yup.string()
-    .required("El título es requerido")
-    .max(20, "El título no puede tener más de 20 caracteres"),
-  description: yup.string()
-    .required("La descripción es requerida")
-    .max(80, "La descripción no puede tener más de 80 caracteres"),
+        .required("El título es requerido")
+        .max(20, "El título no puede tener más de 20 caracteres"),
+    description: yup.string()
+        .required("La descripción es requerida")
+        .max(80, "La descripción no puede tener más de 80 caracteres"),
     price: yup.number()
-    .required("El precio es requerido")
-    .moreThan(0, "El precio no puede ser negativo")
-    .typeError("El precio debe ser un número"),
+        .required("El precio es requerido")
+        .moreThan(0, "El precio no puede ser negativo")
+        .typeError("El precio debe ser un número"),
     category: yup.string()
-    .required("La categoría es requerida"),
+        .required("La categoría es requerida"),
+    code: yup.string()
+        .typeError("El code es requerido")
+        .max(5, "La descripción no puede tener más de 5 caracteres"),
     stock: yup.number()
-    .typeError("El stock es requerido")
-    .test('is-positive', 'El stock no puede ser un número negativo', (value) => value >= 0),
-    shortDescription: yup.string()
-    .required("La descripción es requerida")
-    .max(1000, "El título no puede tener más de 1000 caracteres")
+        .typeError("El stock es requerido")
+        .test('is-positive', 'El stock no puede ser un número negativo', (value) => value >= 0)
 });
 

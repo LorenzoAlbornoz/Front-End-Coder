@@ -1,11 +1,27 @@
 import React, {useState, useEffect} from 'react';
 import ProductsTable from '../components/Admin/ProductsTable';
 import ProductModal from '../components/Admin/ProductModal';
+import { axiosInstance } from '../config/axiosInstance';
+
 const Admin = () => {
     const [show, setShow] = useState(false);
+    const [allProducts, setAllProducts] = useState([])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const getProducts = async () => {
+        try {
+           const resp = await axiosInstance.get("/products")
+        setAllProducts(resp.data.products)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      
+      useEffect(() =>{
+        getProducts()
+      }, [])
     return (
         <>
             <div className="container admin-body">
@@ -17,7 +33,7 @@ const Admin = () => {
                     </div>
                 </div>
                 <div className="row">
-              <ProductsTable />
+              <ProductsTable allProducts={allProducts} getProducts={getProducts}/>
                 </div>
             <ProductModal show={show} handleClose={handleClose}/>
             </div>
