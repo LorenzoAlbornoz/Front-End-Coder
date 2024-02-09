@@ -18,8 +18,8 @@ const ProductCreation = ({ getProducts }) => {
     description: '',
     price: '',
     category: '',
-    stock: '',
-    shortDescription: ''
+    code: '',
+    stock: ''
   });
 
  const getCategorias = async () => {
@@ -54,8 +54,8 @@ const ProductCreation = ({ getProducts }) => {
       formData.append('price', data.price);
       formData.append('category', data.category);
       formData.append('image', imgFile[0]);
+      formData.append('code', data.code);
       formData.append('stock', data.stock);
-      formData.append('shortDescription', data.shortDescription);
       await axiosInstance.post('/product', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -68,7 +68,7 @@ const ProductCreation = ({ getProducts }) => {
     } catch (error) {
       console.log(error);
     } finally {
-      getProducts();
+     getProducts()
     }
   };
 
@@ -100,20 +100,6 @@ const ProductCreation = ({ getProducts }) => {
           />
           {errors.description && (
             <p className="register__error-message">{errors.description.message}</p>
-          )}
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="shortDescription">Descripción del producto</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={5}
-            id="shortDescription"
-            name="shortDescription"
-            onChange={handleChangeDatos}
-            {...register("shortDescription")}
-          />
-          {errors.shortDescription && (
-            <p className="register__error-message">{errors.shortDescription.message}</p>
           )}
         </Form.Group>
         <Form.Group className="mb-3">
@@ -158,6 +144,19 @@ const ProductCreation = ({ getProducts }) => {
             name="image"
             onChange={handleImage}
           />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label htmlFor="nombre">Code</Form.Label>
+          <Form.Control
+            type="string"
+            id="code"
+            name="code"
+            onChange={handleChangeDatos}
+            {...register("code")}
+          />
+          {errors.code && (
+            <p className="register__error-message">{errors.code.message}</p>
+          )}
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label htmlFor="nombre">Stock</Form.Label>
