@@ -3,6 +3,7 @@ import Datable from 'react-data-table-component'
 import { products } from '../../helpers/data'
 
 const ProductsTable = () => {
+
     const columns = [
         {
             name: "Titulo",

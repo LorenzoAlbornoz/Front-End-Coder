@@ -4,9 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { LOGIN_SCHEMA } from "../../helpers/validationsSchemas";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-// import { axiosInstance } from "../../config/axiosInstance";
-// import jwt_decode from 'jwt-decode';
-// import Swal from "sweetalert2";
+import { axiosInstance } from "../../config/axiosInstance";
+import { jwtDecode } from "jwt-decode";
+import Swal from "sweetalert2";
 import styled, { keyframes } from "styled-components"; 
 
 const Login = () => {
@@ -25,13 +25,13 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const response = await axiosInstance.post("/login", data);
       const token = response.data.token;
-      localStorage.setItem("token", token);
-      const decodedToken = jwt_decode(token);
-      const userRole = decodedToken.rol;
+      localStorage.setItem('codertoken', token);
+      const decodedToken = jwtDecode(token);
+      const userRole = decodedToken.role;
       if (userRole === 'admin') {
         navigate('/admin');
       } else if (userRole === 'user') {

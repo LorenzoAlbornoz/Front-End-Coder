@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { REGISTER_SCHEMA } from "../../helpers/validationsSchemas";
 import { useNavigate } from 'react-router-dom';
-// import { axiosInstance } from "../config/axiosInstance";
+import { axiosInstance } from "../../config/axiosInstance";
 import Swal from "sweetalert2";
 import styled, { keyframes } from "styled-components"; 
 
@@ -26,6 +26,7 @@ const Register = () => {
       });
       navigate("/login")
     } catch (error) {
+      console.log(error)
       Swal.fire({
         icon: 'error',
         title: 'Error de Registro',
