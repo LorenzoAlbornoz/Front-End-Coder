@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ProductsTable from '../components/Admin/ProductsTable';
-import CreationForm from '../components/Admin/CreationForm';
+import ProductModal from '../components/Admin/ProductModal';
 const Admin = () => {
     const [show, setShow] = useState(false);
 
@@ -19,7 +19,7 @@ const Admin = () => {
                 <div className="row">
               <ProductsTable />
                 </div>
-            <CreationForm show={show} handleClose={handleClose}/>
+            <ProductModal show={show} handleClose={handleClose}/>
             </div>
         </>
     );

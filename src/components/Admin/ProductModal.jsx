@@ -2,7 +2,7 @@ import React, { useState} from 'react';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
-const CreationForm = ({show, handleClose}) => {
+const ProductModal = ({show, handleClose}) => {
 
   return (
    <>
@@ -24,4 +24,4 @@ const CreationForm = ({show, handleClose}) => {
   );
 };
 
-export default CreationForm;
+export default ProductModal;
