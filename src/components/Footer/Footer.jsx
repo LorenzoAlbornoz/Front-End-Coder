@@ -15,11 +15,40 @@ const Footer = () => {
             <div className="container-fluid footer">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-12 d-flex justify-content-between mt-3">
-                            <div>
+
+                                      <div className="col-lg-12 d-none d-sm-block mt-3">
+                            <div className="d-flex justify-content-between">
+                                <div>
+                                    <img src="https://res.cloudinary.com/dcwpf7ghu/image/upload/v1704945934/fravega_fgkexe.png" alt="Logo" height="100" />
+                                </div>
+                                <div className="d-flex align-items-end fs-2">
+                                    <Link to="https://www.instagram.com/fravegaonline/" className="me-4 footer__icon">
+                                        <RiInstagramLine size={30} />
+                                    </Link>
+                                    <Link to="https://www.facebook.com/fravegaonline" className="me-4 footer__icon">
+                                        <RiFacebookBoxFill size={30} />
+                                    </Link>
+                                    <Link to="https://twitter.com/fravegaonline" className="me-4 footer__icon">
+                                        <RiTwitterLine size={30} />
+                                    </Link>
+                                    <Link to="https://www.youtube.com/user/fravegaonline" className="me-4 footer__icon">
+                                        <RiYoutubeLine size={30} />
+                                    </Link>
+                                    <Link to="https://www.linkedin.com/company/fravega-saciei" className="footer__icon">
+                                        <RiLinkedinBoxFill size={30} />
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="col-sm-12 d-sm-none mt-3">
+                            <div className="text-center">
                                 <img src="https://res.cloudinary.com/dcwpf7ghu/image/upload/v1704945934/fravega_fgkexe.png" alt="Logo" height="100" />
                             </div>
-                            <div className="d-flex align-items-end fs-2 ">
+                        </div>
+                        
+                        <div className="col-lg-12 d-sm-none d-flex justify-content-between">
+                            <div className="d-flex align-items-end fs-2">
                                 <Link to="https://www.instagram.com/fravegaonline/" className="me-4 footer__icon">
                                     <RiInstagramLine size={30} />
                                 </Link>
