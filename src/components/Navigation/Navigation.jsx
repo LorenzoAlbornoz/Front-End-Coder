@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -10,13 +10,12 @@ import Swal from 'sweetalert2';
 import { Link, useNavigate } from "react-router-dom";
 
 const Navigation = () => {
-  const [inputValue, setInputValue] = useState("")
-  
-  const handleSubmit = (e) => {
-   e.preventDefault()
-   console.log("submit")
-  }
+  const [inputValue, setInputValue] = useState("");
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submit");
+  };
 
   const token = localStorage.getItem('codertoken');
   const isLogged = !!token;
@@ -45,7 +44,18 @@ const Navigation = () => {
         navigate('/');
       }
     });
-  }
+  };
+
+  const showFavoritesAndLogout = isLogged && (
+    <div className='icons user-actions d-none d-sm-flex'>
+      <Nav.Link as={Link} to='/favorite'>
+        <RiHeart3Fill className="nav-header__heart" />
+      </Nav.Link>
+      <Button className="nav-header__cerrar-sesion" onClick={logOut}>
+        Cerrar Sesión
+      </Button>
+    </div>
+  );
 
   return (
     <Navbar expand="lg" bg='light' className="nav-header">
@@ -55,49 +65,36 @@ const Navigation = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto"> 
+          <Nav className="mr-auto">
             <Nav.Link href="/">Inicio</Nav.Link>
             <Nav.Link href="/products">Productos</Nav.Link>
             {userRole === 'admin' && (
-                <Nav.Link as={Link} to="/admin" className='nav-header__link'>Administración</Nav.Link>
-              )}
+              <Nav.Link as={Link} to="/admin" className='nav-header__link'>Administración</Nav.Link>
+            )}
           </Nav>
           <Nav className="mx-auto">
-          <form onSubmit={handleSubmit} className="search-form">
-            <div className="d-flex align-items-center">
-              <input type="text" placeholder='Buscar' onChange={(e) => setInputValue(e.target.value)}/>
-              <button type="submit">
-                <FaSearch />
-              </button>
-            </div>
-          </form>
+            <form onSubmit={handleSubmit} className="search-form">
+              <div className="d-flex align-items-center">
+                <input type="text" placeholder='Buscar' onChange={(e) => setInputValue(e.target.value)} />
+                <button type="submit">
+                  <FaSearch />
+                </button>
+              </div>
+            </form>
           </Nav>
           <Nav className="ml-auto">
             <Nav.Link href="/login">
-              <FaUser /> 
+              <FaUser />
             </Nav.Link>
             <Nav.Link href="/cart">
-              <FaShoppingCart /> 
+              <FaShoppingCart />
             </Nav.Link>
           </Nav>
           <div className='d-flex icons-group'>
-            {isLogged && (
-              <div className='icons'>
-                <Nav.Link as={Link} to='/favorite'>
-                  <RiHeart3Fill className="nav-header__heart" />
-                </Nav.Link>
-              </div>
-            )}
             <div className='icons'>
               <Nav.Link> </Nav.Link>
             </div>
-            {isLogged && (
-              <div className='icons user-actions d-none d-sm-flex'>
-                <Button className="nav-header__cerrar-sesion" onClick={logOut}>
-                  Cerrar Sesión
-                </Button>
-              </div>
-            )}
+            {showFavoritesAndLogout}
           </div>
         </Navbar.Collapse>
       </Container>

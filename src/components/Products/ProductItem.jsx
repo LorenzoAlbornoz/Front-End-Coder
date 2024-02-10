@@ -11,7 +11,7 @@ const ProductItem = ({ product }) => {
                     <h5 className="card-title">{product.title}</h5>
                     <p className="card-text">Descripción: {product.description}</p>
                     <p className="card-text">Precio: ${product.price}</p>
-                    <p className="card-text">Categoría: {product.category}</p>
+                    <p className="card-text">Categoría: {product.category.name}</p>
                     <p className="card-text">Código: {product.code}</p>
                     <p className="card-text">Stock: {product.stock}</p>
                     <div className='text-center position-absolute bottom-0 start-50 translate-middle-x'>

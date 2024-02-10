@@ -1,8 +1,25 @@
-import React from 'react'
-import { products } from '../helpers/data'
-import ProductItem from '../components/Products/ProductItem'
+import React, { useState, useEffect } from 'react';
+import { axiosInstance } from '../config/axiosInstance';
+import ProductItem from '../components/Products/ProductItem';
 
 const Products = () => {
+    const [allProducts, setAllProducts] = useState([]);
+
+    const getProducts = async () => {
+        try {
+          const resp = await axiosInstance.get('/products');
+          setAllProducts(resp.data.products);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setIsLoading(false)
+        }
+      };
+
+      useEffect(() => {
+        getProducts();
+      }, []);
+
   return (
     <div className='background-product'>
         <div className="container">
@@ -13,8 +30,8 @@ const Products = () => {
             </div>
             <div className="row">
                 {
-                    products.map((product) => (
-                        <ProductItem product={product} key={product.id}/>
+                    allProducts.map((product) => (
+                        <ProductItem product={product} key={product._id}/>
                     ))
                 }
             </div>
@@ -23,4 +40,4 @@ const Products = () => {
   )
 }
 
-export default Products
+export default Products;

@@ -1,9 +1,9 @@
-import React, { useState} from 'react';
+import React from 'react';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import ProductCreation from './ProductCreation';
 
-const ProductModal = ({show, handleClose}) => {
+const ProductModal = ({show, handleClose, getProducts}) => {
 
   return (
     <>
@@ -12,7 +12,7 @@ const ProductModal = ({show, handleClose}) => {
           <Modal.Title>Agregar Producto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <ProductCreation/>
+        <ProductCreation getProducts={getProducts}/>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

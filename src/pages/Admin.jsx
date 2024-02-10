@@ -28,14 +28,14 @@ const Admin = () => {
                 <div className="row">
                     <div className="col mt-5 mb-4">
                         <h2>Admin</h2>
-                        <button className='btn btn-outline-primary' onClick={handleShow}>Agregar Producto</button>
+                        <button className='btn btn-outline-primary mb-4 mt-4' onClick={handleShow}>Agregar Producto</button>
                         <hr />
                     </div>
                 </div>
                 <div className="row">
               <ProductsTable allProducts={allProducts} getProducts={getProducts}/>
                 </div>
-            <ProductModal show={show} handleClose={handleClose}/>
+            <ProductModal show={show} handleClose={handleClose} getProducts={getProducts}/>
             </div>
         </>
     );

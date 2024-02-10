@@ -88,6 +88,7 @@ const ProductCreation = ({ getProducts }) => {
             <p className="register__error-message">{errors.title.message}</p>
           )}
         </Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Label htmlFor="description">Detalle del producto</Form.Label>
           <Form.Control
@@ -102,6 +103,7 @@ const ProductCreation = ({ getProducts }) => {
             <p className="register__error-message">{errors.description.message}</p>
           )}
         </Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Label htmlFor="price">Precio</Form.Label>
           <InputGroup>
@@ -118,6 +120,7 @@ const ProductCreation = ({ getProducts }) => {
             <p className="register__error-message">{errors.price.message}</p>
           )}
         </Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Label htmlFor="nombre">Categoría</Form.Label>
           <Form.Select
@@ -136,6 +139,7 @@ const ProductCreation = ({ getProducts }) => {
             <p className="register__error-message">{errors.category.message}</p>
           )}
         </Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Label htmlFor="nombre">Imagen del producto</Form.Label>
           <Form.Control
@@ -145,6 +149,7 @@ const ProductCreation = ({ getProducts }) => {
             onChange={handleImage}
           />
         </Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Label htmlFor="nombre">Code</Form.Label>
           <Form.Control
@@ -158,6 +163,7 @@ const ProductCreation = ({ getProducts }) => {
             <p className="register__error-message">{errors.code.message}</p>
           )}
         </Form.Group>
+        
         <Form.Group className="mb-3">
           <Form.Label htmlFor="nombre">Stock</Form.Label>
           <Form.Control

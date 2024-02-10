@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Datable from 'react-data-table-component'
 import { axiosInstance } from "../../config/axiosInstance.js";
 import Swal from "sweetalert2";
+import UpdateModal from './Update/UpdateModal.jsx';
+import styled, { keyframes } from 'styled-components';
 
-const ProductsTable = ({allProducts, getProducts}) => {
+const ProductsTable = ({ allProducts, getProducts }) => {
+    const [show, setShow] = useState(false)
+    const [datoProduct, setDatoProduct] = useState({});
+    const [pending, setPending] = useState(true);
+    const [rows, setRows] = useState([]);
+
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
+
+    
+    const handleUpdate = (row) => {
+        handleShow()
+        setDatoProduct(row);
+    };
 
     const deleteCurso = async (row) => {
         try {
@@ -43,7 +58,22 @@ const ProductsTable = ({allProducts, getProducts}) => {
                 );
             },
             sortable: true,
-            maxWidth: "40%",
+            maxWidth: "20%",
+        },
+        {
+            name: "Detallado",
+            selector: (row) => {
+                const maxDescriptionLength = 50;
+                const description = row.description || ""; // Verifica si row.description es undefined
+                return description.length > maxDescriptionLength ? (
+                    <>{description.slice(0, maxDescriptionLength) + "... "}</>
+                ) : (
+                    description
+                );
+            },
+            sortable: true,
+            hide: "sm",
+            width: "20%",
         },
         {
             name: "Precio",
@@ -73,7 +103,21 @@ const ProductsTable = ({allProducts, getProducts}) => {
                 </div>
             ),
             hide: "lg",
-            width: "9%",
+            width: "10%",
+        },
+        {
+            name: "Stock",
+            selector: (row) => row.stock,
+            sortable: true,
+            hide: "sm",
+            width: "10%",
+        },
+        {
+            name: "Code",
+            selector: (row) => row.code,
+            sortable: true,
+            hide: "sm",
+            width: "10%",
         },
         {
             name: "Acciones",
@@ -97,14 +141,65 @@ const ProductsTable = ({allProducts, getProducts}) => {
             },
         },
     ];
-  return (
-    <Datable
-    title="Administración de Productos"
-    columns={columns}
-    data={allProducts}
-    pagination
-    />
-  )
+
+    
+    const rotate360 = keyframes`
+ from {
+   transform: rotate(0deg);
+ }
+
+  to {
+   transform: rotate(360deg);
+ }
+`;
+
+
+const Spinner = styled.div`
+  margin: 16px;
+  animation: ${rotate360} 1s linear infinite;
+  transform: translateZ(0);
+  border-top: 2px solid var(--c-mainColor); 
+  border-right: 2px solid var(--c-mainColor);
+  border-bottom: 2px solid var(--c-secondColor);
+  border-left: 4px solid var(--c-grey); 
+  background: transparent;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+`;
+
+    const CustomLoader = () => (
+        <div style={{ padding: "24px" }}>
+            <Spinner />
+            <div className="text-center">Cargando...</div>
+        </div>
+    );
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setRows(allProducts);
+            setPending(false);
+        }, 2000);
+        return () => clearTimeout(timeout);
+    }, [allProducts]);
+    return (
+        <>
+            <Datable
+                title="Administración de Productos"
+                columns={columns}
+                data={allProducts}
+                progressPending={pending}
+                progressComponent={<CustomLoader />}
+                pagination
+            />
+            <UpdateModal
+                show={show}
+                handleClose={handleClose}
+                datoProduct={datoProduct}
+                getProducts={getProducts}
+            />
+        </>
+    )
 }
 
 export default ProductsTable

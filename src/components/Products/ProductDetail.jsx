@@ -1,6 +1,7 @@
 import React from 'react'
 
 const ProductDetail = ({ product }) => {
+
     const { data } = product
     return (
         <>
@@ -21,7 +22,7 @@ const ProductDetail = ({ product }) => {
                           <h2>{data[0].description}</h2>
                         </div>
                         <div className='mt-4'>
-                          <h4>{data[0].category}</h4>
+                          <h4>{data[0].category.name}</h4>
                         </div>
                         <div className='mt-4'>
                           <h3>{data[0].price}</h3>
