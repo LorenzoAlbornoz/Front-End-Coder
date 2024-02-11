@@ -3,18 +3,23 @@ import Datable from 'react-data-table-component'
 import { axiosInstance } from "../../config/axiosInstance.js";
 import Swal from "sweetalert2";
 import UpdateModal from './Update/UpdateModal.jsx';
+import ProductModal from './ProductModal.jsx'
 import styled, { keyframes } from 'styled-components';
 
 const ProductsTable = ({ allProducts, getProducts }) => {
-    const [show, setShow] = useState(false)
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const [showAddModal, setShowAddModal] = useState(false);
     const [datoProduct, setDatoProduct] = useState({});
     const [pending, setPending] = useState(true);
     const [rows, setRows] = useState([]);
 
-    const handleClose = () => setShow(false)
-    const handleShow = () => setShow(true)
+    const handleCloseUpdateModal = () => setShowUpdateModal(false);
+    const handleShowUpdateModal = () => setShowUpdateModal(true);
 
-    
+    const handleCloseAddModal = () => setShowAddModal(false);
+    const handleShowAddModal = () => setShowAddModal(true);
+
+
     const handleUpdate = (row) => {
         handleShow()
         setDatoProduct(row);
@@ -142,7 +147,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
         },
     ];
 
-    
+
     const rotate360 = keyframes`
  from {
    transform: rotate(0deg);
@@ -154,7 +159,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
 `;
 
 
-const Spinner = styled.div`
+    const Spinner = styled.div`
   margin: 16px;
   animation: ${rotate360} 1s linear infinite;
   transform: translateZ(0);
@@ -184,6 +189,14 @@ const Spinner = styled.div`
     }, [allProducts]);
     return (
         <>
+            <div className="row">
+                <div className="col text-end">
+                    <button className="btn btn-primary mb-4" onClick={handleShowAddModal}>
+                        Agregar Producto
+                    </button>
+                </div>
+            </div>
+
             <Datable
                 title="Administración de Productos"
                 columns={columns}
@@ -193,10 +206,16 @@ const Spinner = styled.div`
                 pagination
             />
             <UpdateModal
-                show={show}
-                handleClose={handleClose}
-                datoProduct={datoProduct}
-                getProducts={getProducts}
+            show={showUpdateModal}
+            handleClose={handleCloseUpdateModal}
+            datoProduct={datoProduct}
+            getProducts={getProducts}
+            />
+            <ProductModal
+            show={showAddModal}
+            handleClose={handleCloseAddModal}
+            datoProduct={datoProduct}
+            getProducts={getProducts}
             />
         </>
     )

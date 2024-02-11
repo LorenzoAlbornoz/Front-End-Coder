@@ -46,16 +46,19 @@ const Navigation = () => {
     });
   };
 
-  const showFavoritesAndLogout = isLogged && (
-    <div className='icons user-actions d-none d-sm-flex'>
-      <Nav.Link as={Link} to='/favorite'>
-        <RiHeart3Fill className="nav-header__heart" />
-      </Nav.Link>
-      <Button className="nav-header__cerrar-sesion" onClick={logOut}>
-        Cerrar Sesión
-      </Button>
+  const showLogout = isLogged && (
+    <div className='row align-items-center flex-column flex-sm-row'>
+      <div className="col-auto">
+        <Button className='nav-header__cerrar-sesion' onClick={logOut}>
+          Cerrar Sesión
+        </Button>
+      </div>
+      <div className="col-auto mt-2 mt-sm-0">
+      </div>
     </div>
   );
+  
+  
 
   return (
     <Navbar expand="lg" bg='light' className="nav-header">
@@ -64,42 +67,41 @@ const Navigation = () => {
           <img src='https://res.cloudinary.com/dcwpf7ghu/image/upload/v1704945934/fravega_fgkexe.png' height="100" alt="Frávega Logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="/">Inicio</Nav.Link>
-            <Nav.Link href="/products">Productos</Nav.Link>
-            {userRole === 'admin' && (
-              <Nav.Link as={Link} to="/admin" className='nav-header__link'>Administración</Nav.Link>
-            )}
-          </Nav>
-          <Nav className="mx-auto">
-            <form onSubmit={handleSubmit} className="search-form">
-              <div className="d-flex align-items-center">
-                <input type="text" placeholder='Buscar' onChange={(e) => setInputValue(e.target.value)} />
-                <button type="submit">
-                  <FaSearch />
-                </button>
-              </div>
-            </form>
-          </Nav>
-          <Nav className="ml-auto">
-            <Nav.Link href="/login">
-              <FaUser />
-            </Nav.Link>
-            <Nav.Link href="/cart">
-              <FaShoppingCart />
-            </Nav.Link>
-          </Nav>
-          <div className='d-flex icons-group'>
-            <div className='icons'>
-              <Nav.Link> </Nav.Link>
-            </div>
-            {showFavoritesAndLogout}
-          </div>
-        </Navbar.Collapse>
+        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center text-center">
+  <Nav className="mr-auto">
+    <Nav.Link href="/">Inicio</Nav.Link>
+    <Nav.Link href="/products">Productos</Nav.Link>
+    {userRole === 'admin' && (
+      <Nav.Link as={Link} to="/admin" className='nav-header__link'>Administración</Nav.Link>
+    )}
+  </Nav>
+  <Nav className="mx-auto">
+    <form onSubmit={handleSubmit} className="nav-header__search-form">
+      <div className="d-flex align-items-center">
+        <input className='nav-header__search-form-input' type="text" placeholder='Buscar' onChange={(e) => setInputValue(e.target.value)} />
+        <button className='nav-header__search-form-button' type="submit">
+          <FaSearch />
+        </button>
+      </div>
+    </form>
+  </Nav>
+  <Nav className="ml-auto icons-group d-flex flex-row align-items-center justify-content-center text-center">
+    <Nav.Link href="/login">
+      <FaUser className="nav-header__login" />
+    </Nav.Link>
+    <Nav.Link href="/cart">
+      <FaShoppingCart className="nav-header__cart" />
+    </Nav.Link>
+    <Nav.Link as={Link} to='/favorite'>
+      <RiHeart3Fill className="nav-header__heart" />
+    </Nav.Link>
+  </Nav>
+  {showLogout}
+</Navbar.Collapse>
       </Container>
     </Navbar>
   );
 }
 
 export default Navigation;
+
