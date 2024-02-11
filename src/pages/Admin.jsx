@@ -1,14 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import ProductsTable from '../components/Admin/ProductsTable';
-import ProductModal from '../components/Admin/ProductModal';
+import UserTable from '../components/Admin/UserTable';
 import { axiosInstance } from '../config/axiosInstance';
 
 const Admin = () => {
-    const [show, setShow] = useState(false);
-    const [allProducts, setAllProducts] = useState([])
+  const [showProductTable, setShowProductTable] = useState(true);
+  const [allProducts, setAllProducts] = useState([])
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const showProductView = () => {
+    setShowProductTable(true);
+  };
+
+  const showUserView = () => {
+    setShowProductTable(false);
+  };
 
     const getProducts = async () => {
         try {
@@ -22,24 +27,21 @@ const Admin = () => {
       useEffect(() =>{
         getProducts()
       }, [])
-    return (
+      return (
         <>
-            <div className="container admin-body">
-                <div className="row">
-                    <div className="col mt-5 mb-4">
-                        <h2>Admin</h2>
-                        <button className='btn btn-outline-primary mb-4 mt-4' onClick={handleShow}>Agregar Producto</button>
-                        <hr />
-                    </div>
-                </div>
-                <div className="row">
-              <ProductsTable allProducts={allProducts} getProducts={getProducts}/>
-                </div>
-            <ProductModal show={show} handleClose={handleClose} getProducts={getProducts}/>
+          <div className="container admin-body">
+            <div className="row">
+              <div className="col mt-5 mb-4">
+                <button className='btn btn-primary' onClick={showProductView}>Mostrar Productos</button>
+                <button className='btn btn-warning ms-5' onClick={showUserView}>Mostrar Usuarios</button>
+              </div>
             </div>
+            {showProductTable && <ProductsTable allProducts={allProducts} getProducts={getProducts}/>}
+            {!showProductTable && <UserTable />}
+          </div>
         </>
-    );
-}
+      );
+    }
 
 export default Admin;
 

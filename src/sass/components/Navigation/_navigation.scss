@@ -1,25 +1,50 @@
 .nav-header {
-    a {
-      font-size: 2rem;
-      color: black;
-    }
+  a {
+    font-size: 2rem;
+    color: black;
   }
 
-  .search-form {
+  &__cerrar-sesion {
+    max-width: 10rem;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    border: 2px solid var(--c-mainColor);
+    border-radius: 2rem;
+    background-color: var(--c-mainColor);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--c-white);
+    font-family: var(--font-PTSans);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+
+  &__cerrar-sesion:hover {
+    background-color: var(--c-secondColor);
+    color: var(--c-black);
+    border-color: var(--c-secondColor);
+    /* Cambiado el color del borde en hover */
+  }
+
+  &__search-form {
     display: flex;
     align-items: center;
   }
-  
-  .search-form input {
-    width: 30rem; /* Ajusta el ancho según tus preferencias */
-    height: 4rem; /* Ajusta la altura según tus preferencias */
+
+  &__search-form-input {
+    width: 30rem;
+    /* Ajusta el ancho según tus preferencias */
+    height: 4rem;
+    /* Ajusta la altura según tus preferencias */
     font-size: 1.5rem;
     color: var(--c-grey);
     padding-left: 1rem;
   }
-  
-  .search-form button {
-    background-color: var(--c-mainColor); /* Puedes ajustar el color de fondo según tus preferencias */
+
+  &__search-form-button {
+    background-color: var(--c-mainColor);
+    /* Puedes ajustar el color de fondo según tus preferencias */
     color: var(--c-white);
     border: none;
     height: 4rem;
@@ -27,3 +52,50 @@
     width: 3rem;
     cursor: pointer;
   }
+
+  &__login {
+    font-size: 2.5rem;
+    // margin-right: 0.5rem; /* Añadido un margen derecho */
+  }
+
+  &__login:hover {
+    color: var(--c-secondColor);
+  }
+
+  &__cart {
+    font-size: 2.5rem;
+  }
+
+  &__heart {
+    font-size: 2.5rem;
+    margin-left: 0.5rem;
+    /* Añadido un margen izquierdo */
+  }
+
+  &__heart:hover,
+  &__cart:hover {
+    color: var(--c-secondColor);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .nav-header {
+    &__search-form {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    &__heart,
+    &__cart,
+    &__login {
+      margin-left: 1rem; 
+    }
+
+    &__cerrar-sesion {
+      margin-top: 1rem;
+      margin-left: 0;
+    }
+  }
+}
