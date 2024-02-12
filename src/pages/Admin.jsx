@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import ProductsTable from '../components/Admin/ProductsTable';
-import UserTable from '../components/Admin/UserTable';
+import ProductsTable from '../components/Admin/ProductTable/ProductsTable';
+import UserTable from '../components/Admin/UserTable/UserTable';
 import { axiosInstance } from '../config/axiosInstance';
 
 const Admin = () => {

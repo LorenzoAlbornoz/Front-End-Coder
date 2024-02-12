@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Datable from 'react-data-table-component'
-import { axiosInstance } from "../../config/axiosInstance.js";
+import { axiosInstance } from "../../../config/axiosInstance.js";
 import Swal from "sweetalert2";
-import UpdateModal from './Update/UpdateModal.jsx';
+import UpdateModal from './UpdateProduct/UpdateModal.jsx';
 import ProductModal from './ProductModal.jsx'
 import styled, { keyframes } from 'styled-components';
 
@@ -96,7 +96,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
         },
         {
             name: "Categoria",
-            selector: (row) => row.category.name,
+            selector: (row) => row.category,
             sortable: true,
             hide: "sm",
             width: "20%",
@@ -108,7 +108,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
                     <img src={row.image} alt={row.title} width={75} />
                 </div>
             ),
-            hide: "lg",
+            hide: "sm",
             width: "10%",
         },
         {

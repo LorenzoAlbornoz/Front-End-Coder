@@ -78,3 +78,8 @@ export const FORM_SCHEMA = yup.object().shape({
         .test('is-positive', 'El stock no puede ser un número negativo', (value) => value >= 0)
 });
 
+  export const UPDATE_USER_SCHEMA = yup.object({
+    role: yup.string()
+      .required("El rol es requerido")
+      .oneOf(['admin', 'premiun', 'user'], 'Rol no válido')
+  });

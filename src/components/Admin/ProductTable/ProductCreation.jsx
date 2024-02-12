@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { axiosInstance } from '../../config/axiosInstance';
+import { axiosInstance } from '../../../config/axiosInstance';
 import { Form, InputGroup } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FORM_SCHEMA } from '../../helpers/validationsSchemas';
+import { FORM_SCHEMA } from '../../../helpers/validationsSchemas';
 import Swal from 'sweetalert2'
 
 const ProductCreation = ({ getProducts }) => {

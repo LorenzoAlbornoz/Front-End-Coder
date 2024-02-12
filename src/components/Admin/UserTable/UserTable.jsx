@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
-import { axiosInstance } from '../../config/axiosInstance.js';
+import { axiosInstance } from '../../../config/axiosInstance.js';
 import Swal from 'sweetalert2'
 import { jwtDecode } from "jwt-decode";
 import styled, { keyframes } from 'styled-components';
+import UpdateModal from './UpdateUser/UpdateModal.jsx'
 
 const UserTable = () => {
   const [allUsers, setAllUsers] = useState([])
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [datoUser, setDatoUser] = useState({});
   const [pending, setPending] = useState(true);
   const [rows, setRows] = useState([]);
+
+  const handleCloseUpdateModal = () => setShowUpdateModal(false);
+  const handleShowUpdateModal = () => setShowUpdateModal(true);
+
+  const handleUpdate = (row) => {
+    handleShowUpdateModal();
+    setDatoUser(row);
+  };
 
   const getUsers = async () => {
     try {
@@ -47,7 +58,7 @@ const UserTable = () => {
           confirmButtonText: 'Sí, eliminar',
           cancelButtonText: 'Cancelar',
         });
-  
+
         if (result.isConfirmed) {
           await axiosInstance.delete(`/user/${row}`);
           getUsers();
@@ -71,7 +82,7 @@ const UserTable = () => {
       getUsers();
     }
   };
-  
+
   const columns = [
     {
       name: "Email",
@@ -97,6 +108,7 @@ const UserTable = () => {
     {
       name: "Rol",
       selector: (row) => row.role,
+      width: "25%",
       center: true
     },
     {
@@ -104,7 +116,7 @@ const UserTable = () => {
       selector: row => {
         return (
           <div>
-            <button className='btn btn-warning btn-md me-3' onClick={() => changeUserRole(row)}>Edit Rol</button>
+            <button className='btn btn-warning btn-md me-3' onClick={() => handleUpdate(row)}>Edit</button>
             <button className='btn btn-danger btn-md' onClick={() => deleteUser(row._id)}>Delet</button>
           </div>
         )
@@ -122,8 +134,8 @@ const UserTable = () => {
   }
  `;
 
- 
- const Spinner = styled.div`
+
+  const Spinner = styled.div`
  margin: 16px;
  animation: ${rotate360} 1s linear infinite;
  transform: translateZ(0);
@@ -136,21 +148,21 @@ const UserTable = () => {
  height: 40px;
  border-radius: 50%;
 `;
- 
-     const CustomLoader = () => (
-         <div style={{ padding: "24px" }}>
-             <Spinner />
-             <div className="text-center">Cargando...</div>
-         </div>
-     );
- 
-     useEffect(() => {
-         const timeout = setTimeout(() => {
-             setRows(allUsers);
-             setPending(false);
-         }, 2000);
-         return () => clearTimeout(timeout);
-     }, [allUsers]);
+
+  const CustomLoader = () => (
+    <div style={{ padding: "24px" }}>
+      <Spinner />
+      <div className="text-center">Cargando...</div>
+    </div>
+  );
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setRows(allUsers);
+      setPending(false);
+    }, 2000);
+    return () => clearTimeout(timeout);
+  }, [allUsers]);
 
   return (
     <>
@@ -168,6 +180,12 @@ const UserTable = () => {
           progressPending={pending}
           progressComponent={<CustomLoader />}
           pagination />
+        <UpdateModal
+          show={showUpdateModal}
+          handleClose={handleCloseUpdateModal}
+          datoUser={datoUser}
+          getUsers={getUsers}
+        />
       </>
     </>
   )
