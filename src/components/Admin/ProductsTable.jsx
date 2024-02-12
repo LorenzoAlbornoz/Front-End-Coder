@@ -21,7 +21,8 @@ const ProductsTable = ({ allProducts, getProducts }) => {
 
 
     const handleUpdate = (row) => {
-        handleShow()
+        handleShowUpdateModal();
+        handleShowAddModal;
         setDatoProduct(row);
     };
 
@@ -98,7 +99,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
             selector: (row) => row.category.name,
             sortable: true,
             hide: "sm",
-            width: "10%",
+            width: "20%",
         },
         {
             name: "Imagen",
