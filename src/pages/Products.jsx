@@ -11,9 +11,7 @@ const Products = () => {
           setAllProducts(resp.data.products);
         } catch (error) {
           console.log(error);
-        } finally {
-          setIsLoading(false)
-        }
+        } 
       };
 
       useEffect(() => {

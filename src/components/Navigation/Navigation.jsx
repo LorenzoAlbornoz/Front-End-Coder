@@ -8,14 +8,10 @@ import { RiHeart3Fill } from "react-icons/ri";
 import { jwtDecode } from "jwt-decode";
 import Swal from 'sweetalert2';
 import { Link, useNavigate } from "react-router-dom";
+import SearchBar from '../SearchBar/SearchBar';
 
 const Navigation = () => {
   const [inputValue, setInputValue] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("submit");
-  };
 
   const token = localStorage.getItem('codertoken');
   const isLogged = !!token;
@@ -76,14 +72,9 @@ const Navigation = () => {
     )}
   </Nav>
   <Nav className="mx-auto">
-    <form onSubmit={handleSubmit} className="nav-header__search-form">
-      <div className="d-flex align-items-center">
-        <input className='nav-header__search-form-input' type="text" placeholder='Buscar' onChange={(e) => setInputValue(e.target.value)} />
-        <button className='nav-header__search-form-button' type="submit">
-          <FaSearch />
-        </button>
-      </div>
-    </form>
+  <div className='d-flex align-items-center'>
+            <SearchBar />
+          </div>
   </Nav>
   <Nav className="ml-auto icons-group d-flex flex-row align-items-center justify-content-center text-center">
     <Nav.Link href="/login">
