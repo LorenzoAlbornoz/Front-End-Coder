@@ -11,7 +11,7 @@ const UpdateUser = ({ datoUser, getUsers }) => {
     resolver: yupResolver(UPDATE_USER_SCHEMA), // Asegúrate de tener el esquema de validación correcto
   });
 
-  const { name, password, role } = datoUser;
+  const { role } = datoUser;
   const [formDatos, setFormDatos] = useState({
     role,
   });

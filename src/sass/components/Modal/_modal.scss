@@ -1,0 +1,58 @@
+.modal {
+    font-family: var(--font-PTSans);
+    font-weight: 700;
+    color: black;
+  }
+  
+  .modal input,
+  .modal textarea {
+    background-color: transparent;
+    border-color: #ccc;
+    box-shadow: none;
+    color: black;
+  }
+  
+  .form-select {
+    background-color: transparent;
+    font-family: var(--font-PTSans);
+    color: black;
+  }
+  
+  .form-select option {
+    color: black;
+  }
+  
+  .modal-button {
+    width: 100%;
+    max-width: 8rem;
+    margin: 0 auto;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 2rem;
+    background-color: var(--c-mainColor);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: var(--font-PTSans);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .modal-button:hover {
+    background-color: var(--c-secondColor);
+  }
+  
+  .modal input:focus {
+    background-color: transparent;
+    color: black;
+    border-color: #ccc;
+    box-shadow: none;
+  }
+  
+  .modal textarea:focus {
+    color: black;
+    background-color: transparent;
+    border-color: #ccc;
+    box-shadow: none;
+  }
+  
+  
