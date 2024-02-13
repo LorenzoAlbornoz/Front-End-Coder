@@ -6,8 +6,8 @@ import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import RecoverPasswordPage from './pages/RecoverPasswordPage.jsx'
 import Footer from './components/Footer/Footer.jsx';
-import Products from './pages/Products.jsx';
-import Product from './pages/Product.jsx';
+import Products from './pages/ProductsPage.jsx';
+import ProductDetailPage from './pages/ProductDetailPage.jsx';
 import Admin from './pages/Admin.jsx';
 import PrivateRoutes from './Routes/PrivateRoutes.jsx'
 
@@ -21,7 +21,7 @@ function App() {
         <Route path='/register' element={<RegisterPage />} />
          <Route path='/repassword' element={<RecoverPasswordPage />} />
         {/* <Route path='*' element={<Error404/>} /> */}
-        <Route path='/product/:id' element={<Product />} />
+        <Route path='/product/:id' element={<ProductDetailPage />} />
         <Route path='/products' element={<Products />} /> 
         {/* agregar carrito, favorite, etc */}
         <Route element={<PrivateRoutes />}>
