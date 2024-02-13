@@ -15,6 +15,7 @@
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
+    color: var(--c-white);
     font-family: var(--font-PTSans);
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
   }
@@ -22,6 +23,7 @@
   &__cerrar-sesion:hover {
     background-color: var(--c-secondColor);
     border-color: var(--c-secondColor);
+    color: var(--c-white);
     /* Cambiado el color del borde en hover */
   }
 

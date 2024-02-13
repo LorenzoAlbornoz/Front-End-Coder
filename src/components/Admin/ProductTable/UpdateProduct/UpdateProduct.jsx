@@ -78,6 +78,11 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
         }
     };
 
+    const formatPrice = (price) => {
+        // Formatea el precio con puntos y comas
+        return price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
+
     return (
         <div>
             <Form onSubmit={handleSubmit(onSubmit)}>
@@ -119,7 +124,7 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
                             type="text"
                             id="price"
                             name="price"
-                            defaultValue={formDatos.price}
+                            defaultValue={formatPrice(formDatos.price)}
                             // onChange={handleChangeDatos}
                             {...register("price")}
                         />
