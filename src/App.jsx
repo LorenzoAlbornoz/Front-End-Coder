@@ -10,6 +10,7 @@ import Products from './pages/ProductsPage.jsx';
 import ProductDetailPage from './pages/ProductDetailPage.jsx';
 import Admin from './pages/Admin.jsx';
 import PrivateRoutes from './Routes/PrivateRoutes.jsx'
+import Favorite from './pages/Favorite.jsx';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path='/products' element={<Products />} /> 
         {/* agregar carrito, favorite, etc */}
         <Route element={<PrivateRoutes />}>
+        <Route path='/favorite' element={<Favorite />} />
           <Route path='/admin' element={<Admin />} />
         </Route>
       </Routes>
