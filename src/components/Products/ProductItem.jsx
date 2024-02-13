@@ -38,7 +38,8 @@ const ProductItem = ({ product, favorites }) => {
 
   useEffect(() => {
     setIsFavorite(favorites.includes(product._id));
-  }, [favorites]);
+  }, [favorites, product._id]);  
+
 
   return (
     <>
@@ -55,7 +56,7 @@ const ProductItem = ({ product, favorites }) => {
             )}
           </button>
         </div>
-        <Link to={`/productos/${product._id}`} className='productCard__link'>
+        <Link to={`/product/${product._id}`} className='productCard__link'>
           <div className='productCard__imgContainer'>
             <Card.Img variant="top" src={product.image} alt={product.title} className='productCard__img' />
           </div>
