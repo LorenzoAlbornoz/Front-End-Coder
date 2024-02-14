@@ -1,0 +1,55 @@
+/* CartView.css */
+
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .cart-products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .cart-product {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+  }
+  
+  input {
+    width: 50px;
+    margin: 5px;
+  }
+  
+  .btn {
+    cursor: pointer;
+    padding: 8px 16px;
+    margin: 5px;
+  }
+  
+  .btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+    border: 1px solid #ffc107;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #dc3545;
+  }
+  
+  .product-image {
+    max-width: 100px; /* Ajusta el tamaño máximo según tus preferencias */
+    max-height: 100px; /* Ajusta el tamaño máximo según tus preferencias */
+    object-fit: contain; /* O ajusta según tus necesidades de diseño */
+  }

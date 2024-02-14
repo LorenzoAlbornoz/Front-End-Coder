@@ -78,11 +78,6 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
         }
     };
 
-    const formatPrice = (price) => {
-        // Formatea el precio con puntos y comas
-        return price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    };
-
     return (
         <div>
             <Form onSubmit={handleSubmit(onSubmit)}>
@@ -93,7 +88,6 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
                         id="title"
                         name="title"
                         defaultValue={formDatos.title}
-                        // onChange={handleChangeDatos}
                         {...register("title")}
                     />
                     {errors.title && (
@@ -108,7 +102,6 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
                         id="description"
                         name="description"
                         defaultValue={formDatos.description}
-                        // onChange={handleChangeDatos}
                         {...register("description")}
                     />
                     {errors.description && (
@@ -124,8 +117,7 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
                             type="text"
                             id="price"
                             name="price"
-                            defaultValue={formatPrice(formDatos.price)}
-                            // onChange={handleChangeDatos}
+                            defaultValue={formDatos.price}
                             {...register("price")}
                         />
                     </InputGroup>
@@ -199,5 +191,4 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
     )
 }
 
-export default UpdateProduct
-
+export default UpdateProduct;
