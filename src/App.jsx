@@ -11,6 +11,7 @@ import ProductDetailPage from './pages/ProductDetailPage.jsx';
 import Admin from './pages/Admin.jsx';
 import PrivateRoutes from './Routes/PrivateRoutes.jsx'
 import Favorite from './pages/Favorite.jsx';
+import CartView from './pages/CartView.jsx'
 
 function App() {
   return (
@@ -20,17 +21,18 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
-         <Route path='/repassword' element={<RecoverPasswordPage />} />
+        <Route path='/repassword' element={<RecoverPasswordPage />} />
         {/* <Route path='*' element={<Error404/>} /> */}
         <Route path='/product/:id' element={<ProductDetailPage />} />
-        <Route path='/products' element={<Products />} /> 
+        <Route path='/products' element={<Products />} />
         {/* agregar carrito, favorite, etc */}
         <Route element={<PrivateRoutes />}>
-        <Route path='/favorite' element={<Favorite />} />
-          <Route path='/admin' element={<Admin />} />
-        </Route>
+            <Route path='/cart/:cardId' element={<CartView />} />
+            <Route path='/favorite' element={<Favorite />} />
+            <Route path='/admin' element={<Admin />} />
+          </Route>
       </Routes>
-      <Footer/>
+      <Footer />
     </>
   );
 }

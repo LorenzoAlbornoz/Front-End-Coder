@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -14,9 +14,11 @@ const Navigation = () => {
   const isLogged = !!token;
 
   let userRole = '';
+  let cartId = ''
   if (isLogged) {
     const decodedToken = jwtDecode(token);
     userRole = decodedToken.role;
+    cartId = decodedToken.sub
   }
 
   const navigate = useNavigate();
@@ -50,6 +52,7 @@ const Navigation = () => {
     </div>
   );
 
+
   return (
     <Navbar expand='lg' bg='light' className='nav-header'>
       <Container>
@@ -79,7 +82,7 @@ const Navigation = () => {
           <Nav.Link href='/login' className='ml-lg-2'>
             <FaUser className='nav-header__login' />
           </Nav.Link>
-          <Nav.Link href='/cart' className='ml-lg-2'>
+          <Nav.Link href={`/cart/${cartId}`} className='ml-lg-2'>
             <FaShoppingCart className='nav-header__cart' />
           </Nav.Link>
           <Nav.Link as={Link} to='/favorite' className='ml-lg-2'>

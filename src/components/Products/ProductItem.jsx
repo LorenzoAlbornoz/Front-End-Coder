@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Card} from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../config/axiosInstance';
 import { jwtDecode } from 'jwt-decode';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const ProductItem = ({ product, favorites }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const navigate = useNavigate();
 
   const handleFavoriteToggle = async () => {
     try {
@@ -19,12 +21,15 @@ const ProductItem = ({ product, favorites }) => {
 
         if (isFavorite) {
           await axiosInstance.delete(`/favorite/${decodedToken.favorite}/product/${product._id}`);
+          Swal.fire('Eliminado de favoritos', '', 'success');
         } else {
           await axiosInstance.post(`/favorite/${decodedToken.favorite}/product/${product._id}`);
+          Swal.fire('Añadido a favoritos', '', 'success');
         }
       }
     } catch (error) {
       console.error('Error al procesar la acción de favoritos:', error);
+      Swal.fire('Error', 'Hubo un error al procesar la acción de favoritos', 'error');
     }
   };
 
@@ -36,10 +41,27 @@ const ProductItem = ({ product, favorites }) => {
     return pesos;
   };
 
+  const handleAddToCart = async () => {
+    try {
+      const token = localStorage.getItem('codertoken');
+      if (token) {
+        const decodedToken = jwtDecode(token);
+        const cartId = decodedToken.cart; // Obtén el ID del carrito del token
+
+        // Realiza la solicitud POST para agregar el producto al carrito
+        await axiosInstance.post(`/cart/${cartId}/product/${product._id}`);
+        
+        Swal.fire('Añadido al carrito', '', 'success');
+      }
+    } catch (error) {
+      console.error('Error al agregar el producto al carrito:', error);
+      Swal.fire('Error', 'Hubo un error al agregar el producto al carrito', 'error');
+    }
+  };
+
   useEffect(() => {
     setIsFavorite(favorites.includes(product._id));
-  }, [favorites, product._id]);  
-
+  }, [favorites, product._id]);
 
   return (
     <>
@@ -67,11 +89,14 @@ const ProductItem = ({ product, favorites }) => {
           <Card.Text className='productCard__description'>
             {product.description}
           </Card.Text>
+          <Card.Text>
+            {product.stock}
+          </Card.Text>
         </Card.Body>
         <div className='productCard__footer'>
-          <button className='productCard__button'>
-            Añadir al carrito
-          </button>
+        <button className='productCard__button' onClick={handleAddToCart}>
+          Añadir al carrito
+        </button>
         </div>
       </Card>
     </>
