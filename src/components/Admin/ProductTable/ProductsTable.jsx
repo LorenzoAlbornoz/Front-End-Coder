@@ -99,7 +99,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
             selector: (row) => row.category,
             sortable: true,
             hide: "sm",
-            width: "15%",
+            width: "10%",
         },
         {
             name: "Imagen",

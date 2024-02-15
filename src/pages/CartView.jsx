@@ -119,7 +119,7 @@ const CartView = () => {
       const cartId = cart._id;
       try {
         await axiosInstance.post(`/cart/${cartId}/user/${userId}/purchase`);
-        
+
         // Obtener el carrito actualizado después de la compra
         const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
         setCart(updatedCart.data); // Actualizar el estado del carrito en el componente
@@ -134,7 +134,7 @@ const CartView = () => {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Hubo un error al finalizar la compra.',
+          text: 'No hay stock disponible o hubo un error.',
         });
       }
     }
@@ -155,8 +155,13 @@ const CartView = () => {
 
   return (
     <div className="cart-container">
+      <form id="cartForm" onSubmit={confirmPurchase} data-cart-id={cart._id}>
+        <button type="submit" className="btn btn-success">
+          <i>Finalizar Compra </i> <span id="cartQuantity">{cart.totalQuantity}</span>
+        </button>
+      </form>
       <h1>Carrito de Compras</h1>
-      <p>Total del Carrito: ${cart.total}</p>
+      <p>Total del Carrito: {convertToPesos(cart.total)}</p>
       <p>Cantidad Total de Productos: {cart.totalQuantity}</p>
       <div className="cart-products">
         {cart.products && cart.products.map((item) => (
@@ -188,11 +193,6 @@ const CartView = () => {
           </div>
         ))}
       </div>
-      <form id="cartForm" onSubmit={confirmPurchase} data-cart-id={cart._id}>
-        <button type="submit" className="btn btn-success" style={{ marginTop: '10px' }}>
-          <i>Finalizar Compra</i> <span id="cartQuantity">{cart.totalQuantity}</span>
-        </button>
-      </form>
     </div>
   );
 };
