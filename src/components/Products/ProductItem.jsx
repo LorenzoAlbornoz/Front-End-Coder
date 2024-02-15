@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card} from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { axiosInstance } from '../../config/axiosInstance';
 import { jwtDecode } from 'jwt-decode';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 
 const ProductItem = ({ product, favorites }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const navigate = useNavigate();
 
   const handleFavoriteToggle = async () => {
     try {

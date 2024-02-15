@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,20 +8,31 @@ import { FaUser, FaShoppingCart } from 'react-icons/fa';
 import { RiHeart3Fill } from 'react-icons/ri';
 import Swal from 'sweetalert2';
 import SearchBar from '../SearchBar/SearchBar';
+import { axiosInstance } from '../../config/axiosInstance';
+import Cookies from 'universal-cookie';
 
 const Navigation = () => {
-  const token = localStorage.getItem('codertoken');
+  const [cartQuantity, setCartQuantity] = useState(0);
+  const navigate = useNavigate();
+
+  // Verificar si el token está en localStorage
+  const localStorageToken = localStorage.getItem('codertoken');
+  
+  // Verificar si el token está en cookies
+  const cookies = new Cookies();
+  const cookieToken = cookies.get('codertoken');
+
+  // Determinar si el usuario está logueado y obtener el token
+  const token = localStorageToken || cookieToken;
   const isLogged = !!token;
 
   let userRole = '';
-  let cartId = ''
+  let cartId = '';
   if (isLogged) {
     const decodedToken = jwtDecode(token);
     userRole = decodedToken.role;
-    cartId = decodedToken.sub
+    cartId = decodedToken.cart;
   }
-
-  const navigate = useNavigate();
 
   const logOut = () => {
     Swal.fire({
@@ -35,11 +46,30 @@ const Navigation = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem('codertoken');
+        cookies.remove('codertoken'); // Eliminar el token de las cookies también
         localStorage.removeItem('userRole');
         navigate('/');
       }
     });
   };
+
+  const updateCartQuantity = (cartId) => {
+    // Realizar una solicitud al servidor para obtener la cantidad del carrito
+    axiosInstance.get(`/cart/quantity/${cartId}`)
+      .then(response => {
+        const cartQuantityFromServer = response.data.quantity;
+        // Actualizar el estado local con la cantidad del carrito
+        setCartQuantity(cartQuantityFromServer);
+      })
+      .catch(error => {
+        console.error('Error al obtener la cantidad del carrito:', error);
+      });
+  };
+
+  useEffect(() => {
+    // Actualizar la cantidad del carrito al cargar el componente
+    updateCartQuantity(cartId);
+  }, [cartId]);
 
   const showLogout = isLogged && (
     <div className='row align-items-center flex-column flex-sm-row'>
@@ -52,6 +82,11 @@ const Navigation = () => {
     </div>
   );
 
+  // Agregar console.log para verificar la fuente del token
+  useEffect(() => {
+    console.log('Token obtenido:', token);
+    console.log('Fuente del token:', localStorageToken ? 'localStorage' : 'cookies');
+  }, [token]);
 
   return (
     <Navbar expand='lg' bg='light' className='nav-header'>
@@ -84,6 +119,7 @@ const Navigation = () => {
           </Nav.Link>
           <Nav.Link href={`/cart/${cartId}`} className='ml-lg-2'>
             <FaShoppingCart className='nav-header__cart' />
+            <span id='cartQuantity'>{cartQuantity}</span>
           </Nav.Link>
           <Nav.Link as={Link} to='/favorite' className='ml-lg-2'>
             <RiHeart3Fill className='nav-header__heart' />
