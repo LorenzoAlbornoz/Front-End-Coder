@@ -60,7 +60,7 @@ export const RECOVERPASSWORD_SCHEMA = yup.object({
 export const FORM_SCHEMA = yup.object().shape({
     title: yup.string()
         .required("El título es requerido")
-        .max(20, "El título no puede tener más de 20 caracteres"),
+        .max(30, "El título no puede tener más de 30 caracteres"),
     description: yup.string()
         .required("La descripción es requerida")
         .max(80, "La descripción no puede tener más de 80 caracteres"),

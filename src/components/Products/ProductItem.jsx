@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Card} from 'react-bootstrap';
-import { Link} from 'react-router-dom';
+import { Card } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../config/axiosInstance';
 import { jwtDecode } from 'jwt-decode';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
@@ -8,22 +8,23 @@ import Swal from 'sweetalert2';
 
 const ProductItem = ({ product, favorites }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const navigate = useNavigate();
 
   const handleFavoriteToggle = async () => {
     try {
       const token = localStorage.getItem('codertoken');
-  
+
       if (!token) {
         // Si el usuario no está autenticado, muestra un mensaje
         Swal.fire('Inicia sesión', 'Debes iniciar sesión para gestionar tus favoritos', 'info');
         return;
       }
-  
+
       const decodedToken = jwtDecode(token);
-  
+
       // Actualizar el estado local inmediatamente para una respuesta más rápida
       setIsFavorite(!isFavorite);
-  
+
       if (isFavorite) {
         await axiosInstance.delete(`/favorite/${decodedToken.favorite}/product/${product._id}`);
         Swal.fire('Eliminado de favoritos', '', 'success');
@@ -36,7 +37,6 @@ const ProductItem = ({ product, favorites }) => {
       Swal.fire('Error', 'Hubo un error al procesar la acción de favoritos', 'error');
     }
   };
-  
 
   const convertToPesos = (numb) => {
     const pesos = numb.toLocaleString('es-AR', {
@@ -49,26 +49,26 @@ const ProductItem = ({ product, favorites }) => {
   const handleAddToCart = async () => {
     try {
       const token = localStorage.getItem('codertoken');
-      
+
       if (!token) {
         // Si el usuario no está autenticado, muestra un mensaje
         Swal.fire('Inicia sesión', 'Debes iniciar sesión para agregar un producto a tu carrito', 'info');
         return;
       }
-  
+
       const decodedToken = jwtDecode(token);
       const cartId = decodedToken.cart; // Obtén el ID del carrito del token
-  
+
       // Realiza la solicitud POST para agregar el producto al carrito
       await axiosInstance.post(`/cart/${cartId}/product/${product._id}`);
-      
+
       Swal.fire('Añadido al carrito', '', 'success');
+
     } catch (error) {
       console.error('Error al agregar el producto al carrito:', error);
       Swal.fire('Error', 'Hubo un error al agregar el producto al carrito', 'error');
     }
   };
-  
 
   useEffect(() => {
     setIsFavorite(favorites.includes(product._id));
@@ -96,18 +96,21 @@ const ProductItem = ({ product, favorites }) => {
         </Link>
         <Card.Body className='productCard__body text-center'>
           <Card.Title className='productCard__title'>{product.title}</Card.Title>
-          <Card.Subtitle className='productCard__itemprice'>{convertToPesos(product.price)}</Card.Subtitle>
+          <Card.Subtitle className='mb-2 productCard__price'>{convertToPesos(product.price)}</Card.Subtitle>
           <Card.Text className='productCard__description'>
             {product.description}
           </Card.Text>
-          <Card.Text>
-            {product.stock}
+          <Card.Text className='productCard__category'>
+            Categoría: {product.category.name}
+          </Card.Text>
+          <Card.Text className='productCard__stock'>
+            Stock disponible: {product.stock}
           </Card.Text>
         </Card.Body>
         <div className='productCard__footer'>
-        <button className='productCard__button' onClick={handleAddToCart}>
-          Añadir al carrito
-        </button>
+          <button className='btn btn-primary productCard__button' onClick={handleAddToCart}>
+            Añadir al carrito
+          </button>
         </div>
       </Card>
     </>

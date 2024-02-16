@@ -106,7 +106,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
         },
         {
             name: "Categoria",
-            selector: (row) => row.category,
+            selector: (row) => row.category.name,
             sortable: true,
             hide: "sm",
             width: "10%",
