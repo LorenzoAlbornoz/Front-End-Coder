@@ -18,29 +18,47 @@ const UpdateUser = ({ datoUser, getUsers }) => {
 
   const onSubmit = async (data) => {
     try {
-      console.log('Datos antes de la actualización:', data);
-
+      const token = localStorage.getItem('codertoken');
+  
+      // Verifica si hay un token
+      if (!token) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error en la actualización',
+          text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
+        });
+        return; // Detén la ejecución si no hay un token
+      }
+  
       // Puedes construir el objeto de datos para la solicitud de actualización
       const updatedUserData = {
         role: data.role,
       };
-
-      console.log('Datos enviados en la solicitud:', updatedUserData);
-
+  
       // Realiza la solicitud de actualización del usuario
-      await axiosInstance.put(`/user/${datoUser._id}`, updatedUserData);
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Usuario modificado con éxito',
-      });
+      const response = await axiosInstance.put(`/user/${datoUser._id}`, updatedUserData);
+  
+      // Verifica el estado de la respuesta
+      if (response.status === 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario modificado con éxito',
+        });
+      }
     } catch (error) {
-      console.log(error);
+      console.error('Error al modificar el usuario:', error);
+  
+      // Maneja otros errores aquí, si es necesario
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en la actualización',
+        text: 'Hubo un error al modificar el usuario. Por favor, intenta nuevamente.',
+      });
     } finally {
-      getUsers(); 
+      getUsers();
     }
   };
-
+  
   return (
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>

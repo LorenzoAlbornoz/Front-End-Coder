@@ -25,7 +25,6 @@ function App() {
         {/* <Route path='*' element={<Error404/>} /> */}
         <Route path='/product/:id' element={<ProductDetailPage />} />
         <Route path='/products' element={<Products />} />
-        {/* agregar carrito, favorite, etc */}
         <Route element={<PrivateRoutes />}>
             <Route path='/cart/:cardId' element={<CartView />} />
             <Route path='/favorite' element={<Favorite />} />

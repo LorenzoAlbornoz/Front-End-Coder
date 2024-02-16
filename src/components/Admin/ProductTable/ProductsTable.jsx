@@ -28,6 +28,16 @@ const ProductsTable = ({ allProducts, getProducts }) => {
 
     const deleteCurso = async (row) => {
         try {
+            const token = localStorage.getItem('codertoken');
+
+            if (!token) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error en la eliminación',
+                text: 'Debes iniciar sesión para eliminar un usuario.',
+              });
+              return; // Detén la ejecución si no hay un token
+            }
             Swal.fire({
                 title: "¿Estas seguro?",
                 text: "No podrás revertir esto!",

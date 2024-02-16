@@ -9,7 +9,8 @@ import { RiHeart3Fill } from 'react-icons/ri';
 import Swal from 'sweetalert2';
 import SearchBar from '../SearchBar/SearchBar';
 import { axiosInstance } from '../../config/axiosInstance';
-import Cookies from 'universal-cookie';
+import Cookies from 'js-cookie'; // Importa la biblioteca js-cookie
+
 
 const Navigation = () => {
   const [cartQuantity, setCartQuantity] = useState(0);
@@ -17,10 +18,15 @@ const Navigation = () => {
 
   // Verificar si el token está en localStorage
   const localStorageToken = localStorage.getItem('codertoken');
-  
+
   // Verificar si el token está en cookies
-  const cookies = new Cookies();
-  const cookieToken = cookies.get('codertoken');
+  const cookieToken = Cookies.get('codertoken');
+
+  Cookies.set('codertoken', 'valor_de_tu_token', { expires: 7 });
+
+
+  // Imprime todas las cookies disponibles
+  console.log('Cookies disponibles:', document.cookie);
 
   // Determinar si el usuario está logueado y obtener el token
   const token = localStorageToken || cookieToken;
@@ -46,7 +52,7 @@ const Navigation = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem('codertoken');
-        cookies.remove('codertoken'); // Eliminar el token de las cookies también
+        Cookies.remove('codertoken'); // Eliminar el token de las cookies también
         localStorage.removeItem('userRole');
         navigate('/');
       }
@@ -88,6 +94,18 @@ const Navigation = () => {
     console.log('Fuente del token:', localStorageToken ? 'localStorage' : 'cookies');
   }, [token]);
 
+  const handleUnauthorizedAccess = (event) => {
+    event.preventDefault(); // Evitar que el enlace redireccione inmediatamente
+  
+    Swal.fire({
+      title: 'Inicia sesión',
+      text: 'Debes iniciar sesión para acceder a esta función',
+      icon: 'info',
+      confirmButtonText: 'Entendido',
+    })
+  };
+  
+
   return (
     <Navbar expand='lg' bg='light' className='nav-header'>
       <Container>
@@ -117,13 +135,14 @@ const Navigation = () => {
           <Nav.Link href='/login' className='ml-lg-2'>
             <FaUser className='nav-header__login' />
           </Nav.Link>
-          <Nav.Link href={`/cart/${cartId}`} className='ml-lg-2'>
-            <FaShoppingCart className='nav-header__cart' />
-            <span id='cartQuantity'>{cartQuantity}</span>
-          </Nav.Link>
-          <Nav.Link as={Link} to='/favorite' className='ml-lg-2'>
-            <RiHeart3Fill className='nav-header__heart' />
-          </Nav.Link>
+          <Nav.Link href={`/cart/${cartId}`} className='ml-lg-2' onClick={isLogged ? null : handleUnauthorizedAccess}>
+  <FaShoppingCart className='nav-header__cart' />
+  <span id='cartQuantity'>{cartQuantity}</span>
+</Nav.Link>
+<Nav.Link as={Link} to='/favorite' className='ml-lg-2' onClick={isLogged ? null : handleUnauthorizedAccess}>
+  <RiHeart3Fill className='nav-header__heart' />
+</Nav.Link>
+
           {showLogout}
         </Nav>
       </Container>

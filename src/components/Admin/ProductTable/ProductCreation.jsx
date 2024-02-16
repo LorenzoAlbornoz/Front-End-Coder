@@ -48,6 +48,17 @@ const ProductCreation = ({ getProducts }) => {
 
   const onSubmit = async (data) => {
     try {
+      const token = localStorage.getItem('codertoken');
+      
+      // Verifica si hay un token
+      if (!token) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error en la actualización',
+          text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
+        });
+        return; // Detén la ejecución si no hay un token
+      }
       const formData = new FormData();
       formData.append('title', data.title);
       formData.append('description', data.description.replace(/\n/g, 'saltosDeUsuario'));
@@ -66,7 +77,7 @@ const ProductCreation = ({ getProducts }) => {
         title: 'Producto agregado con éxito',
       });
     } catch (error) {
-      console.log(error);
+      console.error('Error al modificar el producto:', error);
     } finally {
      getProducts()
     }

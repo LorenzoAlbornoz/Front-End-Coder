@@ -44,39 +44,59 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
 
     const onSubmit = async (data) => {
         try {
-            console.log('Datos antes de la actualización:', data);
-
-            const formData = new FormData();
-            formData.append('title', data.title);
-            formData.append('description', data.description.replace(/\n/g, 'saltosDeUsuario'));
-            formData.append('price', data.price);
-            formData.append('category', data.category);
-            formData.append('code', data.code);
-            formData.append('stock', data.stock);
-
-            // Solo agregar la nueva imagen si se seleccionó una
-            if (imgFile) {
-                formData.append('image', imgFile);
-            }
-
-            console.log('Datos enviados en la solicitud:', formData);
-
-            await axiosInstance.put(`/product/${datoProduct._id}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
+          const token = localStorage.getItem('codertoken');
+      
+          // Verifica si hay un token
+          if (!token) {
             Swal.fire({
-                icon: 'success',
-                title: 'Producto modificado con éxito',
+              icon: 'error',
+              title: 'Error en la actualización',
+              text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
             });
+            return; // Detén la ejecución si no hay un token
+          }
+      
+          console.log('Datos antes de la actualización:', data);
+      
+          const formData = new FormData();
+          formData.append('title', data.title);
+          formData.append('description', data.description.replace(/\n/g, 'saltosDeUsuario'));
+          formData.append('price', data.price);
+          formData.append('category', data.category);
+          formData.append('code', data.code);
+          formData.append('stock', data.stock);
+      
+          // Solo agregar la nueva imagen si se seleccionó una
+          if (imgFile) {
+            formData.append('image', imgFile);
+          }
+      
+          console.log('Datos enviados en la solicitud:', formData);
+      
+          await axiosInstance.put(`/product/${datoProduct._id}`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+      
+          Swal.fire({
+            icon: 'success',
+            title: 'Producto modificado con éxito',
+          });
         } catch (error) {
-            console.log(error);
+          console.error('Error al modificar el producto:', error);
+      
+          // Maneja otros errores aquí, si es necesario
+          Swal.fire({
+            icon: 'error',
+            title: 'Error en la actualización',
+            text: 'Hubo un error al modificar el producto. Por favor, intenta nuevamente.',
+          });
         } finally {
-            getProducts();
+          getProducts();
         }
-    };
+      };
+      
 
     return (
         <div>
