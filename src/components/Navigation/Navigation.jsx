@@ -22,12 +22,6 @@ const Navigation = () => {
   // Verificar si el token está en cookies
   const cookieToken = Cookies.get('codertoken');
 
-  Cookies.set('codertoken', 'valor_de_tu_token', { expires: 7 });
-
-
-  // Imprime todas las cookies disponibles
-  console.log('Cookies disponibles:', document.cookie);
-
   // Determinar si el usuario está logueado y obtener el token
   const token = localStorageToken || cookieToken;
   const isLogged = !!token;

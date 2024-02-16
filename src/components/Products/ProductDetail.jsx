@@ -1,5 +1,13 @@
 import React from 'react';
 
+const convertToPesos = (numb) => {
+  const pesos = numb.toLocaleString('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+  });
+  return pesos;
+};
+
 const ProductDetail = ({ product }) => {
   console.log(product)
   return (
@@ -24,7 +32,7 @@ const ProductDetail = ({ product }) => {
                   <h4>{product?.category?.name}</h4>
                 </div>
                 <div className='mt-4'>
-                  <h3>{product?.price}</h3>
+                  <h3>{convertToPesos(product?.price)}</h3>
                 </div>
                 <div>
                   <button className='btn btn-warning mt-4 mb-4'>

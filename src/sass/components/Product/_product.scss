@@ -1,0 +1,31 @@
+/* Estilos para resaltar texto importante */
+.productCard{
+
+&__body {
+    font-size: 16px; /* Tamaño de fuente base */
+  }
+  
+  &__title {
+    font-size: 24px; /* Tamaño de fuente para el título */
+    font-weight: bold; /* Negrita para destacar */
+    color: #333; /* Color del texto */
+  }
+  
+  &__price {
+    font-size: 18px; /* Tamaño de fuente para el precio */
+    color: var(--c-secondColor); /* Color del precio destacado */
+  }
+  
+  &__description {
+    font-size: 18px; /* Tamaño de fuente para la descripción */
+  }
+  
+  &__category {
+    font-size: 12px; /* Tamaño de fuente para la categoría */
+  }
+  
+  &__stock {
+    font-size: 12px; /* Tamaño de fuente para el stock */
+  }
+  
+}
