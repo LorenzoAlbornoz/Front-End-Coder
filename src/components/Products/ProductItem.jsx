@@ -12,25 +12,31 @@ const ProductItem = ({ product, favorites }) => {
   const handleFavoriteToggle = async () => {
     try {
       const token = localStorage.getItem('codertoken');
-      if (token) {
-        const decodedToken = jwtDecode(token);
-
-        // Actualizar el estado local inmediatamente para una respuesta más rápida
-        setIsFavorite(!isFavorite);
-
-        if (isFavorite) {
-          await axiosInstance.delete(`/favorite/${decodedToken.favorite}/product/${product._id}`);
-          Swal.fire('Eliminado de favoritos', '', 'success');
-        } else {
-          await axiosInstance.post(`/favorite/${decodedToken.favorite}/product/${product._id}`);
-          Swal.fire('Añadido a favoritos', '', 'success');
-        }
+  
+      if (!token) {
+        // Si el usuario no está autenticado, muestra un mensaje
+        Swal.fire('Inicia sesión', 'Debes iniciar sesión para gestionar tus favoritos', 'info');
+        return;
+      }
+  
+      const decodedToken = jwtDecode(token);
+  
+      // Actualizar el estado local inmediatamente para una respuesta más rápida
+      setIsFavorite(!isFavorite);
+  
+      if (isFavorite) {
+        await axiosInstance.delete(`/favorite/${decodedToken.favorite}/product/${product._id}`);
+        Swal.fire('Eliminado de favoritos', '', 'success');
+      } else {
+        await axiosInstance.post(`/favorite/${decodedToken.favorite}/product/${product._id}`);
+        Swal.fire('Añadido a favoritos', '', 'success');
       }
     } catch (error) {
       console.error('Error al procesar la acción de favoritos:', error);
       Swal.fire('Error', 'Hubo un error al procesar la acción de favoritos', 'error');
     }
   };
+  
 
   const convertToPesos = (numb) => {
     const pesos = numb.toLocaleString('es-AR', {
@@ -43,20 +49,26 @@ const ProductItem = ({ product, favorites }) => {
   const handleAddToCart = async () => {
     try {
       const token = localStorage.getItem('codertoken');
-      if (token) {
-        const decodedToken = jwtDecode(token);
-        const cartId = decodedToken.cart; // Obtén el ID del carrito del token
-
-        // Realiza la solicitud POST para agregar el producto al carrito
-        await axiosInstance.post(`/cart/${cartId}/product/${product._id}`);
-        
-        Swal.fire('Añadido al carrito', '', 'success');
+      
+      if (!token) {
+        // Si el usuario no está autenticado, muestra un mensaje
+        Swal.fire('Inicia sesión', 'Debes iniciar sesión para agregar un producto a tu carrito', 'info');
+        return;
       }
+  
+      const decodedToken = jwtDecode(token);
+      const cartId = decodedToken.cart; // Obtén el ID del carrito del token
+  
+      // Realiza la solicitud POST para agregar el producto al carrito
+      await axiosInstance.post(`/cart/${cartId}/product/${product._id}`);
+      
+      Swal.fire('Añadido al carrito', '', 'success');
     } catch (error) {
       console.error('Error al agregar el producto al carrito:', error);
       Swal.fire('Error', 'Hubo un error al agregar el producto al carrito', 'error');
     }
   };
+  
 
   useEffect(() => {
     setIsFavorite(favorites.includes(product._id));

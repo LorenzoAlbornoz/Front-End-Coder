@@ -38,8 +38,19 @@ const UserTable = () => {
   const deleteUser = async (row) => {
     try {
       const token = localStorage.getItem('codertoken');
+
+      if (!token) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error en la eliminación',
+          text: 'Debes iniciar sesión para eliminar un usuario.',
+        });
+        return; // Detén la ejecución si no hay un token
+      }
+      
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.sub;
+      
       if (row === userId) {
         Swal.fire({
           icon: 'error',
