@@ -2,20 +2,42 @@ import React, { useState, useEffect } from 'react';
 import { axiosInstance } from '../config/axiosInstance';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
+import Cookies from 'js-cookie';
 
 const CartView = () => {
   const [cart, setCart] = useState(null);
   const [userId, setUserId] = useState(null);
   const [newQuantities, setNewQuantities] = useState({});
 
-  useEffect(() => {
+  const getUserInfo = () => {
     const token = localStorage.getItem('codertoken');
-
+  
     if (token) {
       const decodedToken = jwtDecode(token);
-      const cartId = decodedToken.cart;
-      const userId = decodedToken.sub
+      return {
+        userId: decodedToken.sub,
+        cartId: decodedToken.cart,
+      };
+    }
+  
+    const userDataCookie = Cookies.get('user_data');
+  
+    if (userDataCookie) {
+      const userData = JSON.parse(userDataCookie);
+      return {
+        userId: userData.sub,
+        cartId: userData.cart,
+       
+      };
+    }
+    return null;
+  };
 
+  useEffect(() => {
+    const userInfo = getUserInfo();
+
+    if (userInfo) {
+      const { userId, cartId } = userInfo;
       setUserId(userId);
 
       const fetchCart = async () => {
@@ -40,11 +62,11 @@ const CartView = () => {
 
   const updateQuantity = async (cartId, productId) => {
     const newQuantity = newQuantities[productId];
-  
+
     try {
       // Usar Axios para enviar la solicitud de actualización con el método PUT
       const response = await axiosInstance.put(`/cart/${cartId}/product/${productId}`, { quantity: newQuantity });
-  
+
       // Mostrar una alerta indicando que la cantidad se ha actualizado
       console.log("Response from server:", response.data);  // Agregado para verificar la respuesta del servidor
       Swal.fire({
@@ -52,7 +74,7 @@ const CartView = () => {
         title: '¡Éxito!',
         text: 'Cantidad del producto actualizada exitosamente',
       });
-  
+
       // Actualizar el carrito después de la actualización
       const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
       setCart(updatedCart.data);
@@ -65,8 +87,8 @@ const CartView = () => {
       });
     }
   };
-  
-  
+
+
 
   const deleteProductFromCart = async (cartId, productId) => {
     try {
@@ -80,13 +102,13 @@ const CartView = () => {
         confirmButtonText: "Sí, eliminar!",
         cancelButtonText: "Cancelar",
       });
-  
+
       if (result.isConfirmed) {
         await axiosInstance.delete(`/cart/${cartId}/product/${productId}`);
-  
-      // Actualizar el carrito después de la actualización
-      const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
-      setCart(updatedCart.data);
+
+        // Actualizar el carrito después de la actualización
+        const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
+        setCart(updatedCart.data);
       }
     } catch (error) {
       console.error(error);
@@ -102,7 +124,7 @@ const CartView = () => {
 
   const confirmPurchase = async (event) => {
     event.preventDefault();
-  
+
     const result = await Swal.fire({
       title: "¿Finalizar Compra?",
       text: "¿Deseas finalizar la compra?",
@@ -113,7 +135,7 @@ const CartView = () => {
       confirmButtonText: "Sí, finalizar compra",
       cancelButtonText: "Cancelar",
     });
-  
+
     if (result.isConfirmed) {
       // Enviar la solicitud para finalizar la compra
       const cartId = cart._id;
@@ -139,7 +161,7 @@ const CartView = () => {
       }
     }
   };
-  
+
 
   if (!cart) {
     return <div className='text-center'>Cargando...</div>;
