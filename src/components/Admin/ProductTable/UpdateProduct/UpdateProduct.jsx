@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FORM_SCHEMA } from '../../../../helpers/validationsSchemas';
 import Swal from 'sweetalert2'
+import Cookies from 'js-cookie';
 
 const UpdateProduct = ({ datoProduct, getProducts }) => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
@@ -44,7 +45,7 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
 
     const onSubmit = async (data) => {
         try {
-          const token = localStorage.getItem('codertoken');
+            const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
       
           // Verifica si hay un token
           if (!token) {

@@ -9,29 +9,31 @@ import { RiHeart3Fill } from 'react-icons/ri';
 import Swal from 'sweetalert2';
 import SearchBar from '../SearchBar/SearchBar';
 import { axiosInstance } from '../../config/axiosInstance';
-import Cookies from 'js-cookie'; // Importa la biblioteca js-cookie
-
+import Cookies from 'js-cookie'; 
 
 const Navigation = () => {
   const [cartQuantity, setCartQuantity] = useState(0);
   const navigate = useNavigate();
 
-  // Verificar si el token está en localStorage
   const localStorageToken = localStorage.getItem('codertoken');
 
-  // Verificar si el token está en cookies
-  const cookieToken = Cookies.get('codertoken');
+  const userDataCookie = Cookies.get('user_data');
 
-  // Determinar si el usuario está logueado y obtener el token
-  const token = localStorageToken || cookieToken;
-  const isLogged = !!token;
+  const token = localStorageToken || '';
+  const isLogged = !!token || !!userDataCookie;
 
   let userRole = '';
   let cartId = '';
   if (isLogged) {
-    const decodedToken = jwtDecode(token);
-    userRole = decodedToken.role;
-    cartId = decodedToken.cart;
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      userRole = decodedToken.role;
+      cartId = decodedToken.cart;
+    } else if (userDataCookie) {
+      const userData = JSON.parse(userDataCookie);
+      userRole = userData.role;
+      cartId = userData.cart;
+    }
   }
 
   const logOut = () => {
@@ -46,7 +48,7 @@ const Navigation = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem('codertoken');
-        Cookies.remove('codertoken'); // Eliminar el token de las cookies también
+        Cookies.remove('user_data'); // Eliminar el token de las cookies también
         localStorage.removeItem('userRole');
         navigate('/');
       }
@@ -81,12 +83,6 @@ const Navigation = () => {
       <div className='col-auto mt-2 mt-sm-0'></div>
     </div>
   );
-
-  // Agregar console.log para verificar la fuente del token
-  useEffect(() => {
-    console.log('Token obtenido:', token);
-    console.log('Fuente del token:', localStorageToken ? 'localStorage' : 'cookies');
-  }, [token]);
 
   const handleUnauthorizedAccess = (event) => {
     event.preventDefault(); // Evitar que el enlace redireccione inmediatamente

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import UpdateModal from './UpdateProduct/UpdateModal.jsx';
 import ProductModal from './ProductModal.jsx'
 import styled, { keyframes } from 'styled-components';
+import Cookies from 'js-cookie';
 
 const ProductsTable = ({ allProducts, getProducts }) => {
     const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -28,7 +29,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
 
     const deleteCurso = async (row) => {
         try {
-            const token = localStorage.getItem('codertoken');
+            const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
 
             if (!token) {
               Swal.fire({

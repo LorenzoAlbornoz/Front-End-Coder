@@ -5,6 +5,7 @@ import Swal from 'sweetalert2'
 import { jwtDecode } from "jwt-decode";
 import styled, { keyframes } from 'styled-components';
 import UpdateModal from './UpdateUser/UpdateModal.jsx'
+import Cookies from 'js-cookie';
 
 const UserTable = () => {
   const [allUsers, setAllUsers] = useState([])
@@ -37,7 +38,7 @@ const UserTable = () => {
 
   const deleteUser = async (row) => {
     try {
-      const token = localStorage.getItem('codertoken');
+      const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
 
       if (!token) {
         Swal.fire({

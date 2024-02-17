@@ -1,6 +1,7 @@
 .modal {
     font-family: var(--font-PTSans);
     font-weight: 700;
+    font-size: 2rem;
     color: black;
   }
   
@@ -10,12 +11,14 @@
     border-color: #ccc;
     box-shadow: none;
     color: black;
+    font-size: 1.5rem;
   }
   
   .form-select {
     background-color: transparent;
     font-family: var(--font-PTSans);
     color: black;
+    font-size: 1.5rem;
   }
   
   .form-select option {
@@ -29,6 +32,7 @@
     padding: 0.8rem 1rem;
     border: none;
     border-radius: 2rem;
+    color: var(--c-white);
     background-color: var(--c-mainColor);
     font-weight: 600;
     font-size: 1rem;
@@ -38,6 +42,7 @@
   }
   
   .modal-button:hover {
+    color: var(--c-white);
     background-color: var(--c-secondColor);
   }
   
@@ -53,6 +58,7 @@
     background-color: transparent;
     border-color: #ccc;
     box-shadow: none;
+    font-size: 1rem;
   }
   
   
