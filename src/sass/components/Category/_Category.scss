@@ -1,0 +1,32 @@
+/* CategoryList.css */
+
+.category-list {
+    margin: 20px;
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.category-item {
+    text-align: center; 
+    margin-top: 8px;
+}
+
+.category-image,
+.category-name {
+    width: 100%; 
+    max-width: 125px;
+    height: auto; 
+}
+
+/* Media Query para ajustar el tamaño de la fuente a partir de 768px */
+@media screen and (max-width: 768px) {
+    .category-list {
+        font-size: 1.5rem 
+    }
+    
+    .category-image,
+    .category-name {
+        max-width: 200px !important; 
+    }
+}

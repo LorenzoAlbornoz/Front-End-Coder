@@ -1,11 +1,15 @@
 import React from 'react';
 
 const convertToPesos = (numb) => {
-  const pesos = numb.toLocaleString('es-AR', {
-    style: 'currency',
-    currency: 'ARS',
-  });
-  return pesos;
+  if (typeof numb !== 'undefined') {
+    const pesos = numb.toLocaleString('es-AR', {
+      style: 'currency',
+      currency: 'ARS',
+    });
+    return pesos;
+  } else {
+    return ''; 
+  }
 };
 
 const ProductDetail = ({ product }) => {

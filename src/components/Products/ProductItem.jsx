@@ -5,9 +5,9 @@ import { axiosInstance } from '../../config/axiosInstance';
 import { jwtDecode } from 'jwt-decode';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import Cookies from 'js-cookie'; 
+import Cookies from 'js-cookie';
 
-const ProductItem = ({ product, favorites }) => {
+const ProductItem = ({ product, favorites, categories, handleCategoryClick }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
 
