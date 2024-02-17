@@ -8,13 +8,6 @@ const Home = () => {
         <>
          <CarouselHome />
          <ShippingType/>
-            <div className='container home-container'>
-                <div className='row'>
-                    <div className='col-6'>
-                        {/* <a href="#" className='btn btn-outline-info mt-3'></a> */}
-                    </div>
-                </div>
-            </div>
             <WhatsappLink/>
         </>
     )
