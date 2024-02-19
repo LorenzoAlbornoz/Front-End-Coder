@@ -3,7 +3,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 90vh;
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,14 +54,14 @@
         transition: filter 0.3s;
     }
 
-    &__borderIconFacebook{
-        background-color: #1877f2;
+    &__borderIconFacebook {
+        background-color: #557d9f; 
     }
-
-    &__borderIconGoogle{
-        background-color: #DB4437;
+    
+    &__borderIconGoogle {
+        background-color: #cc6964;
     }
-
+    
     &__borderIconFacebook:hover,
     &__borderIconGoogle:hover {
         filter: brightness(90%);
@@ -119,21 +119,18 @@
             padding: 2rem;
         }
 
+        &__iconos {
+            flex-direction: column;
+        }
+
+        &__borderIconFacebook,
+        &__borderIconGoogle {
+            width: 100%;
+        }
+
         &__createAccount {
             font-size: 2rem;
             padding: 1.5rem 0;
-        }
-
-        &__iconos {
-            flex-direction: row;
-            margin-top: 1.5rem;
-        }
-
-        &__borderIcon {
-            margin-bottom: 1rem;
-            height: 2rem;
-            width: 2rem;
-            font-size: 2.5rem;
         }
 
         &__enlace {

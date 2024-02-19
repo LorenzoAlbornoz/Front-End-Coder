@@ -177,14 +177,14 @@ const CartView = () => {
 
   return (
     <div className="cart-container">
+      <h1>Carrito de Compras</h1>
+      <p>Total del Carrito: {convertToPesos(cart.total)}</p>
+      <p>Cantidad Total de Productos: {cart.totalQuantity}</p>
       <form id="cartForm" onSubmit={confirmPurchase} data-cart-id={cart._id}>
         <button type="submit" className="btn btn-success">
           <i>Finalizar Compra </i> <span id="cartQuantity">{cart.totalQuantity}</span>
         </button>
       </form>
-      <h1>Carrito de Compras</h1>
-      <p>Total del Carrito: {convertToPesos(cart.total)}</p>
-      <p>Cantidad Total de Productos: {cart.totalQuantity}</p>
       <div className="cart-products">
         {cart.products && cart.products.map((item) => (
           <div key={item.product._id} className="cart-product">
@@ -210,7 +210,7 @@ const CartView = () => {
               onClick={() => deleteProductFromCart(cart._id, item.product._id)}
               className="btn btn-danger"
             >
-              Eliminar del carrito
+              X
             </button>
           </div>
         ))}
