@@ -74,6 +74,9 @@
 
 @media screen and (max-width: 768px) {
     .login {
+        &__input{
+            width: 100%;
+        }
         &__button {
             max-width: 20rem;
             padding: 0.4rem 0.5rem;

@@ -15,12 +15,12 @@ const LoginPage = () => {
             <div className="loginPage__iconos">
                 <div className="loginPage__borderIconFacebook">
                   <a href="http://localhost:8080/api/facebook" className="loginPage__facebook">
-                    <BsFacebook /> Ingresar con Facebook
+                    <BsFacebook size={20} /> Ingresar con Facebook
                   </a>
                 </div>
                 <div className="loginPage__borderIconGoogle">
                   <a href="http://localhost:8080/api/google" className="loginPage__google">
-                    <FcGoogle /> Ingresar con Google
+                    <FcGoogle size={23} /> Ingresar con Google
                   </a>
                 </div>
               </div>

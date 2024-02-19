@@ -4,58 +4,87 @@
     ul {
         list-style: none;
         padding: 0;
-        text-align: justify;
-        margin-left: 8rem;
+        margin-bottom: 2rem;
+        font-weight: 600;
     }
 
     &__text1 {
-        text-align: justify;
-        margin-right: 8rem;
-        font-size: 1.3rem;
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        font-weight: 600;
     }
 
     &__text2 {
-       
-        font-size: 1.3rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    &__text3 {
+     font-size: 1.25rem;
+     font-weight: 600;
     }
 
     a {
-        font-size: rem;
-        color: var(--c-black);
+        color: var(--c-white);
+        margin-bottom: 2rem;
     }
     &__title{
         color: var(--c-mainColor);
-        text-align: justify;
-        margin-left: 8rem;
+        text-align: center;
+        font-weight: 600;
     }
-    &__title2{
-        color: var(--c-mainColor);
-        text-align: justify;
-    }
-    &__icon {
-        background-color: #ccc; 
+
+    &__iconInstagram,
+    &__iconFacebook,
+    &__iconTwitter,
+    &__iconYoutube,
+    &__iconLinkedin {
+        background-color: #333333; 
         border-radius: 50%;
         padding: 10px; 
         margin-right: 10px;
         transition: background-color 0.3s; 
-  
-        &:hover {
-          background-color: transparent; 
+    }
+        &__iconInstagram:hover {
+            background-color: #e1306c; // Púrpura
+        }
+    
+        &__iconFacebook:hover {
+            background-color: #3b5998; // Azul de Facebook
+        }
+    
+        &__iconTwitter:hover {
+            background-color: #36D8FF; // Azul de Twitter
+        }
+    
+        &__iconYoutube:hover {
+            background-color: #ff0000; // Rojo de YouTube
+        }
+    
+        &__iconLinkedin:hover {
+            background-color: #00a0dc; // Azul de LinkedIn
         }
     }
-}
+  
+
 
 @media screen and (max-width: 768px) {
     .footer {
         ul {
             list-style: none;
             padding: 0;
-            text-align: justify;
+            text-align: center;
             margin-left: 0rem;
+        }
+        &__text1 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
         }
         &__title{
             color: var(--c-mainColor);
-            text-align: justify;
+            text-align: center;
             margin-left: 0rem;
         }
         &__icon {

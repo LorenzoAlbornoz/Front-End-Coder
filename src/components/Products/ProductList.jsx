@@ -4,7 +4,25 @@ import { jwtDecode } from 'jwt-decode';
 import ProductSkeleton from '../Skeleton/ProductSkeleton';
 import Cookies from 'js-cookie';
 import CategoryList from './CategoryList';
+import SelectorBar from './SelectorBar';  // Asegúrate de importar SelectorBar
 import { axiosInstance } from '../../config/axiosInstance';
+
+const sortProducts = (products, order) => {
+  switch (order) {
+    case '1':
+      return products.slice().sort((a, b) => a._id - b._id);
+    case '2':
+      return products.slice().sort((a, b) => a.price - b.price);
+    case '3':
+      return products.slice().sort((a, b) => b.price - a.price);
+    case '4':
+      return products.slice().sort((a, b) => a.title.localeCompare(b.title));
+    case '5':
+      return products.slice().sort((a, b) => b.title.localeCompare(a.title));
+    default:
+      return products.slice();
+  }
+};
 
 const ProductList = ({ allProducts }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,6 +30,7 @@ const ProductList = ({ allProducts }) => {
   const [favorites, setFavorites] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
+  const [selectedOrder, setSelectedOrder] = useState('1');  // Agrega el estado para la orden
 
   useEffect(() => {
     const getFavorite = async () => {
@@ -45,24 +64,24 @@ const ProductList = ({ allProducts }) => {
     };
 
     getFavorite();
-  }, []);
+  }, [selectedOrder]);
 
   const handleCategoryClick = async (categoryName) => {
     try {
       setIsLoading(true);
       const response = await axiosInstance.get(`/products/category?categoryName=${categoryName}`);
       setSelectedCategory(categoryName);
-  
+
       const totalFilteredProducts = response.data.products.length;
-  
+
       // Ajustar la página actual si es necesario
       const newPage = Math.ceil(totalFilteredProducts / itemsPerPage);
-  
+
       // Verificar si la página actual necesita ser ajustada
       if (currentPage > newPage) {
         setCurrentPage(newPage > 0 ? newPage : 1);
       }
-  
+
       setFavorites(response.data.products.map(({ product }) => product._id));
     } catch (error) {
       console.error('Error al obtener productos por categoría:', error);
@@ -70,19 +89,20 @@ const ProductList = ({ allProducts }) => {
       setIsLoading(false);
     }
   };
-  
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = allProducts
-    .filter(product => !selectedCategory || product.category.name === selectedCategory)
-    .slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = sortProducts(
+    allProducts.filter(product => !selectedCategory || product.category.name === selectedCategory),
+    selectedOrder
+  ).slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="container containerProductList">
       <CategoryList onCategoryClick={handleCategoryClick} />
+      <SelectorBar onOrderChange={setSelectedOrder} />
       <div className="row">
         <div className="col text-center my-3"></div>
       </div>
@@ -107,9 +127,9 @@ const ProductList = ({ allProducts }) => {
 
       {(!selectedCategory && allProducts.length > itemsPerPage) && (
         <div className="pagination-container">
-          <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} className="pagination-button">Previous</button>
+          <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} className="pagination-button">Anterior</button>
           <span className="pagination-current">{currentPage}</span>
-          <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(allProducts.length / itemsPerPage)} className="pagination-button">Next</button>
+          <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(allProducts.length / itemsPerPage)} className="pagination-button">Siguiente</button>
         </div>
       )}
     </div>
