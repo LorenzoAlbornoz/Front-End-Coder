@@ -20,7 +20,7 @@ const LoginPage = () => {
                 </div>
                 <div className="loginPage__borderIconGoogle">
                   <a href="http://localhost:8080/api/google" className="loginPage__google">
-                    <FcGoogle size={23} /> Ingresar con Google
+                    <FcGoogle size={20} /> Ingresar con Google
                   </a>
                 </div>
               </div>
@@ -32,9 +32,6 @@ const LoginPage = () => {
               </Link>
             </span>
           </div>
-          <button type="submit" className="login__button">
-            Ingresar
-          </button>
             <div className="loginPage__enlace">
               <span>
                 ¿Aún no tienes una cuenta? <a href="/register" className="loginPage__link">Regístrate</a>

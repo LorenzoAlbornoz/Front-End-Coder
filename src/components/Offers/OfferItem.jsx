@@ -7,7 +7,7 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
 
-const ProductItem = ({ product, favorites }) => {
+const OfferItem = ({ product, favorites }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleFavoriteToggle = async () => {
@@ -98,39 +98,33 @@ const ProductItem = ({ product, favorites }) => {
 
   return (
     <>
-      <Card key={product._id} className='productCard'>
-        <div className='d-flex justify-content-end m-3'>
+      <Card key={product._id} className='offerCard'>
+        <div className='offerCard__header'>
           <button
-            className={`productCard__favorite `}
+            className={`offerCard__favorite `}
             onClick={handleFavoriteToggle}
           >
             {isFavorite ? (
-              <FaHeart className={`productCard__favorite-icons favorite`} />
+              <FaHeart className={`offerCard__favorite-icons favorite`} />
             ) : (
-              <FaRegHeart className='productCard__favorite-icons' />
+              <FaRegHeart className='offerCard__favorite-icons' />
             )}
           </button>
         </div>
-        <Link to={`/product/${product._id}`} className='productCard__link'>
-          <div className='productCard__imgContainer'>
-            <Card.Img variant="top" src={product.image} alt={product.title} className='productCard__img' />
+        <Link to={`/product/${product._id}`} className='offerCard__link'>
+          <div className='offerCard__imgContainer'>
+            <Card.Img variant="top" src={product.image} alt={product.title} className='offerCard__img' />
           </div>
         </Link>
-        <Card.Body className='productCard__body text-center'>
-          <Card.Title className='productCard__title'>{product.title}</Card.Title>
-          <Card.Subtitle className='mb-2 productCard__price'>{convertToPesos(product.price)}</Card.Subtitle>
-          <Card.Text className='productCard__description'>
+        <Card.Body className='offerCard__body text-center'>
+          <Card.Title className='offerCard__title'>{product.title}</Card.Title>
+          <Card.Subtitle className='mb-2 offerCard__price'>{convertToPesos(product.price)}</Card.Subtitle>
+          <Card.Text className='offerCard__description'>
             {product.description}
           </Card.Text>
-          <Card.Text className='productCard__category'>
-            Categoría: {product.category.name}
-          </Card.Text>
-          <Card.Text className='productCard__stock'>
-            Stock disponible: {product.stock}
-          </Card.Text>
         </Card.Body>
-        <div className='productCard__footer'>
-          <button className='btn btn-primary productCard__button' onClick={handleAddToCart}>
+        <div className='offerCard__footer'>
+          <button className='btn btn-primary offerCard__button' onClick={handleAddToCart}>
             Añadir al carrito
           </button>
         </div>
@@ -139,4 +133,4 @@ const ProductItem = ({ product, favorites }) => {
   );
 };
 
-export default ProductItem;
+export default OfferItem;
