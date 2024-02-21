@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import mediosPago from "../../assets/Public/img/mercadopago_logos1.jpg";
+import React from 'react';
+import mediosPago from "../../../public/img/mercadopago_logos1.jpg";
 import { RiLockFill } from "react-icons/ri";
 import { axiosInstance } from '../../config/axiosInstance';
 import { jwtDecode } from 'jwt-decode';

@@ -61,6 +61,60 @@ const ProductsTable = ({ allProducts, getProducts }) => {
         }
     };
 
+    const changeFeaturedStatus = async (row) => {
+        try {
+            const newIsFeaturedStatus = row.isFeatured === true ? false : true;
+
+            await axiosInstance.put(`/product/featured/${row._id}`, {
+                isFeatured: newIsFeaturedStatus,
+            });
+
+            await getProducts();
+            Swal.fire({
+                icon: "success",
+                title: "Producto destacado con éxito.",
+                showConfirmButton: false,
+                timer: 1000,
+            });
+        } catch (error) {
+            console.error(error);
+
+            Swal.fire({
+                icon: "error",
+                title: "Hubo un error al destacar el producto.",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }
+    };
+
+    const changeOfferStatus = async (row) => {
+        try {
+            const newIsOfferStatus = row.isOffer === true ? false : true;
+
+            await axiosInstance.put(`/product/offer/${row._id}`, {
+                isOffer: newIsOfferStatus,
+            });
+
+            await getProducts();
+            Swal.fire({
+                icon: "success",
+                title: "Producto en Oferta.",
+                showConfirmButton: false,
+                timer: 1000,
+            });
+        } catch (error) {
+            console.error(error);
+
+            Swal.fire({
+                icon: "error",
+                title: "Hubo un error al poner el producto en Oferta.",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }
+    };
+
 
     const columns = [
         {
@@ -75,7 +129,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
                 );
             },
             sortable: true,
-            maxWidth: "20%",
+            maxWidth: "9%",
         },
         {
             name: "Detallado",
@@ -90,7 +144,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
             },
             sortable: true,
             hide: "sm",
-            width: "20%",
+            width: "9%",
         },
         {
             name: "Precio",
@@ -103,14 +157,14 @@ const ProductsTable = ({ allProducts, getProducts }) => {
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
                 return formattedPrice;
             },
-            width: "10%",
+            width: "9%",
         },
         {
             name: "Categoria",
             selector: (row) => row.category.name,
             sortable: true,
             hide: "sm",
-            width: "10%",
+            width: "8%",
         },
         {
             name: "Imagen",
@@ -120,29 +174,55 @@ const ProductsTable = ({ allProducts, getProducts }) => {
                 </div>
             ),
             hide: "sm",
-            width: "10%",
+            width: "9%",
         },
         {
             name: "Stock",
             selector: (row) => row.stock,
             sortable: true,
             hide: "sm",
-            width: "10%",
+            width: "6%",
         },
         {
             name: "Code",
             selector: (row) => row.code,
             sortable: true,
             hide: "sm",
-            width: "10%",
+            width: "6%",
+        },
+        {
+            name: "Destacado",
+            selector: (row) => (row.isFeatured ? "true" : "false"),
+            sortable: true,
+            width: "8%",
+            hide: "sm",
+        },
+        {
+            name: "Oferta",
+            selector: (row) => (row.isOffer ? "true" : "false"),
+            sortable: true,
+            width: "8%",
+            hide: "sm",
         },
         {
             name: "Acciones",
             selector: (row) => {
                 return (
                     <div>
+                                <button
+                            className="btn btn-secondary btn-md me-3 "
+                            onClick={() => changeFeaturedStatus(row)}
+                        >
+                            Destacado
+                        </button>
                         <button
-                            className="btn btn-warning btn-md me-3"
+                            className="btn btn-secondary btn-md me-3 "
+                            onClick={() => changeOfferStatus(row)}
+                        >
+                            Oferta
+                        </button>
+                        <button
+                            className="btn btn-success btn-md me-3"
                             onClick={() => handleUpdate(row)}
                         >
                             Edit
@@ -151,7 +231,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
                             className="btn btn-danger btn-md "
                             onClick={() => deleteCurso(row._id)}
                         >
-                            Delete
+                           X
                         </button>
                     </div>
                 );
@@ -203,7 +283,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
         <>
             <div className="row">
                 <div className="col text-end">
-                    <button className="btn btn-primary mb-4" onClick={handleShowAddModal}>
+                    <button className="btn btn-success mb-4" onClick={handleShowAddModal}>
                         Agregar Producto
                     </button>
                 </div>

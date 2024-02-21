@@ -33,7 +33,7 @@ const Admin = () => {
             <div className="row">
               <div className="col mt-5 mb-4">
                 <button className='btn btn-primary' onClick={showProductView}>Mostrar Productos</button>
-                <button className='btn btn-warning ms-5' onClick={showUserView}>Mostrar Usuarios</button>
+                <button className='btn btn-dark ms-5' onClick={showUserView}>Mostrar Usuarios</button>
               </div>
             </div>
             {showProductTable && <ProductsTable allProducts={allProducts} getProducts={getProducts}/>}
