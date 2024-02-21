@@ -3,11 +3,13 @@ import { axiosInstance } from '../config/axiosInstance';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
+import styled, { keyframes } from "styled-components"; 
 
 const CartView = () => {
   const [cart, setCart] = useState(null);
   const [userId, setUserId] = useState(null);
   const [newQuantities, setNewQuantities] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   const getUserInfo = () => {
     const token = localStorage.getItem('codertoken');
@@ -53,6 +55,8 @@ const CartView = () => {
           setNewQuantities(initialQuantities);
         } catch (error) {
           console.error('Error al obtener el carrito:', error);
+        } finally {
+          setIsLoading(false);
         }
       };
 
@@ -162,11 +166,6 @@ const CartView = () => {
     }
   };
 
-
-  if (!cart) {
-    return <div className='text-center'>Cargando...</div>;
-  }
-
   const convertToPesos = (numb) => {
     const pesos = numb.toLocaleString('es-AR', {
       style: 'currency',
@@ -174,6 +173,49 @@ const CartView = () => {
     });
     return pesos;
   };
+
+  const rotate360 = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+ 
+   to {
+    transform: rotate(360deg);
+  }
+ `;
+ 
+ const SpinnerContainer = styled.div`
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ `;
+ 
+ const Spinner = styled.div`
+   animation: ${rotate360} 1s linear infinite;
+   transform: translateZ(0);
+   border-top: 2px solid var(--c-mainColor);
+   border-right: 2px solid var(--c-mainColor);
+   border-bottom: 2px solid var(--c-secondColor);
+   border-left: 4px solid var(--c-grey);
+   background: transparent;
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+ `;
+
+ const CustomLoader = () => (
+   <div style={{ padding: "24px" }}>
+   <SpinnerContainer>
+     <Spinner />
+   </SpinnerContainer>
+     <div className="loginPage__custom-loading-text">Cargando...</div>
+   
+   </div>
+ );
+
+ if (isLoading) {
+  return <CustomLoader />;
+}
 
   return (
     <div className="cart-container">
