@@ -128,8 +128,8 @@ const UserTable = () => {
       selector: row => {
         return (
           <div>
-            <button className='btn btn-warning btn-md me-3' onClick={() => handleUpdate(row)}>Edit</button>
-            <button className='btn btn-danger btn-md' onClick={() => deleteUser(row._id)}>Delet</button>
+            <button className='btn btn-success btn-md me-3' onClick={() => handleUpdate(row)}>Edit</button>
+            <button className='btn btn-danger btn-md' onClick={() => deleteUser(row._id)}>X</button>
           </div>
         )
       }

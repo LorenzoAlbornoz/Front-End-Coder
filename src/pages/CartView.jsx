@@ -202,13 +202,13 @@ const CartView = () => {
             />
             <button
               onClick={() => updateQuantity(cart._id, item.product._id)}
-              className="btn btn-warning"
+              className="btn btn-secondary"
             >
               Actualizar Cantidad
             </button>
             <button
               onClick={() => deleteProductFromCart(cart._id, item.product._id)}
-              className="btn btn-danger"
+              className="btn btn-danger btn-cart"
             >
               X
             </button>
