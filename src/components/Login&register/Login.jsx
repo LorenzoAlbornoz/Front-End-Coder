@@ -127,6 +127,9 @@ const CustomLoader = () => (
             {errors.password && (
               <p className="register__error-message">{errors.password.message}</p>
             )}
+                 <button type="submit" className="login__button">
+            Ingresar
+          </button>
           </div>
         </form>
       )}

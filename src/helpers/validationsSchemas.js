@@ -72,7 +72,7 @@ export const FORM_SCHEMA = yup.object().shape({
         .required("La categoría es requerida"),
     code: yup.string()
         .typeError("El code es requerido")
-        .max(5, "La descripción no puede tener más de 5 caracteres"),
+        .max(10, "La descripción no puede tener más de diez caracteres"),
     stock: yup.number()
         .typeError("El stock es requerido")
         .test('is-positive', 'El stock no puede ser un número negativo', (value) => value >= 0)

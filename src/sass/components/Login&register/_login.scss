@@ -26,7 +26,6 @@
         margin: 0 auto;
         padding: 0.8rem 1rem;
         border: none;
-        border-radius: 1rem;
         background-color: var(--c-mainColor);
         font-weight: 600;
         font-size: 1.5rem;
@@ -34,7 +33,7 @@
         color: var(--c-black);
         font-family: var(--font-PTSans);
         transition: background-color 0.3s, color 0.3s;
-        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
     }
 
     &__button:hover {

@@ -9,9 +9,9 @@ const ShippingType = () => {
             <img
               src='https://res.cloudinary.com/dcwpf7ghu/image/upload/v1705068382/cart_gfixuf.png'
               alt='Tarjeta de crédito y débito'
-              className='ShippingType__card'
+              className='ShippingType__card d-none d-sm-block'  // Agrega la clase d-md-none aquí
             />
-            <span className='ShippingType__text'>Pagá con crédito y débito</span>
+            <span className='ShippingType__text d-none d-sm-block'>Pagá con crédito y débito</span>
           </div>
           <div className='ShippingType__item'>
             <img

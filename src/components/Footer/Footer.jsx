@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12 d-sm-block mt-3">
-                        <div className="d-flex justify-content-between align-items-center">
+                        <div className="text-center">
                             <div>
                                 <img src="https://res.cloudinary.com/dcwpf7ghu/image/upload/v1704945934/fravega_fgkexe.png" alt="Logo" height="100" />
                             </div>
