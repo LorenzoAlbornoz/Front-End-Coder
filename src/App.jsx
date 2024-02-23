@@ -5,6 +5,7 @@ import Navigation from './components/Navigation/Navigation';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import RecoverPasswordPage from './pages/RecoverPasswordPage.jsx'
+import ResetPage from './pages/ResetPage.jsx'
 import Footer from './components/Footer/Footer.jsx';
 import Products from './pages/ProductsPage.jsx';
 import ProductDetailPage from './pages/ProductDetailPage.jsx';
@@ -22,6 +23,7 @@ function App() {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/repassword' element={<RecoverPasswordPage />} />
+        <Route path="/reset_password/:id/:token" element={<ResetPage />}></Route>
         {/* <Route path='*' element={<Error404/>} /> */}
         <Route path='/product/:id' element={<ProductDetailPage />} />
         <Route path='/products' element={<Products />} />
