@@ -57,6 +57,26 @@ export const RECOVERPASSWORD_SCHEMA = yup.object({
         )
 })
 
+export const RESETPASSWORD_SCHEMA = yup.object({
+    password: yup
+        .string()
+        .required("La contraseña es requerida")
+        .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,20}$/,
+            "Ingresa una constraseña válida"
+        )
+        .min(8, "La contraseña debe tener al menos 8 caracteres")
+        .max(20, "La contraseña debe tener como máximo 20 caracteres"),
+    repassword: yup
+        .string()
+        .required("Repetir la contraseña es requerido")
+        .oneOf([yup.ref('password')], 'Las contraseñas no coinciden')
+        .min(8, "La contraseña debe tener al menos 8 caracteres")
+        .max(20, "La contraseña debe tener como máximo 20 caracteres")
+
+})
+
+
 export const FORM_SCHEMA = yup.object().shape({
     title: yup.string()
         .required("El título es requerido")
