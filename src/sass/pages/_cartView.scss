@@ -1,65 +1,104 @@
-/* CartView.css */
-
 .cart-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px;
-  font-size: 14px;
+  max-width: 1300px;
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+
+/* Cart Table Styles */
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* Table Head Styles */
+.table-head tr {
+  width: 100%;
+  font-size: 16px;
   font-weight: 500;
 }
 
-h1 {
-  font-size: 28px;
-  margin-bottom: 10px;
+/* Table Row Styles */
+.tbody td {
+  padding: 12px;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Product Image Styles */
+.product-image {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Actions Column Styles */
+.actions-column .btn {
+  margin-right: 15px;
+}
+
+/* Tfoot Container Styles */
+.tfoot-container tr td {
+  padding: 12px;
+  font-size: 18px;
   color: #333;
 }
 
-.cart-products {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.cart-product {
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-input {
-  width: 50px;
-  margin: 5px;
+.tfoot-container .btn {
+  font-size: 14px;
 }
 
 .btn {
   cursor: pointer;
   padding: 8px 16px;
   margin: 5px;
-  font-size: 14px;
-}
-
-.btn-warning {
-  background-color: #ffe066;
-  color: #495057;
-  border: 1px solid #ffe066;
-}
-
-.btn-cart {
-  background-color: #cc6964;
-  color: #fff;
-  border: 1px solid #cc6964;
-}
-
-.product-image {
-  max-width: 100px;
-  max-height: 100px;
-  object-fit: contain;
+  font-size: 12px;
 }
 
 #cartQuantity {
   font-size: 14px; /* Ajusta el tamaño del número de productos según tus preferencias */
+}
+
+.form-control{
+  font-size: 18px;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 767px) {
+  .table-head tr {
+    font-size: 12px;
+  }
+
+  .tbody td {
+    padding: 5px;
+    font-size: 12px;
+  }
+
+  .cart-description {
+    display: none;
+  }
+  
+  .product-image {
+    margin-bottom: 10px;
+    max-width: 50%;
+  }
+
+  .actions-column .btn {
+    margin-right: 0px;
+  }
+
+  .tfoot-container tr td {
+    padding: 2px;
+    font-size: 12px;
+  }
+
+  .tfoot-container .btn {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .form-control {
+    font-size: 12px;
+  }
 }
