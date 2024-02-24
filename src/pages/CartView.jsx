@@ -3,7 +3,9 @@ import { axiosInstance } from '../config/axiosInstance';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
-import styled, { keyframes } from "styled-components"; 
+import styled, { keyframes } from "styled-components";
+import { FaSyncAlt, FaTrashAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const CartView = () => {
   const [cart, setCart] = useState(null);
@@ -217,46 +219,92 @@ const CartView = () => {
   return <CustomLoader />;
 }
 
+  if (!cart || cart.products.length === 0) {
+    return <p>No hay productos en el carrito.</p>;
+  }
+
   return (
     <div className="cart-container">
-      <h1>Carrito de Compras</h1>
-      <p>Total del Carrito: {convertToPesos(cart.total)}</p>
-      <p>Cantidad Total de Productos: {cart.totalQuantity}</p>
-      <form id="cartForm" onSubmit={confirmPurchase} data-cart-id={cart._id}>
-        <button type="submit" className="btn btn-success">
-          <i>Finalizar Compra </i> <span id="cartQuantity">{cart.totalQuantity}</span>
-        </button>
-      </form>
-      <div className="cart-products">
-        {cart.products && cart.products.map((item) => (
-          <div key={item.product._id} className="cart-product">
-            <img src={item.product.image} alt={item.product.title} className="product-image" />
-            <h2>{item.product.title}</h2>
-            <p>Precio: {convertToPesos(item.product.price)}</p>
-            <p>Cantidad: {item.quantity}</p>
-            <label htmlFor={`quantity-${item._id}`}>Nueva Cantidad:</label>
-            <input
-              type="number"
-              name={`quantity-${item._id}`}
-              value={newQuantities[item.product._id]}
-              min="1"
-              onChange={(event) => handleQuantityChange(item.product._id, event)}
-            />
-            <button
-              onClick={() => updateQuantity(cart._id, item.product._id)}
-              className="btn btn-secondary"
-            >
-              Actualizar Cantidad
-            </button>
-            <button
-              onClick={() => deleteProductFromCart(cart._id, item.product._id)}
-              className="btn btn-danger btn-cart"
-            >
-              X
-            </button>
-          </div>
-        ))}
-      </div>
+      <table className="cart-table table table-hover table-condensed">
+        <thead className="table-head">
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th className="text-center">Subtotal</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody className='tbody'>
+          {cart.products.map((item) => (
+            <tr key={item.product._id}>
+              <td>
+                <div className="row">
+                  <div className="col-sm-2 hidden-xs">
+                    <img className="product-image" src={item.product.image} alt={item.product.title} />
+                  </div>
+                  <div className="col-sm-10">
+                    <div>
+                      <h4 className="nomargin">{item.product.title}</h4>
+                      <p className="cart-description">{item.product.description}</p>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td>{convertToPesos(item.product.price)}</td>
+              <td>
+                <select
+                  name={`quantity-${item._id}`}
+                  value={newQuantities[item.product._id]}
+                  onChange={(event) => handleQuantityChange(item.product._id, event)}
+                  className="form-control" // Agregada clase Bootstrap para estilos de formulario
+                >
+                  {[1, 2, 3, 4, 5].map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </td>
+              <td className="text-center">{convertToPesos(item.product.price * item.quantity)}</td>
+              <td className="actions-column">
+                <button
+                  className="btn btn-info btn-sm"
+                  onClick={() => updateQuantity(cart._id, item.product._id)}
+                >
+                  <FaSyncAlt style={{ fontSize: '15px', color: 'white' }} />
+                </button>
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={() => deleteProductFromCart(cart._id, item.product._id)}
+                >
+                  <FaTrashAlt style={{ fontSize: '15px' }} />
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+        <tfoot className="tfoot-container">
+          <tr>
+            <td>
+              <Link to="/products" className="btn btn-warning">
+                <i className="fa fa-angle-left"></i> Continuar Comprando
+              </Link>
+            </td>
+            <td colSpan="2" className="hidden-xs"></td>
+            <td className="hidden-xs text-center">
+              <strong>Total {convertToPesos(cart.total)}</strong>
+            </td>
+            <td>
+              <form id="cartForm" onSubmit={confirmPurchase} data-cart-id={cart._id}>
+                <button type="submit" className="btn btn-success">
+                  Finalizar Compra
+                </button>
+              </form>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
     </div>
   );
 };
