@@ -13,14 +13,14 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
     });
 
     const [categories, setCategories] = useState([])
-    const [imgFile, setImgFile] = useState(null);
-    const { title, description, price, category, image, code, stock } = datoProduct
+    const [imgFiles, setImgFiles] = useState(null);
+    const { title, description, price, category, images, code, stock } = datoProduct
     const [formDatos, setFormDatos] = useState({
         title,
         description,
         price,
         category,
-        image,
+        images,
         code,
         stock
     })
@@ -40,7 +40,7 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
     }, [])
 
     const handleImage = (e) => {
-        setImgFile(e.target.files[0]);  // Solo guarda un archivo en lugar de una lista
+        setImgFiles(e.target.files);  // Solo guarda un archivo en lugar de una lista
     };
 
     const onSubmit = async (data) => {
@@ -67,10 +67,12 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
           formData.append('code', data.code);
           formData.append('stock', data.stock);
       
-          // Solo agregar la nueva imagen si se seleccionó una
-          if (imgFile) {
-            formData.append('image', imgFile);
+          if (imgFiles.length > 0) {
+            for (let i = 0; i < imgFiles.length; i++) {
+              formData.append('images', imgFiles[i]);
+            }
           }
+    
       
           console.log('Datos enviados en la solicitud:', formData);
       
@@ -167,12 +169,13 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label htmlFor="nombre">Imagen del producto</Form.Label>
+                    <Form.Label htmlFor="nombre">Imagenes del producto</Form.Label>
                     <Form.Control
                         type="file"
-                        id="image"
-                        name="image"
+                        id="images"
+                        name="images"
                         onChange={handleImage}
+                        multiple
                     />
                 </Form.Group>
 
