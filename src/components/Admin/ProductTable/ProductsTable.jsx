@@ -170,7 +170,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
             name: "Imagen",
             selector: (row) => (
                 <div>
-                    <img src={row.image} alt={row.title} width={75} />
+                    <img src={row.images[0]} alt={row.title} width={75} />
                 </div>
             ),
             hide: "sm",
