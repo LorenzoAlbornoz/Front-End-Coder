@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import mediosPago from "../../../public/img/mercadopago_logos1.jpg";
 import { RiLockFill } from "react-icons/ri";
 import { axiosInstance } from '../../config/axiosInstance';
@@ -19,6 +19,7 @@ const convertToPesos = (numb) => {
 };
 
 const ProductDetail = ({ product }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleAddToCart = async () => {
     try {
@@ -55,14 +56,41 @@ const ProductDetail = ({ product }) => {
     }
   };
 
+  const handleThumbnailClick = (index) => {
+    setCurrentImageIndex(index);
+  };
+
   return (
     <>
       {product !== null ? (
-        <div className='container mt-4'>
-          <div className='row'>
-            <div className='col-lg-7 d-flex justify-content-center align-items-center'>
-              <div className='text-center'>
-                <img src={product?.image} alt={product?.title} className='img-fluid img-product' />
+        <div className="container mt-4">
+          <div className="row">
+            <div className="col-lg-7 text-center">
+              <div className="mb-3">
+                {product?.images && product.images.length > 0 ? (
+                  <div className="zoom-container">
+                    <img
+                      src={product.images[currentImageIndex]}
+                      alt={product.title}
+                      className="img-fluid img-product"
+                      id="zoomImage"
+                    />
+                  </div>
+                ) : (
+                  <p>No hay imágenes disponibles</p>
+                )}
+              </div>
+              <div className="row justify-content-center">
+                {product?.images && product.images.length > 0 && product.images.map((image, index) => (
+                  <div key={index} className="col-2">
+                    <img
+                      src={image}
+                      alt={product.title}
+                      className={`img-fluid img-thumbnail ${index === currentImageIndex ? 'selected-thumbnail' : ''}`}
+                      onClick={() => handleThumbnailClick(index)}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
             <div className='col-lg-5'>
@@ -92,7 +120,7 @@ const ProductDetail = ({ product }) => {
             </div>
           </div>
           <div className="row">
-            <div className="col-12 mt-4 pre">
+            <div className="col-12 mt-5 pre">
               <h3>Medios de Pago</h3>
               <p>
                 Podes pagar online de forma segura mediante las plataformas

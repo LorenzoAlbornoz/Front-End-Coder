@@ -113,7 +113,7 @@ const OfferItem = ({ product, favorites }) => {
         </div>
         <Link to={`/product/${product._id}`} className='offerCard__link'>
           <div className='offerCard__imgContainer'>
-            <Card.Img variant="top" src={product.image} alt={product.title} className='offerCard__img' />
+            <Card.Img variant="top" src={product.images[0]} alt={product.title} className='offerCard__img' />
           </div>
         </Link>
         <Card.Body className='offerCard__body text-center'>
