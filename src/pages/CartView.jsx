@@ -241,7 +241,7 @@ const CartView = () => {
               <td>
                 <div className="row">
                   <div className="col-sm-2 hidden-xs">
-                    <img className="product-image" src={item.product.image} alt={item.product.title} />
+                    <img className="product-image" src={item.product.images[0]} alt={item.product.title} />
                   </div>
                   <div className="col-sm-10">
                     <div>

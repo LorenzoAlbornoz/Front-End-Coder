@@ -68,7 +68,7 @@ const ProductDetail = ({ product }) => {
             <div className="col-lg-7 text-center">
               <div className="mb-3">
                 {product?.images && product.images.length > 0 ? (
-                  <div className="zoom-container">
+                  <div className="zoom-container mb-5">
                     <img
                       src={product.images[currentImageIndex]}
                       alt={product.title}
@@ -110,8 +110,8 @@ const ProductDetail = ({ product }) => {
                   </button>
                 </div>
                 <p><RiLockFill /> Compra Protegida</p>
-                <hr />
-                <h4 className="text-center">
+                <hr className='mt-5'/>
+                <h4 className="text-center ">
                   Tenemos la mejor financiación para vos!
                 </h4>
                 <img src={mediosPago} alt="" className="img-fluid" />
