@@ -20,7 +20,7 @@ const Featured = () => {
 
   return (
       <div>
-        <h1 className='text-center'>Productos Destacados</h1>
+ <h1 className='important-titles'>Productos Destacados</h1>
       <FeaturedList allProducts={allProducts} getProducts={getProducts} />
     </div>
   );
