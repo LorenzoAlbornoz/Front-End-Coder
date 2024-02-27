@@ -80,8 +80,8 @@ const CategoryTable = () => {
       name: "Nombre",
       selector: (row) => row.name,
       sortable: true,
+      width: "25%",
       center: true,
-      hide: 'md'
     },
     {
       name: "Imagen",
