@@ -20,7 +20,7 @@ const Offer = () => {
 
   return (
       <div>
-        <h1 className='text-center'>Productos de Oferta</h1>
+        <h1 className='important-titles'>Productos de Oferta</h1>
       <OfferList allProducts={allProducts} getProducts={getProducts} />
     </div>
   );

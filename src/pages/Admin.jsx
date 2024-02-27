@@ -2,17 +2,22 @@ import React, {useState, useEffect} from 'react';
 import ProductsTable from '../components/Admin/ProductTable/ProductsTable';
 import UserTable from '../components/Admin/UserTable/UserTable';
 import { axiosInstance } from '../config/axiosInstance';
+import CategoryTable from '../components/Admin/CategotyTable/CategoryTable';
 
 const Admin = () => {
-  const [showProductTable, setShowProductTable] = useState(true);
-  const [allProducts, setAllProducts] = useState([])
+  const [activeTable, setActiveTable] = useState('products'); // Estado para controlar qué tabla mostrar
+  const [allProducts, setAllProducts] = useState([]);
 
   const showProductView = () => {
-    setShowProductTable(true);
+    setActiveTable('products');
   };
 
   const showUserView = () => {
-    setShowProductTable(false);
+    setActiveTable('users');
+  };
+
+  const showCategoryView = () => {
+    setActiveTable('categories');
   };
 
     const getProducts = async () => {
@@ -29,17 +34,19 @@ const Admin = () => {
       }, [])
       return (
         <>
-          <div className="container admin-body">
-            <div className="row">
-              <div className="col mt-5 mb-4">
-                <button className='btn btn-primary' onClick={showProductView}>Mostrar Productos</button>
-                <button className='btn btn-dark ms-5' onClick={showUserView}>Mostrar Usuarios</button>
-              </div>
+        <div className="container admin-body">
+          <div className="row">
+            <div className="col mt-5 mb-4">
+              <button className={`btn ${activeTable === 'products' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={showProductView}>Mostrar Productos</button>
+              <button className={`btn ${activeTable === 'users' ? 'btn-dark' : 'btn-outline-dark'} ms-5`} onClick={showUserView}>Mostrar Usuarios</button>
+              <button className={`btn ${activeTable === 'categories' ? 'btn-secondary' : 'btn-outline-secondary'} ms-5`} onClick={showCategoryView}>Mostrar Categorías</button>
             </div>
-            {showProductTable && <ProductsTable allProducts={allProducts} getProducts={getProducts}/>}
-            {!showProductTable && <UserTable />}
           </div>
-        </>
+          {activeTable === 'products' && <ProductsTable allProducts={allProducts} getProducts={getProducts} />}
+          {activeTable === 'users' && <UserTable />}
+          {activeTable === 'categories' && <CategoryTable />}
+        </div>
+      </>
       );
     }
 

@@ -103,3 +103,9 @@ export const FORM_SCHEMA = yup.object().shape({
       .required("El rol es requerido")
       .oneOf(['admin', 'premiun', 'user'], 'Rol no válido')
   });
+
+  export const UPDATE_CATEGORY_SCHEMA = yup.object({
+    name: yup.string()
+    .required("El nombre es requerido")
+    .max(30, "El nombre no puede tener más de 30 caracteres"),
+  });

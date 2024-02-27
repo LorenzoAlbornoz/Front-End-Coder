@@ -1,10 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import mediosPago from "../../../public/img/mercadopago_logos1.jpg";
 import { RiLockFill } from "react-icons/ri";
 import { axiosInstance } from '../../config/axiosInstance';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
+import styled, { keyframes } from 'styled-components';
+
+const rotate360 = keyframes`
+ from {
+   transform: rotate(0deg);
+ }
+
+  to {
+   transform: rotate(360deg);
+ }
+`;
+
+const Spinner = styled.div`
+margin: 0 auto;  // Añade esta línea para centrar horizontalmente
+animation: ${rotate360} 1s linear infinite;
+transform: translateZ(0);
+border-top: 2px solid var(--c-mainColor); 
+border-right: 2px solid var(--c-mainColor);
+border-bottom: 2px solid var(--c-secondColor);
+border-left: 4px solid var(--c-grey); 
+background: transparent;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+`;
+
+const CustomLoader = () => (
+  <div style={{ padding: "24px" }}>
+      <Spinner />
+      <div className="text-center">Cargando...</div>
+  </div>
+);
 
 const convertToPesos = (numb) => {
   if (typeof numb !== 'undefined') {
@@ -19,7 +51,27 @@ const convertToPesos = (numb) => {
 };
 
 const ProductDetail = ({ product }) => {
+  const [loading, setLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Simula un retraso en la carga con un timeout
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Establece loading en falso una vez que los datos están cargados (o ocurrió un error)
+        setLoading(false);
+      } catch (error) {
+        console.error('Error al obtener los datos del producto:', error);
+        // Maneja el error si es necesario
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleAddToCart = async () => {
     try {
@@ -62,8 +114,10 @@ const ProductDetail = ({ product }) => {
 
   return (
     <>
-      {product !== null ? (
-        <div className="container mt-4">
+  {loading ? (
+      <CustomLoader />
+    ) : (
+      <div className="container mt-4">
           <div className="row">
             <div className="col-lg-7 text-center">
               <div className="mb-3">
@@ -169,14 +223,6 @@ const ProductDetail = ({ product }) => {
                 sitio web pueden ser devueltos o cambiados dentro de los 30 días
                 posteriores a la compra.
               </p>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className="container mt-5">
-          <div className="row">
-            <div className="col text-center">
-              <h3>Producto no encontrado</h3>
             </div>
           </div>
         </div>
