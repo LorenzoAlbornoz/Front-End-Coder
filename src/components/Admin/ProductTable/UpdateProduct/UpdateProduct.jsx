@@ -67,12 +67,12 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
           formData.append('code', data.code);
           formData.append('stock', data.stock);
       
-          if (imgFiles.length > 0) {
-            for (let i = 0; i < imgFiles.length; i++) {
-              formData.append('images', imgFiles[i]);
-            }
-          }
-    
+    // Si hay imágenes, agregarlas al FormData
+    if (imgFiles && imgFiles.length > 0) {
+        for (let i = 0; i < imgFiles.length; i++) {
+          formData.append('images', imgFiles[i]);
+        }
+      }
       
           console.log('Datos enviados en la solicitud:', formData);
       
