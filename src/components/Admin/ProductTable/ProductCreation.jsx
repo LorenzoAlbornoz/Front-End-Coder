@@ -13,7 +13,7 @@ const ProductCreation = ({ getProducts }) => {
   });
 
   const [categories, setCategories] = useState([]);
-  const [imgFile, setImgFile] = useState([]);
+  const [imgFiles, setImgFiles] = useState([]);
   const [formDatos, setFormDatos] = useState({
     title: '',
     description: '',
@@ -44,7 +44,7 @@ const ProductCreation = ({ getProducts }) => {
   }
 
   const handleImage = (e) => {
-    setImgFile([...e.target.files]);
+    setImgFiles([...e.target.files]);
   };
 
   const onSubmit = async (data) => {
@@ -65,9 +65,15 @@ const ProductCreation = ({ getProducts }) => {
       formData.append('description', data.description.replace(/\n/g, 'saltosDeUsuario'));
       formData.append('price', data.price);
       formData.append('category', data.category);
-      formData.append('image', imgFile[0]);
       formData.append('code', data.code);
       formData.append('stock', data.stock);
+
+      if (imgFiles.length > 0) {
+        for (let i = 0; i < imgFiles.length; i++) {
+          formData.append('images', imgFiles[i]);
+        }
+      }
+      
       await axiosInstance.post('/product', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -154,12 +160,13 @@ const ProductCreation = ({ getProducts }) => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label htmlFor="nombre">Imagen del producto</Form.Label>
+          <Form.Label htmlFor="images">Imagen del producto</Form.Label>
           <Form.Control
             type="file"
-            id="image"
-            name="image"
+            id="images"
+            name="images"
             onChange={handleImage}
+            multiple
           />
         </Form.Group>
 
