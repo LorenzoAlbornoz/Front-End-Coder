@@ -16,9 +16,7 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const localStorageToken = localStorage.getItem('codertoken');
-
   const userDataCookie = Cookies.get('user_data');
-
   const token = localStorageToken || '';
   const isLogged = !!token || !!userDataCookie;
 
@@ -49,7 +47,6 @@ const Navigation = () => {
       if (result.isConfirmed) {
         localStorage.removeItem('codertoken');
         Cookies.remove('user_data'); // Eliminar el token de las cookies también
-        localStorage.removeItem('userRole');
         navigate('/');
       }
     });
@@ -71,7 +68,20 @@ const Navigation = () => {
   useEffect(() => {
     // Actualizar la cantidad del carrito al cargar el componente
     updateCartQuantity(cartId);
-  }, [cartId]);
+  
+    // Configurar temporizador para cerrar sesión después de 1 hora
+    const logoutTimeout = 60 * 60 * 1000; // 1 hora en milisegundos
+    const timeoutId = setTimeout(() => {
+      localStorage.removeItem('codertoken');
+      Cookies.remove('user_data'); // Eliminar el token de las cookies también
+      navigate('/');
+    }, logoutTimeout);
+  
+    // Limpiar temporizador al desmontar el componente
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [cartId, navigate]);
 
   const showLogout = isLogged && (
     <div className='row align-items-center flex-column flex-sm-row'>
@@ -92,9 +102,8 @@ const Navigation = () => {
       text: 'Debes iniciar sesión para acceder a esta función',
       icon: 'info',
       confirmButtonText: 'Entendido',
-    })
+    });
   };
-  
 
   return (
     <Navbar expand='lg' bg='light' className='nav-header'>
@@ -126,12 +135,12 @@ const Navigation = () => {
             <FaUser className='nav-header__login' />
           </Nav.Link>
           <Nav.Link href={`/cart/${cartId}`} className='ml-lg-2' onClick={isLogged ? null : handleUnauthorizedAccess}>
-  <FaShoppingCart className='nav-header__cart' />
-  <span id='cartQuantity'>{cartQuantity}</span>
-</Nav.Link>
-<Nav.Link as={Link} to='/favorite' className='ml-lg-2' onClick={isLogged ? null : handleUnauthorizedAccess}>
-  <RiHeart3Fill className='nav-header__heart' />
-</Nav.Link>
+            <FaShoppingCart className='nav-header__cart' />
+            <span id='cartQuantity'>{cartQuantity}</span>
+          </Nav.Link>
+          <Nav.Link as={Link} to='/favorite' className='ml-lg-2' onClick={isLogged ? null : handleUnauthorizedAccess}>
+            <RiHeart3Fill className='nav-header__heart' />
+          </Nav.Link>
 
           {showLogout}
         </Nav>
