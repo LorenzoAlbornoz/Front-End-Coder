@@ -34,21 +34,23 @@ const Admin = () => {
       }, [])
       return (
         <>
-        <div className="container admin-body">
-          <div className="row">
-            <div className="col mt-5 mb-4">
-              <button className={`btn ${activeTable === 'products' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={showProductView}>Mostrar Productos</button>
-              <button className={`btn ${activeTable === 'users' ? 'btn-dark' : 'btn-outline-dark'} ms-5`} onClick={showUserView}>Mostrar Usuarios</button>
-              <button className={`btn ${activeTable === 'categories' ? 'btn-secondary' : 'btn-outline-secondary'} ms-5`} onClick={showCategoryView}>Mostrar Categorías</button>
+          <div className="container admin-body">
+            <div className="row">
+              <div className="col mt-5 mb-4">
+                <div className="d-flex flex-row">
+                  <button className={`btn ${activeTable === 'products' ? 'btn-primary' : 'btn-outline-primary'} mb-2`} onClick={showProductView}>Mostrar Productos</button>
+                  <button className={`btn ${activeTable === 'users' ? 'btn-dark' : 'btn-outline-dark'} mb-2`} onClick={showUserView}>Mostrar Usuarios</button>
+                  <button className={`btn ${activeTable === 'categories' ? 'btn-secondary' : 'btn-outline-secondary'} mb-2`} onClick={showCategoryView}>Mostrar Categorías</button>
+                </div>
+              </div>
             </div>
+            {activeTable === 'products' && <ProductsTable allProducts={allProducts} getProducts={getProducts} />}
+            {activeTable === 'users' && <UserTable />}
+            {activeTable === 'categories' && <CategoryTable />}
           </div>
-          {activeTable === 'products' && <ProductsTable allProducts={allProducts} getProducts={getProducts} />}
-          {activeTable === 'users' && <UserTable />}
-          {activeTable === 'categories' && <CategoryTable />}
-        </div>
-      </>
+        </>
       );
-    }
+      }
 
 export default Admin;
 
