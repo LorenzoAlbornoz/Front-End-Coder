@@ -30,28 +30,38 @@ const ProductsTable = ({ allProducts, getProducts }) => {
     const deleteCurso = async (row) => {
         try {
             const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
-
+    
             if (!token) {
-              Swal.fire({
-                icon: 'error',
-                title: 'Error en la eliminación',
-                text: 'Debes iniciar sesión para eliminar un usuario.',
-              });
-              return; // Detén la ejecución si no hay un token
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error en la eliminación',
+                    text: 'Debes iniciar sesión para eliminar un producto.',
+                });
+                return;
             }
+    
             Swal.fire({
-                title: "¿Estas seguro?",
-                text: "No podrás revertir esto!",
+                title: "¿Estás seguro?",
+                text: "No podrás revertir esto.",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#F8A126",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Sí, eliminar!",
+                confirmButtonText: "Sí, eliminar",
                 cancelButtonText: "Cancelar",
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    await axiosInstance.delete(`/product/${row}`);
-                    getProducts();
+                    try {
+                        await axiosInstance.delete(`/product/${row}`);
+                        getProducts();
+                    } catch (error) {
+                        console.error('Error al eliminar el producto:', error.response?.data?.data || 'Error desconocido');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error en la eliminación',
+                            text: `Hubo un error al eliminar el producto: ${error.response?.data?.data || 'Error desconocido'}`,
+                        });
+                    }
                 }
             });
         } catch (error) {

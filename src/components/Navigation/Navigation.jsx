@@ -81,7 +81,7 @@ const Navigation = () => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [cartId, navigate]);
+  }, [cartId, navigate, userRole]);
 
   const showLogout = isLogged && (
     <div className='row align-items-center flex-column flex-sm-row'>
@@ -120,7 +120,7 @@ const Navigation = () => {
           <Nav className='mr-auto'>
             <Nav.Link href='/'>Inicio</Nav.Link>
             <Nav.Link href='/products'>Productos</Nav.Link>
-            {userRole === 'admin' && (
+            {(userRole === 'admin' || userRole === 'premium') && (
               <Nav.Link as={Link} to='/admin' className='nav-header__link'>
                 Administración
               </Nav.Link>

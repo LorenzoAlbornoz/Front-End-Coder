@@ -101,7 +101,7 @@ export const FORM_SCHEMA = yup.object().shape({
   export const UPDATE_USER_SCHEMA = yup.object({
     role: yup.string()
       .required("El rol es requerido")
-      .oneOf(['admin', 'premiun', 'user'], 'Rol no válido')
+      .oneOf(['admin', 'premium', 'user'], 'Rol no válido')
   });
 
   export const UPDATE_CATEGORY_SCHEMA = yup.object({

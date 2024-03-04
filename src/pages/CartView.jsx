@@ -220,7 +220,7 @@ const CartView = () => {
 }
 
   if (!cart || cart.products.length === 0) {
-    return <p>No hay productos en el carrito.</p>;
+    return <p className="important-titles">No hay productos en el carrito.</p>;
   }
 
   return (

@@ -45,7 +45,7 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
 
     const onSubmit = async (data) => {
         try {
-            const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
+          const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
       
           // Verifica si hay un token
           if (!token) {
@@ -67,33 +67,41 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
           formData.append('code', data.code);
           formData.append('stock', data.stock);
       
-    // Si hay imágenes, agregarlas al FormData
-    if (imgFiles && imgFiles.length > 0) {
-        for (let i = 0; i < imgFiles.length; i++) {
-          formData.append('images', imgFiles[i]);
-        }
-      }
+          // Si hay imágenes, agregarlas al FormData
+          if (imgFiles && imgFiles.length > 0) {
+            for (let i = 0; i < imgFiles.length; i++) {
+              formData.append('images', imgFiles[i]);
+            }
+          }
       
-          console.log('Datos enviados en la solicitud:', formData);
-      
-          await axiosInstance.put(`/product/${datoProduct._id}`, formData, {
+          // Intenta hacer la solicitud
+          const response = await axiosInstance.put(`/product/${datoProduct._id}`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
           });
       
-          Swal.fire({
-            icon: 'success',
-            title: 'Producto modificado con éxito',
-          });
+          // Verifica el estado de la respuesta
+          if (response.status === 200 && response.data.status === 'OK') {
+            Swal.fire({
+              icon: 'success',
+              title: 'Producto modificado con éxito',
+            });
+          } else {
+            // Si hay un error en la respuesta, muestra el mensaje de error
+            Swal.fire({
+              icon: 'error',
+              title: 'Error en la actualización',
+              text: response.data,
+            });
+          }
         } catch (error) {
+          // Si hay un error en el proceso, muestra el mensaje de error
           console.error('Error al modificar el producto:', error);
-      
-          // Maneja otros errores aquí, si es necesario
           Swal.fire({
             icon: 'error',
             title: 'Error en la actualización',
-            text: 'Hubo un error al modificar el producto. Por favor, intenta nuevamente.',
+            text: `${error.response?.data?.data || 'Error desconocido'}`,
           });
         } finally {
           getProducts();
