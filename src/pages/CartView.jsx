@@ -121,6 +121,31 @@ const CartView = () => {
     }
   };
 
+  const clearCart = async (cartId) => {
+    try {
+      const result = await Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Esto eliminará todos los productos del carrito",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#F8A126",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, vaciar carrito",
+        cancelButtonText: "Cancelar",
+      });
+
+      if (result.isConfirmed) {
+        await axiosInstance.delete(`/cleanCart/${cartId}`);
+
+        // Actualizar el carrito después de la eliminación
+        const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
+        setCart(updatedCart.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleQuantityChange = (productId, event) => {
     setNewQuantities((prevQuantities) => ({
       ...prevQuantities,
@@ -297,9 +322,17 @@ const CartView = () => {
             </td>
             <td>
               <form id="cartForm" onSubmit={confirmPurchase} data-cart-id={cart._id}>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() => clearCart(cart._id)}
+              >
+                Vaciar Carrito
+              </button>
                 <button type="submit" className="btn btn-success">
                   Finalizar Compra
                 </button>
+           
               </form>
             </td>
           </tr>
