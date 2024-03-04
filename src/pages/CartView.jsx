@@ -6,8 +6,10 @@ import Cookies from 'js-cookie';
 import styled, { keyframes } from "styled-components";
 import { FaSyncAlt, FaTrashAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import {useCart} from '../Context/CartContext'
 
 const CartView = () => {
+  const { updateCartQuantity } = useCart();
   const [cart, setCart] = useState(null);
   const [userId, setUserId] = useState(null);
   const [newQuantities, setNewQuantities] = useState({});
@@ -84,6 +86,8 @@ const CartView = () => {
       // Actualizar el carrito después de la actualización
       const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
       setCart(updatedCart.data);
+
+      updateCartQuantity(cartId);
     } catch (error) {
       // Mostrar una alerta indicando que ha ocurrido un error
       Swal.fire({
@@ -115,6 +119,8 @@ const CartView = () => {
         // Actualizar el carrito después de la actualización
         const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
         setCart(updatedCart.data);
+
+        updateCartQuantity(cartId);
       }
     } catch (error) {
       console.error(error);
@@ -140,6 +146,8 @@ const CartView = () => {
         // Actualizar el carrito después de la eliminación
         const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
         setCart(updatedCart.data);
+
+        updateCartQuantity(cartId);
       }
     } catch (error) {
       console.error(error);
@@ -177,6 +185,9 @@ const CartView = () => {
         const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
         setCart(updatedCart.data); // Actualizar el estado del carrito en el componente
         // Puedes redirigir al usuario a una página de confirmación aquí si es necesario
+
+        updateCartQuantity(cartId);
+        
         Swal.fire({
           icon: 'success',
           title: '¡Compra Finalizada!',
