@@ -32,7 +32,7 @@ const Login = () => {
       localStorage.setItem('codertoken', token);
       const decodedToken = jwtDecode(token);
       const userRole = decodedToken.role;
-      if (userRole === 'admin') {
+      if (userRole === 'admin' || userRole === 'premium') {
         navigate('/admin');
       } else if (userRole === 'user') {
         navigate('/');
