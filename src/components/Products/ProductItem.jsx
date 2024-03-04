@@ -6,8 +6,10 @@ import { jwtDecode } from 'jwt-decode';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
+import { useCart } from '../../Context/CartContext';
 
 const ProductItem = ({ product, favorites }) => {
+  const { updateCartQuantity } = useCart();
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleFavoriteToggle = async () => {
@@ -85,6 +87,8 @@ const ProductItem = ({ product, favorites }) => {
   
       // Realiza la solicitud POST para agregar el producto al carrito
       await axiosInstance.post(`/cart/${cartId}/product/${product._id}`);
+
+      updateCartQuantity(cartId);
   
       Swal.fire('Añadido al carrito', '', 'success');
     } catch (error) {

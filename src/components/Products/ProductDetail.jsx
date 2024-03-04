@@ -6,6 +6,7 @@ import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
 import styled, { keyframes } from 'styled-components';
+import { useCart } from '../../Context/CartContext';
 
 const rotate360 = keyframes`
  from {
@@ -51,6 +52,7 @@ const convertToPesos = (numb) => {
 };
 
 const ProductDetail = ({ product }) => {
+  const { updateCartQuantity } = useCart();
   const [loading, setLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -101,6 +103,8 @@ const ProductDetail = ({ product }) => {
   
       // Realiza la solicitud POST para agregar el producto al carrito
       await axiosInstance.post(`/cart/${cartId}/product/${product._id}`);
+
+      updateCartQuantity(cartId);
   
       Swal.fire('Añadido al carrito', '', 'success');
     } catch (error) {

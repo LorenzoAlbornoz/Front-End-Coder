@@ -8,11 +8,11 @@ import { FaUser, FaShoppingCart } from 'react-icons/fa';
 import { RiHeart3Fill } from 'react-icons/ri';
 import Swal from 'sweetalert2';
 import SearchBar from '../SearchBar/SearchBar';
-import { axiosInstance } from '../../config/axiosInstance';
 import Cookies from 'js-cookie'; 
+import {useCart} from '../../Context/CartContext'
 
 const Navigation = () => {
-  const [cartQuantity, setCartQuantity] = useState(0);
+  const { cartQuantity, updateCartQuantity } = useCart();
   const navigate = useNavigate();
 
   const localStorageToken = localStorage.getItem('codertoken');
@@ -52,19 +52,6 @@ const Navigation = () => {
     });
   };
 
-  const updateCartQuantity = (cartId) => {
-    // Realizar una solicitud al servidor para obtener la cantidad del carrito
-    axiosInstance.get(`/cart/quantity/${cartId}`)
-      .then(response => {
-        const cartQuantityFromServer = response.data.quantity;
-        // Actualizar el estado local con la cantidad del carrito
-        setCartQuantity(cartQuantityFromServer);
-      })
-      .catch(error => {
-        console.error('Error al obtener la cantidad del carrito:', error);
-      });
-  };
-
   useEffect(() => {
     // Actualizar la cantidad del carrito al cargar el componente
     updateCartQuantity(cartId);
@@ -81,7 +68,7 @@ const Navigation = () => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [cartId, navigate, userRole]);
+  }, [cartId, navigate, userRole, updateCartQuantity]);
 
   const showLogout = isLogged && (
     <div className='row align-items-center flex-column flex-sm-row'>
