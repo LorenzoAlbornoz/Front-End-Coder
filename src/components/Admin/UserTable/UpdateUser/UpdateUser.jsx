@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { UPDATE_USER_SCHEMA } from '../../../../helpers/validationsSchemas';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
+import { jwtDecode } from "jwt-decode";
 
 const UpdateUser = ({ datoUser, getUsers }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
@@ -29,6 +30,20 @@ const UpdateUser = ({ datoUser, getUsers }) => {
           text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
         });
         return; // Detén la ejecución si no hay un token
+      }
+
+      const decodedToken = jwtDecode(token);
+      const userRole = decodedToken.role;
+  
+      // Verifica si el usuario tiene el rol de administrador
+      if (userRole !== 'admin') {
+        Swal.fire({
+          icon: 'error',
+          title: 'No tienes permisos para modificar usuarios.',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        return; // Detén la ejecución si el usuario no es administrador
       }
   
       // Puedes construir el objeto de datos para la solicitud de actualización

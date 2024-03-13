@@ -6,6 +6,7 @@ import styled, { keyframes } from 'styled-components';
 import UpdateModal from './UpdateCategory/UpdateModal.jsx'
 import Cookies from 'js-cookie';
 import CategoryModal from './CategoryModal.jsx';
+import { jwtDecode } from "jwt-decode";
 
 const CategoryTable = () => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -52,6 +53,19 @@ const CategoryTable = () => {
           text: 'Debes iniciar sesión para eliminar una Categoria.',
         });
         return; // Detén la ejecución si no hay un token
+      }
+
+      const decodedToken = jwtDecode(token);
+      const userRole = decodedToken.role;
+
+      if (userRole !== 'admin') {
+        Swal.fire({
+          icon: 'error',
+          title: 'No tienes permisos para eliminar categorías.',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        return; // Detén la ejecución si el usuario no es administrador
       }
       Swal.fire({
         title: "¿Estas seguro?",

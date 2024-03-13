@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { UPDATE_CATEGORY_SCHEMA } from '../../../../helpers/validationsSchemas';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
+import { jwtDecode } from "jwt-decode";
 
 const UpdateCategory = ({ datoCategory, getCategories }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
@@ -36,7 +37,19 @@ const UpdateCategory = ({ datoCategory, getCategories }) => {
         return; // Detén la ejecución si no hay un token
       }
   
-      console.log('Datos antes de la actualización:', data);
+      const decodedToken = jwtDecode(token);
+      const userRole = decodedToken.role;
+  
+      // Verifica si el usuario tiene el rol de administrador
+      if (userRole !== 'admin') {
+        Swal.fire({
+          icon: 'error',
+          title: 'No tienes permisos para modificar usuarios.',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        return; // Detén la ejecución si el usuario no es administrador
+      }
   
       const formData = new FormData();
       formData.append('name', data.name);
