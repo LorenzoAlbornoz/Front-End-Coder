@@ -51,11 +51,19 @@ const UserTable = () => {
       
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.sub;
+      const userRole = decodedToken.role;
       
       if (row === userId) {
         Swal.fire({
           icon: 'error',
           title: 'No puedes eliminarte a ti mismo.',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else if (userRole !== 'admin') {
+        Swal.fire({
+          icon: 'error',
+          title: 'No tienes permisos para eliminar usuarios.',
           showConfirmButton: false,
           timer: 1500,
         });

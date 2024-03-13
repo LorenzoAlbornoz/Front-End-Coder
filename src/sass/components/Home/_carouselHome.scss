@@ -24,17 +24,6 @@
 }
 
 
-@media screen and (max-width: 768px) {
-    #carouselHome .carouselResponsive__img{
-        min-height: 10rem;
-
-    }
-    #carouselHome .carousel-control-prev,
-    #carouselHome .carousel-control-next {
-    display: none;
-
-    }
-}
 
 #carouselCards{
   padding-left: 10vw;
@@ -48,6 +37,8 @@
   background-color: rgba(0, 0, 0, 0.583); 
   border-radius: 50%;
   top: 45%;
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 
 
@@ -63,21 +54,23 @@
 
   #carouselCards .carousel-control-prev, #carouselCards
   .carousel-control-next {
-    width: 2rem;
-    height: 2rem;
+    width: 5rem;
+    height: 5rem;
   } 
-  #carouselCards .carousel-control-prev {
-    left: 1rem; 
-  }
-  
-  #carouselCards .carousel-control-next{
-    right: 1rem;
-  }
   #carouselHome .carouselResponsive__img{
     height: 20vh;
   }
 
 }
 
+@media screen and (max-width: 768px) {
+  #carouselHome .carouselResponsive__img{
+      min-height: 10rem;
 
+  }
+  #carouselHome .carousel-control-prev,
+  #carouselHome .carousel-control-next {
+  display: none;
 
+  }
+}
