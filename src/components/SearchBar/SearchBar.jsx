@@ -70,7 +70,7 @@ const SearchBar = () => {
               style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', fontSize: '1.5rem' }}
             >
               <img
-                src={option.image}
+                src={option.images[0]}
                 alt={option.title}
                 style={{ width: '80px', height: '80px', marginRight: '10px', borderRadius: '50%' }}
               />
