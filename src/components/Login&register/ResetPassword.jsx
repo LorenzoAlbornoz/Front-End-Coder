@@ -6,15 +6,18 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { axiosInstance } from '../../config/axiosInstance';
 import Swal from 'sweetalert2'
 import styled, { keyframes } from "styled-components";
+import { FaExclamationCircle } from 'react-icons/fa';
 
 const ResetPassword = () => {
+    const [userNotFound, setUserNotFound] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
     const {
         register, handleSubmit, formState: { errors }, reset } = useForm(
             {
                 resolver: yupResolver(RESETPASSWORD_SCHEMA),
             }
         );
-    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
     const { id, token } = useParams()
@@ -35,6 +38,7 @@ const ResetPassword = () => {
             navigate("/login")
         } catch (error) {
             console.error(error);
+            setUserNotFound(true);
             Swal.fire({
                 icon: 'error',
                 title: 'La nueva contraseña es igual a la anterior.',
@@ -50,7 +54,7 @@ const ResetPassword = () => {
 
     const handlePaste = (e) => {
         e.preventDefault()
-      }
+    }
 
     const rotate360 = keyframes`
   from {
@@ -108,7 +112,9 @@ const ResetPassword = () => {
                                 {...register("password")}
                             />
                             {errors.password && (
-                                <p className="register__error-message">{errors.password.message}</p>
+                                <p className="register__error-message">
+                                    <FaExclamationCircle />{errors.password.message}
+                                </p>
                             )}
                         </div>
                         <div>
@@ -121,7 +127,9 @@ const ResetPassword = () => {
                                 {...register("repassword")}
                             />
                             {errors.repassword && (
-                                <p className="register__error-message">{errors.repassword.message}</p>
+                                <p className="register__error-message">
+                                    <FaExclamationCircle />{errors.repassword.message}
+                                </p>
                             )}
                         </div>
                         <p className="register__description"> Tu contraseña debe tener al menos una mayúscula, una minúscula, un número y 8 caracteres como mínimo y 20 como máximo </p>

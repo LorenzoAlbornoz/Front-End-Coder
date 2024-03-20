@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FORM_SCHEMA } from '../../../helpers/validationsSchemas';
 import Swal from 'sweetalert2'
 import Cookies from 'js-cookie';
+import { FaExclamationCircle } from 'react-icons/fa';
 
 const ProductCreation = ({ getProducts }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
@@ -104,7 +105,8 @@ const ProductCreation = ({ getProducts }) => {
             {...register("title")}
           />
           {errors.title && (
-            <p className="register__error-message">{errors.title.message}</p>
+            <p className="register__error-message"><FaExclamationCircle />{errors.title.message}
+            </p>
           )}
         </Form.Group>
 
@@ -119,7 +121,8 @@ const ProductCreation = ({ getProducts }) => {
             {...register("description")}
           />
           {errors.description && (
-            <p className="register__error-message">{errors.description.message}</p>
+            <p className="register__error-message"><FaExclamationCircle />{errors.description.message}
+            </p>
           )}
         </Form.Group>
 
@@ -136,7 +139,8 @@ const ProductCreation = ({ getProducts }) => {
             />
           </InputGroup>
           {errors.price && (
-            <p className="register__error-message">{errors.price.message}</p>
+            <p className="register__error-message"><FaExclamationCircle />{errors.price.message}
+            </p>
           )}
         </Form.Group>
 
@@ -155,7 +159,8 @@ const ProductCreation = ({ getProducts }) => {
             ))}
           </Form.Select>
           {errors.category && (
-            <p className="register__error-message">{errors.category.message}</p>
+            <p className="register__error-message"><FaExclamationCircle />{errors.category.message}
+            </p>
           )}
         </Form.Group>
 
@@ -180,7 +185,8 @@ const ProductCreation = ({ getProducts }) => {
             {...register("code")}
           />
           {errors.code && (
-            <p className="register__error-message">{errors.code.message}</p>
+            <p className="register__error-message"><FaExclamationCircle />{errors.code.message}
+            </p>
           )}
         </Form.Group>
         
@@ -194,7 +200,8 @@ const ProductCreation = ({ getProducts }) => {
             {...register("stock")}
           />
           {errors.stock && (
-            <p className="register__error-message">{errors.stock.message}</p>
+            <p className="register__error-message"><FaExclamationCircle />{errors.stock.message}
+            </p>
           )}
         </Form.Group>
 

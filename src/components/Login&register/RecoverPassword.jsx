@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RECOVERPASSWORD_SCHEMA } from "../../helpers/validationsSchemas";
 import { Link } from 'react-router-dom';
 import { axiosInstance } from '../../config/axiosInstance';
 import Swal from 'sweetalert2'
+import { FaExclamationCircle } from 'react-icons/fa';
 
 const RecoverPassword = () => {
+    const [userNotFound, setUserNotFound] = useState(false);
+
     const {
         register, handleSubmit, formState: { errors }, reset } = useForm(
             {
@@ -27,6 +30,7 @@ const RecoverPassword = () => {
             }
         } catch (error) {
             console.error(error);
+            setUserNotFound(true);
             Swal.fire({
                 icon: 'error',
                 title: 'Usuario No Registrado.',
@@ -50,7 +54,9 @@ const RecoverPassword = () => {
                             {...register("email")}
                         />
                         {errors.email && (
-                            <p className="register__error-message">{errors.email.message}</p>
+                            <p className="register__error-message">
+                                <FaExclamationCircle /> {errors.email.message}
+                            </p>
                         )}
                     </div>
                     <button type="submit" className="recoverPassword__button">Enviar</button>

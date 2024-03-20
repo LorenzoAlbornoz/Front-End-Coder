@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { UPDATE_CATEGORY_SCHEMA } from '../../../helpers/validationsSchemas';
 import Swal from 'sweetalert2'
 import Cookies from 'js-cookie';
+import { FaExclamationCircle } from 'react-icons/fa';
 
 const CategoryCreation = ({ getCategories}) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
@@ -74,7 +75,7 @@ const CategoryCreation = ({ getCategories}) => {
             {...register("name")}
           />
           {errors.name && (
-            <p className="register__error-message">{errors.name.message}</p>
+            <p className="register__error-message"><FaExclamationCircle />{errors.name.message}</p>
           )}
         </Form.Group>
 
