@@ -1,13 +1,13 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LOGIN_SCHEMA } from "../../helpers/validationsSchemas";
-
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from "../../config/axiosInstance";
 import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
 import styled, { keyframes } from "styled-components"; 
+import { FaExclamationCircle } from 'react-icons/fa';
 
 const Login = () => {
   const [userNotFound, setUserNotFound] = useState(false);
@@ -97,45 +97,47 @@ const CustomLoader = () => (
   </div>
 );
 
-  return (
-    <div className="login">
-      {isLoading ? (
-       <CustomLoader />
-
-      ) : (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              className="login__input"
-              {...register("email")}
-            />
-            {errors.email && (
-              <p className="register__error-message">{errors.email.message}</p>
-            )}
-          </div>
-          <div>
-            <input
-              type="password"
-              name="password"
-              className="login__input"
-              placeholder="Contraseña"
-              {...register("password")}
-            />
-            {errors.password && (
-              <p className="register__error-message">{errors.password.message}</p>
-            )}
-                 <button type="submit" className="login__button">
+return (
+  <div className="login">
+    {isLoading ? (
+      <CustomLoader />
+    ) : (
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="login__input"
+            {...register("email")}
+          />
+          {errors.email && (
+            <p className="register__error-message">
+              <FaExclamationCircle /> {errors.email.message}
+            </p>
+          )}
+        </div>
+        <div>
+          <input
+            type="password"
+            name="password"
+            className="login__input"
+            placeholder="Contraseña"
+            {...register("password")}
+          />
+          {errors.password && (
+            <p className="register__error-message">
+              <FaExclamationCircle /> {errors.password.message}
+            </p>
+          )}
+          <button type="submit" className="login__button">
             Ingresar
           </button>
-          </div>
-        </form>
-      )}
-    </div>
-  );
+        </div>
+      </form>
+    )}
+  </div>
+);
 };
 
 export default Login;
-

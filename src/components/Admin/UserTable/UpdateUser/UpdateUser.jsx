@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { axiosInstance } from '../../../../config/axiosInstance';
-import { Form} from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { UPDATE_USER_SCHEMA } from '../../../../helpers/validationsSchemas';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
 import { jwtDecode } from "jwt-decode";
+import { FaExclamationCircle } from 'react-icons/fa';
 
 const UpdateUser = ({ datoUser, getUsers }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
@@ -21,7 +22,7 @@ const UpdateUser = ({ datoUser, getUsers }) => {
   const onSubmit = async (data) => {
     try {
       const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
-  
+
       // Verifica si hay un token
       if (!token) {
         Swal.fire({
@@ -34,7 +35,7 @@ const UpdateUser = ({ datoUser, getUsers }) => {
 
       const decodedToken = jwtDecode(token);
       const userRole = decodedToken.role;
-  
+
       // Verifica si el usuario tiene el rol de administrador
       if (userRole !== 'admin') {
         Swal.fire({
@@ -45,15 +46,15 @@ const UpdateUser = ({ datoUser, getUsers }) => {
         });
         return; // Detén la ejecución si el usuario no es administrador
       }
-  
+
       // Puedes construir el objeto de datos para la solicitud de actualización
       const updatedUserData = {
         role: data.role,
       };
-  
+
       // Realiza la solicitud de actualización del usuario
       const response = await axiosInstance.put(`/user/${datoUser._id}`, updatedUserData);
-  
+
       // Verifica el estado de la respuesta
       if (response.status === 200) {
         Swal.fire({
@@ -63,7 +64,7 @@ const UpdateUser = ({ datoUser, getUsers }) => {
       }
     } catch (error) {
       console.error('Error al modificar el usuario:', error);
-  
+
       // Maneja otros errores aquí, si es necesario
       Swal.fire({
         icon: 'error',
@@ -74,7 +75,7 @@ const UpdateUser = ({ datoUser, getUsers }) => {
       getUsers();
     }
   };
-  
+
   return (
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -89,7 +90,8 @@ const UpdateUser = ({ datoUser, getUsers }) => {
             {...register('role')}
           />
           {errors.role && (
-            <p className="register__error-message">{errors.role.message}</p>
+            <p className="register__error-message"> <FaExclamationCircle />{errors.role.message}
+            </p>
           )}
         </Form.Group>
 
