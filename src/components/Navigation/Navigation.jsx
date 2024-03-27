@@ -104,7 +104,7 @@ const Navigation = () => {
           <Nav className='mr-auto'>
             <Nav.Link href='/'>Inicio</Nav.Link>
             <Nav.Link href='/products'>Productos</Nav.Link>
-            {(userRole === 'admin' || userRole === 'premium') && (
+            {(userRole === 'admin') && (
               <Nav.Link as={Link} to='/admin' className='nav-header__link'>
                 Administración
               </Nav.Link>

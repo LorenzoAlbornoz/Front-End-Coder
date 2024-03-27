@@ -171,18 +171,8 @@ const CartView = () => {
     if (result.isConfirmed) {
       const cartId = cart._id;
       try {
-        await axiosInstance.post(`/cart/${cartId}/user/${userId}/purchase`);
-
-        const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
-        setCart(updatedCart.data);
-
-        updateCartQuantity(cartId);
-
-        Swal.fire({
-          icon: 'success',
-          title: '¡Compra Finalizada!',
-          text: 'Gracias por tu compra.',
-        });
+        const response = await axiosInstance.post(`/payment-attempt/${cartId}`);
+        window.location.href = response.data.url;
       } catch (error) {
         console.error(error);
         Swal.fire({
