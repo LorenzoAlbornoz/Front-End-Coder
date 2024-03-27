@@ -1,46 +1,39 @@
-
 .carousel-item {
-    transition: 900ms ease-in-out;
-
-  
+  transition: 900ms ease-in-out;
 }
 
-
-#carouselHome .carousel-control-prev, #carouselHome
-.carousel-control-next {
+#carouselHome .carousel-control-prev,
+#carouselHome .carousel-control-next {
   width: 10rem;
   height: 10rem;
-  background-color: rgba(0, 0, 0, 0.882); 
+  background-color: rgba(0, 0, 0, 0.882);
   border-radius: 50%;
   top: 40%;
 }
 
 #carouselHome .carousel-control-prev {
-  left: 8rem; 
+  left: 8rem;
 }
 
-#carouselHome .carousel-control-next{
+#carouselHome .carousel-control-next {
   right: 8rem;
 }
 
-
-
-#carouselCards{
+#carouselCards {
   padding-left: 10vw;
   padding-right: 10vw;
 }
 
-#carouselCards .carousel-control-prev, #carouselCards
-.carousel-control-next {
+#carouselCards .carousel-control-prev,
+#carouselCards .carousel-control-next {
   width: 8rem;
   height: 8rem;
-  background-color: rgba(0, 0, 0, 0.583); 
+  background-color: rgba(0, 0, 0, 0.583);
   border-radius: 50%;
   top: 45%;
   margin-left: 4rem;
   margin-right: 4rem;
 }
-
 
 .carousel-indicators {
   margin-bottom: 0rem;
@@ -52,25 +45,25 @@
 
 @media screen and (max-width: 398px) {
 
-  #carouselCards .carousel-control-prev, #carouselCards
-  .carousel-control-next {
+  #carouselCards .carousel-control-prev,
+  #carouselCards .carousel-control-next {
     width: 5rem;
     height: 5rem;
-  } 
-  #carouselHome .carouselResponsive__img{
+  }
+
+  #carouselHome .carouselResponsive__img {
     height: 20vh;
   }
 
 }
 
 @media screen and (max-width: 768px) {
-  #carouselHome .carouselResponsive__img{
-      min-height: 10rem;
-
+  #carouselHome .carouselResponsive__img {
+    min-height: 10rem;
   }
+
   #carouselHome .carousel-control-prev,
   #carouselHome .carousel-control-next {
-  display: none;
-
+    display: none;
   }
 }

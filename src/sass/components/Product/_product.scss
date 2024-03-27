@@ -1,36 +1,33 @@
-/* Estilos para resaltar texto importante */
-.productCard{
+.productCard {
 
-&__body {
-    font-size: 16px; /* Tamaño de fuente base */
+  &__body {
+    font-size: 16px;
   }
-  
+
   &__title {
-    font-size: 24px; /* Tamaño de fuente para el título */
-    font-weight: bold; /* Negrita para destacar */
-    color: #333; /* Color del texto */
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
   }
-  
-  &__price {
-    font-size: 18px; /* Tamaño de fuente para el precio */
-    color: var(--c-secondColor); /* Color del precio destacado */
-  }
-  
-  &__description {
-    font-size: 18px; /* Tamaño de fuente para la descripción */
-  }
-  
-  &__category {
-    font-size: 12px; /* Tamaño de fuente para la categoría */
-  }
-  
-  &__stock {
-    font-size: 12px; /* Tamaño de fuente para el stock */
-  }
-  
-}
 
-/* ProductList.css */
+  &__price {
+    font-size: 18px;
+    color: var(--c-secondColor);
+  }
+
+  &__description {
+    font-size: 18px;
+  }
+
+  &__category {
+    font-size: 12px;
+  }
+
+  &__stock {
+    font-size: 12px;
+  }
+
+}
 
 .pagination-container {
   display: flex;
@@ -63,12 +60,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 300px; /* Ajusta el ancho máximo según tus necesidades */
-  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  max-width: 300px;
+  margin: 0 auto;
   margin-bottom: 4rem;
 }
 
-.titleSelect{
+.titleSelect {
   margin-top: 4rem;
   font-size: 15px;
 }

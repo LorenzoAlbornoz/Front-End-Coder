@@ -1,24 +1,24 @@
   .featuredCard {
-    width: 300px; /* Ajusta el ancho según tus necesidades */
+    width: 300px;
     margin-bottom: 3rem;
     margin-top: 6rem;
     border: none;
   }
-  
+
   .featuredCard__header {
-    margin-left: auto; 
+    margin-left: auto;
   }
 
   .featuredCard__link {
     text-decoration: none;
   }
-  
+
   .featuredCard__imgContainer {
     position: relative;
     overflow: hidden;
-    height: 300px; /* Ajusta la altura según tus necesidades */
+    height: 300px;
   }
-  
+
   .featuredCard__img {
     width: 100%;
     height: 100%;
@@ -26,23 +26,23 @@
     border-radius: 10px 10px 0 0;
     transition: all 0.5s;
   }
-  
+
   .featuredCard__img:hover {
     transform: scale(1.2);
   }
-  
+
   .featuredCard__body {
     padding: 15px;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
-  
+
   .featuredCard__title {
     font-size: 20px;
     font-weight: 700;
   }
-  
+
   .featuredCard__itemprice {
     font-size: 18px;
   }
@@ -52,20 +52,20 @@
     font-size: 1.5rem;
     font-weight: 600;
   }
-  
+
   .featuredCard__description {
     line-height: 1.5;
     font-size: 1.5rem;
     font-weight: 600;
   }
-  
+
   .featuredCard__footer {
     margin-top: auto;
     display: flex;
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center;
+    align-items: center;
   }
-  
+
   .featuredCard__button {
     border: none;
     background-color: #000;
@@ -76,22 +76,22 @@
     display: block;
     font-size: 1.5rem;
     transition: all 0.3s ease;
-  
+
     @media screen and (max-width: 576px) {
       font-size: 1rem;
     }
-  
+
     &:hover {
       background-color: green;
     }
   }
-  
+
   .featuredCard__favorite-container {
     position: absolute;
     top: 10px;
     right: 10px;
   }
-  
+
   .featuredCard__favorite {
     background: transparent;
     border: none;
@@ -99,15 +99,15 @@
     font-size: 2rem;
     color: red;
   }
-  
+
   .featuredCard__favorite:hover {
     color: darkred;
   }
-  
+
   .important-titles {
     text-align: center;
-    font-size: 3rem; /* Puedes ajustar el tamaño de la fuente según tus preferencias */
+    font-size: 3rem;
     font-weight: bold;
-    color: #333; /* Puedes ajustar el color del texto según tus preferencias */
-    margin-bottom: 20px; /* Puedes ajustar el margen inferior según tus preferencias */
+    color: #333;
+    margin-bottom: 20px;
   }

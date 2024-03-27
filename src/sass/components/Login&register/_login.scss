@@ -18,7 +18,7 @@
 
     &__input::placeholder {
         color: white;
-      }
+    }
 
     &__button {
         width: 100%;
@@ -59,8 +59,8 @@
         font-weight: bold;
     }
 
-    &__link:hover{
-    color: var(--c-secondColor);
+    &__link:hover {
+        color: var(--c-secondColor);
     }
 
     &__error-message {
@@ -70,12 +70,12 @@
     }
 }
 
-
 @media screen and (max-width: 768px) {
     .login {
-        &__input{
+        &__input {
             width: 100%;
         }
+
         &__button {
             max-width: 20rem;
             padding: 0.4rem 0.5rem;

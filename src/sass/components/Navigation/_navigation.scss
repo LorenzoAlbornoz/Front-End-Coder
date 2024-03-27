@@ -24,12 +24,10 @@
     background-color: var(--c-secondColor);
     border-color: var(--c-secondColor);
     color: var(--c-white);
-    /* Cambiado el color del borde en hover */
   }
 
   &__login {
     font-size: 2.5rem;
-    // margin-right: 0.5rem; /* Añadido un margen derecho */
     margin-left: 8rem;
   }
 
@@ -63,7 +61,7 @@
     &__heart,
     &__cart,
     &__login {
-      margin-left: 1.5rem; 
+      margin-left: 1.5rem;
       margin-top: 2rem;
     }
 

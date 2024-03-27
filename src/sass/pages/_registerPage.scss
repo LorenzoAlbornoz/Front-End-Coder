@@ -1,13 +1,13 @@
 .register-container {
     background-image: url(https://img.freepik.com/vector-gratis/composicion-realista-electrodomesticos_1284-65307.jpg?w=1060&t=st=1705027229~exp=1705027829~hmac=ec7902e9a70c6878da8605af60af320e67b512187dc4d841456692682c4a8043);
-    background-size: cover; 
-    background-repeat: no-repeat; 
+    background-size: cover;
+    background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 80vh; 
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
 .registerPage {
     width: 100%;
@@ -19,8 +19,8 @@
     &__form {
         width: 60rem;
         padding: 8rem;
-        margin: 0; // Reinicia el margen a 0
-        margin-left: auto; // Alinea el formulario a la derecha
+        margin: 0;
+        margin-left: auto;
         margin-right: 10rem;
         text-align: center;
         border-radius: 0.6rem;
@@ -52,26 +52,28 @@
         font-weight: bold;
     }
 
-    &__link:hover{
+    &__link:hover {
         color: var(--c-secondColor);
-        }
+    }
 
     &__error-message {
         font-size: 2rem;
         color: var(--c-wrong);
         font-weight: 400;
     }
+
     &__custom-loading-text {
         color: var(--c-mainColor);
         text-align: center;
         margin-top: 1rem;
-      }
+    }
 }
 
 @media screen and (max-width: 768px) {
     .register-container {
-        height: 95vh; 
+        height: 95vh;
     }
+
     .registerPage {
         flex-direction: column;
         align-items: center;
