@@ -163,7 +163,7 @@ const CartView = () => {
 
   const confirmPurchase = async (event) => {
     event.preventDefault();
-
+  
     const result = await Swal.fire({
       title: "¿Finalizar Compra?",
       text: "¿Deseas finalizar la compra?",
@@ -174,25 +174,16 @@ const CartView = () => {
       confirmButtonText: "Sí, finalizar compra",
       cancelButtonText: "Cancelar",
     });
-
+  
     if (result.isConfirmed) {
       // Enviar la solicitud para finalizar la compra
       const cartId = cart._id;
       try {
-        await axiosInstance.post(`/cart/${cartId}/user/${userId}/purchase`);
-
-        // Obtener el carrito actualizado después de la compra
-        const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
-        setCart(updatedCart.data); // Actualizar el estado del carrito en el componente
-        // Puedes redirigir al usuario a una página de confirmación aquí si es necesario
-
-        updateCartQuantity(cartId);
+        const response = await axiosInstance.post(`/payment-attempt/${cartId}`);
+        // Manejar la respuesta del servidor y redirigir al usuario a la URL de Stripe para completar el pago
+        window.location.href = response.data.url; // Suponiendo que el servidor envía la URL de redirección como parte de la respuesta
         
-        Swal.fire({
-          icon: 'success',
-          title: '¡Compra Finalizada!',
-          text: 'Gracias por tu compra.',
-        });
+        // También puedes actualizar el estado del carrito y mostrar un mensaje de éxito aquí si es necesario
       } catch (error) {
         console.error(error);
         Swal.fire({
