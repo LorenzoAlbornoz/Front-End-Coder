@@ -1,0 +1,111 @@
+.register-container {
+    background-image: url(https://img.freepik.com/vector-gratis/composicion-realista-electrodomesticos_1284-65307.jpg?w=1060&t=st=1705027229~exp=1705027829~hmac=ec7902e9a70c6878da8605af60af320e67b512187dc4d841456692682c4a8043);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerPage {
+    width: 100%;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    transition: all .5s ease-out;
+
+    &__form {
+        width: 60rem;
+        padding: 8rem;
+        margin: 0;
+        margin-left: auto;
+        margin-right: 10rem;
+        text-align: center;
+        border-radius: 0.6rem;
+    }
+
+    &__createAccount {
+        color: var(--c-black);
+        padding: 2.7rem 0;
+        font-size: 2.7rem;
+        font-family: var(--font-PTSans);
+        font-weight: bold;
+    }
+
+    &__enlace {
+        color: var(--c-black);
+        font-family: var(--font-PTSans);
+        margin-top: 1.5rem;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    &__enlace:hover {
+        opacity: 1;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: var(--c-mainColor);
+        font-weight: bold;
+    }
+
+    &__link:hover {
+        color: var(--c-secondColor);
+    }
+
+    &__error-message {
+        font-size: 2rem;
+        color: var(--c-wrong);
+        font-weight: 400;
+    }
+
+    &__custom-loading-text {
+        color: var(--c-mainColor);
+        text-align: center;
+        margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .register-container {
+        height: 95vh;
+    }
+
+    .registerPage {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        &__form {
+            width: 100%;
+            max-width: 25rem;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        &__createAccount {
+            font-size: 2rem;
+            padding: 1.5rem 0;
+        }
+
+        &__iconos {
+            flex-direction: row;
+            margin-top: 1.5rem;
+        }
+
+        &__borderIcon {
+            margin-bottom: 1rem;
+            height: 2rem;
+            width: 2rem;
+            font-size: 2.5rem;
+        }
+
+        &__enlace {
+            margin-bottom: 1.25rem;
+            font-size: 1.25rem;
+        }
+    }
+}

@@ -1,6 +1,23 @@
 @import './base/base';
 @import './base/variables';
 
-@import './components/carouselHome';
+@import './components/Navigation/navigation';
+@import './components/Home/carouselHome';
+@import './components/Home/whatsApp';
+@import './components/Login&register/login';
+@import './components/Login&register/register';
+@import './components/Login&register/recoverPassword';
+@import './components/Footer/footer';
+@import './components/SearchBar/searchBar';
+@import './components//Modal/modal';
+@import './components/Items/items';
+@import './components/Product/_product';
+@import './components/Category/Category';
+@import './components/Featured/featured';
+@import './components/Offer/offer';
 
 @import './pages/Home';
+@import './pages/loginPage';
+@import './pages/registerPage';
+@import './pages/recoverPasswordPage';
+@import './pages/cartView'
