@@ -32,10 +32,8 @@ const SearchBar = () => {
       const searchResults = await getSearchResults(searchText);
 
       if (searchResults.length > 0) {
-        // For simplicity, navigate to the first result
         navigate(`/product/${searchResults[0]._id}`);
       } else {
-        // Handle case when no results are found
         console.log("No results found");
       }
     }

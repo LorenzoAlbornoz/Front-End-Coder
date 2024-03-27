@@ -1,5 +1,3 @@
-// Home.jsx
-
 import React from 'react';
 import CarouselHome from '../components/Home/CarouselHome';
 import ShippingType from '../components/Home/ShippingType';

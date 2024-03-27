@@ -52,7 +52,7 @@ const CategoryTable = () => {
           title: 'Error en la eliminación',
           text: 'Debes iniciar sesión para eliminar una Categoria.',
         });
-        return; // Detén la ejecución si no hay un token
+        return;
       }
 
       const decodedToken = jwtDecode(token);
@@ -65,7 +65,7 @@ const CategoryTable = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        return; // Detén la ejecución si el usuario no es administrador
+        return;
       }
       Swal.fire({
         title: "¿Estas seguro?",

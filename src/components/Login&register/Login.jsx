@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from "../../config/axiosInstance";
 import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
-import styled, { keyframes } from "styled-components"; 
+import styled, { keyframes } from "styled-components";
 import { FaExclamationCircle } from 'react-icons/fa';
 
 const Login = () => {
@@ -69,13 +69,13 @@ const Login = () => {
  }
 `;
 
-const SpinnerContainer = styled.div`
+  const SpinnerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const Spinner = styled.div`
+  const Spinner = styled.div`
   animation: ${rotate360} 1s linear infinite;
   transform: translateZ(0);
   border-top: 2px solid var(--c-mainColor);
@@ -87,57 +87,57 @@ const Spinner = styled.div`
   height: 40px;
   border-radius: 50%;
 `;
-const CustomLoader = () => (
-  <div style={{ padding: "24px" }}>
-  <SpinnerContainer>
-    <Spinner />
-  </SpinnerContainer>
-    <div className="loginPage__custom-loading-text">Cargando...</div>
-  
-  </div>
-);
+  const CustomLoader = () => (
+    <div style={{ padding: "24px" }}>
+      <SpinnerContainer>
+        <Spinner />
+      </SpinnerContainer>
+      <div className="loginPage__custom-loading-text">Cargando...</div>
 
-return (
-  <div className="login">
-    {isLoading ? (
-      <CustomLoader />
-    ) : (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            className="login__input"
-            {...register("email")}
-          />
-          {errors.email && (
-            <p className="register__error-message">
-              <FaExclamationCircle /> {errors.email.message}
-            </p>
-          )}
-        </div>
-        <div>
-          <input
-            type="password"
-            name="password"
-            className="login__input"
-            placeholder="Contraseña"
-            {...register("password")}
-          />
-          {errors.password && (
-            <p className="register__error-message">
-              <FaExclamationCircle /> {errors.password.message}
-            </p>
-          )}
-          <button type="submit" className="login__button">
-            Ingresar
-          </button>
-        </div>
-      </form>
-    )}
-  </div>
-);
+    </div>
+  );
+
+  return (
+    <div className="login">
+      {isLoading ? (
+        <CustomLoader />
+      ) : (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              className="login__input"
+              {...register("email")}
+            />
+            {errors.email && (
+              <p className="register__error-message">
+                <FaExclamationCircle /> {errors.email.message}
+              </p>
+            )}
+          </div>
+          <div>
+            <input
+              type="password"
+              name="password"
+              className="login__input"
+              placeholder="Contraseña"
+              {...register("password")}
+            />
+            {errors.password && (
+              <p className="register__error-message">
+                <FaExclamationCircle /> {errors.password.message}
+              </p>
+            )}
+            <button type="submit" className="login__button">
+              Ingresar
+            </button>
+          </div>
+        </form>
+      )}
+    </div>
+  );
 };
 
 export default Login;

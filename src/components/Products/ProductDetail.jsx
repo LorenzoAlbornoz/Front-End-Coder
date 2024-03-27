@@ -34,8 +34,8 @@ border-radius: 50%;
 
 const CustomLoader = () => (
   <div style={{ padding: "24px" }}>
-      <Spinner />
-      <div className="text-center">Cargando...</div>
+    <Spinner />
+    <div className="text-center">Cargando...</div>
   </div>
 );
 
@@ -47,7 +47,7 @@ const convertToPesos = (numb) => {
     });
     return pesos;
   } else {
-    return ''; 
+    return '';
   }
 };
 
@@ -60,14 +60,11 @@ const ProductDetail = ({ product }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Simula un retraso en la carga con un timeout
         await new Promise(resolve => setTimeout(resolve, 2000));
 
-        // Establece loading en falso una vez que los datos están cargados (o ocurrió un error)
         setLoading(false);
       } catch (error) {
         console.error('Error al obtener los datos del producto:', error);
-        // Maneja el error si es necesario
         setLoading(false);
       }
     };
@@ -78,41 +75,34 @@ const ProductDetail = ({ product }) => {
 
   const handleAddToCart = async () => {
     try {
-      // Intenta obtener el token del localStorage
       const localStorageToken = localStorage.getItem('codertoken');
       let decodedToken;
-  
+
       if (localStorageToken) {
-        // Si hay un token en localStorage, decodifícalo
         decodedToken = jwtDecode(localStorageToken);
       } else {
-        // Si no hay un token en localStorage, intenta obtener la cookie 'user_data'
         const cookieUserData = Cookies.get('user_data');
-  
+
         if (!cookieUserData) {
-          // Si no hay token en localStorage ni cookie 'user_data', muestra un mensaje
           Swal.fire('Inicia sesión', 'Debes iniciar sesión para agregar un producto a tu carrito', 'info');
           return;
         }
-  
-        // Si hay una cookie 'user_data', parsea la información
+
         decodedToken = JSON.parse(cookieUserData);
       }
-  
-      const cartId = decodedToken.cart; // Obtén el ID del carrito del token
-  
-      // Realiza la solicitud POST para agregar el producto al carrito
+
+      const cartId = decodedToken.cart;
+
       await axiosInstance.post(`/cart/${cartId}/product/${product._id}`);
 
       updateCartQuantity(cartId);
-  
+
       Swal.fire('Añadido al carrito', '', 'success');
     } catch (error) {
       console.error('Error al agregar el producto al carrito:', error);
-  
-      // Accede al mensaje de error en la respuesta de axios
+
       const errorMessage = error.response?.data?.error || 'Hubo un error al agregar el producto al carrito';
-  
+
       Swal.fire('Error', errorMessage, 'error');
     }
   };
@@ -123,10 +113,10 @@ const ProductDetail = ({ product }) => {
 
   return (
     <>
-  {loading ? (
-      <CustomLoader />
-    ) : (
-      <div className="container mt-4">
+      {loading ? (
+        <CustomLoader />
+      ) : (
+        <div className="container mt-4">
           <div className="row">
             <div className="col-lg-7 text-center">
               <div className="mb-3">
@@ -173,7 +163,7 @@ const ProductDetail = ({ product }) => {
                   </button>
                 </div>
                 <p><RiLockFill /> Compra Protegida</p>
-                <hr className='mt-5'/>
+                <hr className='mt-5' />
                 <h4 className="text-center ">
                   Tenemos la mejor financiación para vos!
                 </h4>

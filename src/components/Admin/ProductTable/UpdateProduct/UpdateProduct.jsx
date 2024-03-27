@@ -41,74 +41,68 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
     }, [])
 
     const handleImage = (e) => {
-        setImgFiles(e.target.files);  // Solo guarda un archivo en lugar de una lista
+        setImgFiles(e.target.files);
     };
 
     const onSubmit = async (data) => {
         try {
-          const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
-      
-          // Verifica si hay un token
-          if (!token) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error en la actualización',
-              text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
-            });
-            return; // Detén la ejecución si no hay un token
-          }
-      
-          console.log('Datos antes de la actualización:', data);
-      
-          const formData = new FormData();
-          formData.append('title', data.title);
-          formData.append('description', data.description.replace(/\n/g, 'saltosDeUsuario'));
-          formData.append('price', data.price);
-          formData.append('category', data.category);
-          formData.append('code', data.code);
-          formData.append('stock', data.stock);
-      
-          // Si hay imágenes, agregarlas al FormData
-          if (imgFiles && imgFiles.length > 0) {
-            for (let i = 0; i < imgFiles.length; i++) {
-              formData.append('images', imgFiles[i]);
+            const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
+
+            if (!token) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error en la actualización',
+                    text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
+                });
+                return;
             }
-          }
-      
-          // Intenta hacer la solicitud
-          const response = await axiosInstance.put(`/product/${datoProduct._id}`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          });
-      
-          // Verifica el estado de la respuesta
-          if (response.status === 200 && response.data.status === 'OK') {
-            Swal.fire({
-              icon: 'success',
-              title: 'Producto modificado con éxito',
+
+            console.log('Datos antes de la actualización:', data);
+
+            const formData = new FormData();
+            formData.append('title', data.title);
+            formData.append('description', data.description.replace(/\n/g, 'saltosDeUsuario'));
+            formData.append('price', data.price);
+            formData.append('category', data.category);
+            formData.append('code', data.code);
+            formData.append('stock', data.stock);
+
+            if (imgFiles && imgFiles.length > 0) {
+                for (let i = 0; i < imgFiles.length; i++) {
+                    formData.append('images', imgFiles[i]);
+                }
+            }
+
+            const response = await axiosInstance.put(`/product/${datoProduct._id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
             });
-          } else {
-            // Si hay un error en la respuesta, muestra el mensaje de error
-            Swal.fire({
-              icon: 'error',
-              title: 'Error en la actualización',
-              text: response.data,
-            });
-          }
+
+            if (response.status === 200 && response.data.status === 'OK') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Producto modificado con éxito',
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error en la actualización',
+                    text: response.data,
+                });
+            }
         } catch (error) {
-          // Si hay un error en el proceso, muestra el mensaje de error
-          console.error('Error al modificar el producto:', error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Error en la actualización',
-            text: `${error.response?.data?.data || 'Error desconocido'}`,
-          });
+            console.error('Error al modificar el producto:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en la actualización',
+                text: `${error.response?.data?.data || 'Error desconocido'}`,
+            });
         } finally {
-          getProducts();
+            getProducts();
         }
-      };
-      
+    };
+
 
     return (
         <div>
@@ -162,7 +156,7 @@ const UpdateProduct = ({ datoProduct, getProducts }) => {
                     <Form.Label htmlFor="nombre">Categoria</Form.Label>
                     <Form.Select
                         name="category"
-                        defaultValue={formDatos.category._id}  // Proporciona solo el ID de la categoría
+                        defaultValue={formDatos.category._id}
                         {...register("category")}
                     >
                         <option value="">Seleccione una categoría</option>

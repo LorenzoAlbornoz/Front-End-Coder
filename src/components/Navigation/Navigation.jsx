@@ -46,25 +46,22 @@ const Navigation = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem('codertoken');
-        Cookies.remove('user_data'); // Eliminar el token de las cookies también
+        Cookies.remove('user_data'); 
         navigate('/');
       }
     });
   };
 
   useEffect(() => {
-    // Actualizar la cantidad del carrito al cargar el componente
     updateCartQuantity(cartId);
   
-    // Configurar temporizador para cerrar sesión después de 1 hora
-    const logoutTimeout = 60 * 60 * 1000; // 1 hora en milisegundos
+    const logoutTimeout = 60 * 60 * 1000; 
     const timeoutId = setTimeout(() => {
       localStorage.removeItem('codertoken');
-      Cookies.remove('user_data'); // Eliminar el token de las cookies también
+      Cookies.remove('user_data'); 
       navigate('/');
     }, logoutTimeout);
   
-    // Limpiar temporizador al desmontar el componente
     return () => {
       clearTimeout(timeoutId);
     };
@@ -82,7 +79,7 @@ const Navigation = () => {
   );
 
   const handleUnauthorizedAccess = (event) => {
-    event.preventDefault(); // Evitar que el enlace redireccione inmediatamente
+    event.preventDefault();
   
     Swal.fire({
       title: 'Inicia sesión',

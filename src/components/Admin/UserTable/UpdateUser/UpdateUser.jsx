@@ -11,7 +11,7 @@ import { FaExclamationCircle } from 'react-icons/fa';
 
 const UpdateUser = ({ datoUser, getUsers }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
-    resolver: yupResolver(UPDATE_USER_SCHEMA), // Asegúrate de tener el esquema de validación correcto
+    resolver: yupResolver(UPDATE_USER_SCHEMA), 
   });
 
   const { role } = datoUser;
@@ -23,20 +23,18 @@ const UpdateUser = ({ datoUser, getUsers }) => {
     try {
       const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
 
-      // Verifica si hay un token
       if (!token) {
         Swal.fire({
           icon: 'error',
           title: 'Error en la actualización',
           text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
         });
-        return; // Detén la ejecución si no hay un token
+        return; 
       }
 
       const decodedToken = jwtDecode(token);
       const userRole = decodedToken.role;
 
-      // Verifica si el usuario tiene el rol de administrador
       if (userRole !== 'admin') {
         Swal.fire({
           icon: 'error',
@@ -44,18 +42,15 @@ const UpdateUser = ({ datoUser, getUsers }) => {
           showConfirmButton: false,
           timer: 1500,
         });
-        return; // Detén la ejecución si el usuario no es administrador
+        return; 
       }
 
-      // Puedes construir el objeto de datos para la solicitud de actualización
       const updatedUserData = {
         role: data.role,
       };
 
-      // Realiza la solicitud de actualización del usuario
       const response = await axiosInstance.put(`/user/${datoUser._id}`, updatedUserData);
 
-      // Verifica el estado de la respuesta
       if (response.status === 200) {
         Swal.fire({
           icon: 'success',
@@ -65,7 +60,6 @@ const UpdateUser = ({ datoUser, getUsers }) => {
     } catch (error) {
       console.error('Error al modificar el usuario:', error);
 
-      // Maneja otros errores aquí, si es necesario
       Swal.fire({
         icon: 'error',
         title: 'Error en la actualización',
@@ -86,7 +80,7 @@ const UpdateUser = ({ datoUser, getUsers }) => {
             type="text"
             id="role"
             name="role"
-            defaultValue={formDatos.role} // Puedes mostrar el rol actual aquí
+            defaultValue={formDatos.role} 
             {...register('role')}
           />
           {errors.role && (

@@ -23,7 +23,6 @@ const OfferList = ({ allProducts }) => {
               const decodedToken = jwtDecode(localStorageToken);
               userId = decodedToken.sub;
             } else {
-              // Resto del código para obtener userId desde Cookies si es necesario
             }
     
             if (userId) {

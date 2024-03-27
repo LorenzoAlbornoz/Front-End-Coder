@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 import Cookies from 'js-cookie';
 import { FaExclamationCircle } from 'react-icons/fa';
 
-const CategoryCreation = ({ getCategories}) => {
+const CategoryCreation = ({ getCategories }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(UPDATE_CATEGORY_SCHEMA)
   });
@@ -32,15 +32,14 @@ const CategoryCreation = ({ getCategories}) => {
   const onSubmit = async (data) => {
     try {
       const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
-      
-      // Verifica si hay un token
+
       if (!token) {
         Swal.fire({
           icon: 'error',
           title: 'Error en la actualización',
           text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
         });
-        return; // Detén la ejecución si no hay un token
+        return;
       }
       const formData = new FormData();
       formData.append('name', data.name);
@@ -58,11 +57,11 @@ const CategoryCreation = ({ getCategories}) => {
       reset();
     } catch (error) {
     } finally {
-        getCategories()
-       }
+      getCategories()
+    }
   };
 
- return (
+  return (
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3">

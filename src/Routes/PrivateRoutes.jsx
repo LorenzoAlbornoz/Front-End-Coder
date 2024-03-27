@@ -7,7 +7,6 @@ const useAuth = () => {
   const cookieUserData = Cookies.get("user_data");
 
   if (!localStorageToken && !cookieUserData) {
-    // No hay token ni user_data, redirigir al usuario a la página de inicio de sesión
     return <Navigate to="/login" />;
   }
 };

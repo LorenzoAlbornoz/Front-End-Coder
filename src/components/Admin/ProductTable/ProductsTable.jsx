@@ -30,7 +30,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
     const deleteCurso = async (row) => {
         try {
             const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
-    
+
             if (!token) {
                 Swal.fire({
                     icon: 'error',
@@ -39,7 +39,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
                 });
                 return;
             }
-    
+
             Swal.fire({
                 title: "¿Estás seguro?",
                 text: "No podrás revertir esto.",
@@ -145,7 +145,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
             name: "Detallado",
             selector: (row) => {
                 const maxDescriptionLength = 50;
-                const description = row.description || ""; // Verifica si row.description es undefined
+                const description = row.description || "";
                 return description.length > maxDescriptionLength ? (
                     <>{description.slice(0, maxDescriptionLength) + "... "}</>
                 ) : (
@@ -219,7 +219,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
             selector: (row) => {
                 return (
                     <div>
-                                <button
+                        <button
                             className="btn btn-secondary btn-md me-3 "
                             onClick={() => changeFeaturedStatus(row)}
                         >
@@ -241,7 +241,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
                             className="btn btn-danger btn-md "
                             onClick={() => deleteCurso(row._id)}
                         >
-                           X
+                            X
                         </button>
                     </div>
                 );
@@ -308,16 +308,16 @@ const ProductsTable = ({ allProducts, getProducts }) => {
                 pagination
             />
             <UpdateModal
-            show={showUpdateModal}
-            handleClose={handleCloseUpdateModal}
-            datoProduct={datoProduct}
-            getProducts={getProducts}
+                show={showUpdateModal}
+                handleClose={handleCloseUpdateModal}
+                datoProduct={datoProduct}
+                getProducts={getProducts}
             />
             <ProductModal
-            show={showAddModal}
-            handleClose={handleCloseAddModal}
-            datoProduct={datoProduct}
-            getProducts={getProducts}
+                show={showAddModal}
+                handleClose={handleCloseAddModal}
+                datoProduct={datoProduct}
+                getProducts={getProducts}
             />
         </>
     )

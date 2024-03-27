@@ -11,7 +11,7 @@ import { FaExclamationCircle } from 'react-icons/fa';
 
 const UpdateCategory = ({ datoCategory, getCategories }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
-    resolver: yupResolver(UPDATE_CATEGORY_SCHEMA), // Asegúrate de tener el esquema de validación correcto
+    resolver: yupResolver(UPDATE_CATEGORY_SCHEMA),
   });
   const [imgFile, setImgFile] = useState(null);
   const { name, image } = datoCategory;
@@ -21,27 +21,25 @@ const UpdateCategory = ({ datoCategory, getCategories }) => {
   });
 
   const handleImage = (e) => {
-    setImgFile(e.target.files[0]);  // Solo guarda un archivo en lugar de una lista
+    setImgFile(e.target.files[0]);
   };
 
   const onSubmit = async (data) => {
     try {
       const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
 
-      // Verifica si hay un token
       if (!token) {
         Swal.fire({
           icon: 'error',
           title: 'Error en la actualización',
           text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
         });
-        return; // Detén la ejecución si no hay un token
+        return;
       }
 
       const decodedToken = jwtDecode(token);
       const userRole = decodedToken.role;
 
-      // Verifica si el usuario tiene el rol de administrador
       if (userRole !== 'admin') {
         Swal.fire({
           icon: 'error',
@@ -49,13 +47,12 @@ const UpdateCategory = ({ datoCategory, getCategories }) => {
           showConfirmButton: false,
           timer: 1500,
         });
-        return; // Detén la ejecución si el usuario no es administrador
+        return;
       }
 
       const formData = new FormData();
       formData.append('name', data.name);
 
-      // Solo agregar la nueva imagen si se seleccionó una
       if (imgFile) {
         formData.append('image', imgFile);
       }
@@ -96,7 +93,7 @@ const UpdateCategory = ({ datoCategory, getCategories }) => {
             type="text"
             id="name"
             name="name"
-            defaultValue={formDatos.name} // Puedes mostrar el rol actual aquí
+            defaultValue={formDatos.name}
             {...register('name')}
           />
           {errors.name && (

@@ -8,7 +8,6 @@ const CategoryList = ({ onCategoryClick }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    // Hacer la solicitud al endpoint de categorías
     axiosInstance
       .get('/categories')
       .then((response) => setCategories(response.data.categories))
@@ -25,7 +24,7 @@ const CategoryList = ({ onCategoryClick }) => {
       />
     );
   }
-  
+
   function SamplePrevArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -43,12 +42,12 @@ const CategoryList = ({ onCategoryClick }) => {
     slidesToShow: 8,
     slidesToScroll: 1,
     responsive: [
-        {
-            breakpoint: 768,
-            settings: {
-                slidesToShow: 4,
-                nextArrow: <SampleNextArrow />,
-                prevArrow: <SamplePrevArrow />,
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 4,
+          nextArrow: <SampleNextArrow />,
+          prevArrow: <SamplePrevArrow />,
         },
       },
     ],

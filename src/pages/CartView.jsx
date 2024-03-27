@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 import styled, { keyframes } from "styled-components";
 import { FaSyncAlt, FaTrashAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import {useCart} from '../Context/CartContext'
+import { useCart } from '../Context/CartContext'
 
 const CartView = () => {
   const { updateCartQuantity } = useCart();
@@ -17,7 +17,7 @@ const CartView = () => {
 
   const getUserInfo = () => {
     const token = localStorage.getItem('codertoken');
-  
+
     if (token) {
       const decodedToken = jwtDecode(token);
       return {
@@ -25,15 +25,15 @@ const CartView = () => {
         cartId: decodedToken.cart,
       };
     }
-  
+
     const userDataCookie = Cookies.get('user_data');
-  
+
     if (userDataCookie) {
       const userData = JSON.parse(userDataCookie);
       return {
         userId: userData.sub,
         cartId: userData.cart,
-       
+
       };
     }
     return null;
@@ -51,7 +51,6 @@ const CartView = () => {
           const response = await axiosInstance.get(`/cart/${cartId}`);
           setCart(response.data);
 
-          // Inicializar las cantidades en el estado
           const initialQuantities = {};
           response.data.products.forEach((item) => {
             initialQuantities[item.product._id] = item.quantity;
@@ -72,24 +71,20 @@ const CartView = () => {
     const newQuantity = newQuantities[productId];
 
     try {
-      // Usar Axios para enviar la solicitud de actualización con el método PUT
       const response = await axiosInstance.put(`/cart/${cartId}/product/${productId}`, { quantity: newQuantity });
 
-      // Mostrar una alerta indicando que la cantidad se ha actualizado
-      console.log("Response from server:", response.data);  // Agregado para verificar la respuesta del servidor
+      console.log("Response from server:", response.data);
       Swal.fire({
         icon: 'success',
         title: '¡Éxito!',
         text: 'Cantidad del producto actualizada exitosamente',
       });
 
-      // Actualizar el carrito después de la actualización
       const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
       setCart(updatedCart.data);
 
       updateCartQuantity(cartId);
     } catch (error) {
-      // Mostrar una alerta indicando que ha ocurrido un error
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -116,7 +111,6 @@ const CartView = () => {
       if (result.isConfirmed) {
         await axiosInstance.delete(`/cart/${cartId}/product/${productId}`);
 
-        // Actualizar el carrito después de la actualización
         const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
         setCart(updatedCart.data);
 
@@ -143,7 +137,6 @@ const CartView = () => {
       if (result.isConfirmed) {
         await axiosInstance.delete(`/cleanCart/${cartId}`);
 
-        // Actualizar el carrito después de la eliminación
         const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
         setCart(updatedCart.data);
 
@@ -176,18 +169,15 @@ const CartView = () => {
     });
 
     if (result.isConfirmed) {
-      // Enviar la solicitud para finalizar la compra
       const cartId = cart._id;
       try {
         await axiosInstance.post(`/cart/${cartId}/user/${userId}/purchase`);
 
-        // Obtener el carrito actualizado después de la compra
         const updatedCart = await axiosInstance.get(`/cart/${cartId}`);
-        setCart(updatedCart.data); // Actualizar el estado del carrito en el componente
-        // Puedes redirigir al usuario a una página de confirmación aquí si es necesario
+        setCart(updatedCart.data);
 
         updateCartQuantity(cartId);
-        
+
         Swal.fire({
           icon: 'success',
           title: '¡Compra Finalizada!',
@@ -221,14 +211,14 @@ const CartView = () => {
     transform: rotate(360deg);
   }
  `;
- 
- const SpinnerContainer = styled.div`
+
+  const SpinnerContainer = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
  `;
- 
- const Spinner = styled.div`
+
+  const Spinner = styled.div`
    animation: ${rotate360} 1s linear infinite;
    transform: translateZ(0);
    border-top: 2px solid var(--c-mainColor);
@@ -241,19 +231,19 @@ const CartView = () => {
    border-radius: 50%;
  `;
 
- const CustomLoader = () => (
-   <div style={{ padding: "24px" }}>
-   <SpinnerContainer>
-     <Spinner />
-   </SpinnerContainer>
-     <div className="loginPage__custom-loading-text">Cargando...</div>
-   
-   </div>
- );
+  const CustomLoader = () => (
+    <div style={{ padding: "24px" }}>
+      <SpinnerContainer>
+        <Spinner />
+      </SpinnerContainer>
+      <div className="loginPage__custom-loading-text">Cargando...</div>
 
- if (isLoading) {
-  return <CustomLoader />;
-}
+    </div>
+  );
+
+  if (isLoading) {
+    return <CustomLoader />;
+  }
 
   if (!cart || cart.products.length === 0) {
     return <p className="important-titles">No hay productos en el carrito.</p>;
@@ -293,7 +283,7 @@ const CartView = () => {
                   name={`quantity-${item._id}`}
                   value={newQuantities[item.product._id]}
                   onChange={(event) => handleQuantityChange(item.product._id, event)}
-                  className="form-control" // Agregada clase Bootstrap para estilos de formulario
+                  className="form-control"
                 >
                   {[1, 2, 3, 4, 5].map((option) => (
                     <option key={option} value={option}>
@@ -333,17 +323,17 @@ const CartView = () => {
             </td>
             <td>
               <form id="cartForm" onSubmit={confirmPurchase} data-cart-id={cart._id}>
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={() => clearCart(cart._id)}
-              >
-                Vaciar Carrito
-              </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => clearCart(cart._id)}
+                >
+                  Vaciar Carrito
+                </button>
                 <button type="submit" className="btn btn-success">
                   Finalizar Compra
                 </button>
-           
+
               </form>
             </td>
           </tr>

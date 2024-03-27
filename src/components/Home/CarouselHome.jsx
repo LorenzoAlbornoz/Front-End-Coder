@@ -13,12 +13,12 @@ const CarouselHome = () => {
           />
         </Carousel.Item>
         <Carousel.Item>
-          <img 
+          <img
             className="d-block w-100 img-fluid"
             src="https://res.cloudinary.com/dcwpf7ghu/image/upload/v1704944089/img2_mo4ine.webp"
             alt="Second slide"
           />
-          
+
         </Carousel.Item>
         <Carousel.Item>
           <img

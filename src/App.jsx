@@ -24,14 +24,13 @@ function App() {
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/repassword' element={<RecoverPasswordPage />} />
         <Route path="/reset_password/:id/:token" element={<ResetPage />}></Route>
-        {/* <Route path='*' element={<Error404/>} /> */}
         <Route path='/product/:id' element={<ProductDetailPage />} />
         <Route path='/products' element={<Products />} />
         <Route element={<PrivateRoutes />}>
-            <Route path='/cart/:cardId' element={<CartView />} />
-            <Route path='/favorite' element={<Favorite />} />
-            <Route path='/admin' element={<Admin />} />
-          </Route>
+          <Route path='/cart/:cardId' element={<CartView />} />
+          <Route path='/favorite' element={<Favorite />} />
+          <Route path='/admin' element={<Admin />} />
+        </Route>
       </Routes>
       <Footer />
     </>

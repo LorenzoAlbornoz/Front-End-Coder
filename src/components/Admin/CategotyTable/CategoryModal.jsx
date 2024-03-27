@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import CategoryCreation from './CategoryCreation';
 
-const CategoryModal = ({show, handleClose, getCategories}) => {
+const CategoryModal = ({ show, handleClose, getCategories }) => {
 
   return (
     <>
@@ -12,7 +12,7 @@ const CategoryModal = ({show, handleClose, getCategories}) => {
           <Modal.Title>Agregar Categoria</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <CategoryCreation getCategories={getCategories}/>
+          <CategoryCreation getCategories={getCategories} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

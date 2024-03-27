@@ -6,11 +6,11 @@ import { axiosInstance } from '../config/axiosInstance'
 const Product = () => {
 
   const [product, setProduct] = useState([])
-  
+
   const { id } = useParams()
 
   const getProduct = async () => {
-    try { 
+    try {
       const resp = await axiosInstance.get(`/product/${id}`)
       setProduct(resp.data.product)
     } catch (error) {
@@ -21,14 +21,14 @@ const Product = () => {
   useEffect(() => {
     getProduct()
   }, [id])
-  
+
 
   return (
     <div className='mb-4'>
       {
-          <>
-            <ProductDetail product={product} />
-          </>
+        <>
+          <ProductDetail product={product} />
+        </>
       }
     </div>
   )

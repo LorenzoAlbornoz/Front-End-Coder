@@ -98,14 +98,14 @@ export const FORM_SCHEMA = yup.object().shape({
         .test('is-positive', 'El stock no puede ser un número negativo', (value) => value >= 0)
 });
 
-  export const UPDATE_USER_SCHEMA = yup.object({
+export const UPDATE_USER_SCHEMA = yup.object({
     role: yup.string()
-      .required("El rol es requerido")
-      .oneOf(['admin', 'premium', 'user'], 'Rol no válido')
-  });
+        .required("El rol es requerido")
+        .oneOf(['admin', 'premium', 'user'], 'Rol no válido')
+});
 
-  export const UPDATE_CATEGORY_SCHEMA = yup.object({
+export const UPDATE_CATEGORY_SCHEMA = yup.object({
     name: yup.string()
-    .required("El nombre es requerido")
-    .max(30, "El nombre no puede tener más de 30 caracteres"),
-  });
+        .required("El nombre es requerido")
+        .max(30, "El nombre no puede tener más de 30 caracteres"),
+});

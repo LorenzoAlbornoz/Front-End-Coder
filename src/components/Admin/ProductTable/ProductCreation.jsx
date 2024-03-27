@@ -24,7 +24,7 @@ const ProductCreation = ({ getProducts }) => {
     stock: ''
   });
 
- const getCategorias = async () => {
+  const getCategorias = async () => {
     try {
       const resp = await axiosInstance.get('/categories');
       setCategories(resp.data.categories);
@@ -51,15 +51,14 @@ const ProductCreation = ({ getProducts }) => {
   const onSubmit = async (data) => {
     try {
       const token = localStorage.getItem('codertoken') || Cookies.get('codertoken');
-      
-      // Verifica si hay un token
+
       if (!token) {
         Swal.fire({
           icon: 'error',
           title: 'Error en la actualización',
           text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
         });
-        return; // Detén la ejecución si no hay un token
+        return;
       }
       const formData = new FormData();
       formData.append('title', data.title);
@@ -74,7 +73,7 @@ const ProductCreation = ({ getProducts }) => {
           formData.append('images', imgFiles[i]);
         }
       }
-      
+
       await axiosInstance.post('/product', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -88,11 +87,11 @@ const ProductCreation = ({ getProducts }) => {
     } catch (error) {
       console.error('Error al modificar el producto:', error);
     } finally {
-     getProducts()
+      getProducts()
     }
   };
 
- return (
+  return (
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3">
@@ -189,7 +188,7 @@ const ProductCreation = ({ getProducts }) => {
             </p>
           )}
         </Form.Group>
-        
+
         <Form.Group className="mb-3">
           <Form.Label htmlFor="nombre">Stock</Form.Label>
           <Form.Control

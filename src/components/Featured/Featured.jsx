@@ -5,22 +5,22 @@ import FeaturedList from './FeaturedList';
 const Featured = () => {
   const [allProducts, setAllProducts] = useState([])
 
-    const getProducts = async () => {
-        try {
-           const resp = await axiosInstance.get("/products")
-        setAllProducts(resp.data.products)
-        } catch (error) {
-          console.log(error)
-        }
-      }
-      
-      useEffect(() =>{
-        getProducts()
-      }, [])
+  const getProducts = async () => {
+    try {
+      const resp = await axiosInstance.get("/products")
+      setAllProducts(resp.data.products)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getProducts()
+  }, [])
 
   return (
-      <div>
- <h1 className='important-titles'>Productos Destacados</h1>
+    <div>
+      <h1 className='important-titles'>Productos Destacados</h1>
       <FeaturedList allProducts={allProducts} getProducts={getProducts} />
     </div>
   );

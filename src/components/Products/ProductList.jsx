@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import ProductSkeleton from '../Skeleton/ProductSkeleton';
 import Cookies from 'js-cookie';
 import CategoryList from './CategoryList';
-import SelectorBar from './SelectorBar';  // Asegúrate de importar SelectorBar
+import SelectorBar from './SelectorBar';
 import { axiosInstance } from '../../config/axiosInstance';
 
 const sortProducts = (products, order) => {
@@ -30,7 +30,7 @@ const ProductList = ({ allProducts }) => {
   const [favorites, setFavorites] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
-  const [selectedOrder, setSelectedOrder] = useState('1');  // Agrega el estado para la orden
+  const [selectedOrder, setSelectedOrder] = useState('1');
 
   useEffect(() => {
     const getFavorite = async () => {
@@ -74,10 +74,8 @@ const ProductList = ({ allProducts }) => {
 
       const totalFilteredProducts = response.data.products.length;
 
-      // Ajustar la página actual si es necesario
       const newPage = Math.ceil(totalFilteredProducts / itemsPerPage);
 
-      // Verificar si la página actual necesita ser ajustada
       if (currentPage > newPage) {
         setCurrentPage(newPage > 0 ? newPage : 1);
       }

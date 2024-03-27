@@ -46,13 +46,13 @@ const UserTable = () => {
           title: 'Error en la eliminación',
           text: 'Debes iniciar sesión para eliminar un usuario.',
         });
-        return; // Detén la ejecución si no hay un token
+        return;
       }
-      
+
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.sub;
       const userRole = decodedToken.role;
-      
+
       if (row === userId) {
         Swal.fire({
           icon: 'error',
