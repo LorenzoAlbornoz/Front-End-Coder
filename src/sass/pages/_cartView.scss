@@ -95,3 +95,14 @@
     font-size: 12px;
   }
 }
+
+.out-of-stock {
+  color: #ccc; /* Color gris para productos fuera de stock */
+}
+
+.stock-label {
+  font-size: 12px; /* Tamaño de fuente */
+  color: #ff0000; /* Color rojo para indicar sin stock */
+  font-weight: bold; /* Texto en negrita para resaltar */
+}
+
