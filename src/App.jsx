@@ -13,6 +13,7 @@ import Admin from './pages/Admin.jsx';
 import PrivateRoutes from './Routes/PrivateRoutes.jsx'
 import Favorite from './pages/Favorite.jsx';
 import CartView from './pages/CartView.jsx'
+import PurchaseSuccess from './pages/Success.jsx';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path='/products' element={<Products />} />
         <Route path='/cart/:cardId' element={<CartView />} />
         <Route path='/favorite' element={<Favorite />} />
+        <Route path='/cart/success' element={<PurchaseSuccess/>}/>
         <Route element={<PrivateRoutes />}>
             <Route path='/admin' element={<Admin />} />
           </Route>
