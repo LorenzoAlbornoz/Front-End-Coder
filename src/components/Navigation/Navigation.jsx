@@ -61,11 +61,18 @@ const Navigation = () => {
       Cookies.remove('user_data'); 
       navigate('/');
     }, logoutTimeout);
-  
+
+    const tokenExpirationTimeout = setTimeout(() => {
+      localStorage.removeItem('codertoken');
+      Cookies.remove('user_data');
+      navigate('/login'); 
+    }, logoutTimeout); 
+
     return () => {
       clearTimeout(timeoutId);
+      clearTimeout(tokenExpirationTimeout); 
     };
-  }, [cartId, navigate, userRole, updateCartQuantity]);
+  }, [cartId, navigate, updateCartQuantity]);
 
   const showLogout = isLogged && (
     <div className='row align-items-center flex-column flex-sm-row'>
@@ -134,3 +141,4 @@ const Navigation = () => {
 };
 
 export default Navigation;
+
