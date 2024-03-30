@@ -252,21 +252,24 @@ const CartView = () => {
           </tr>
         </thead>
         <tbody className='tbody'>
-          {cart.products.map((item) => (
-            <tr key={item.product._id}>
-              <td>
-                <div className="row">
-                  <div className="col-sm-2 hidden-xs">
+        {cart.products.map((item) => (
+    <tr key={item.product._id}>
+        <td>
+            <div className="row">
+                <div className="col-sm-2 hidden-xs">
                     <img className="product-image" src={item.product.images[0]} alt={item.product.title} />
-                  </div>
-                  <div className="col-sm-10">
-                    <div>
-                      <h4 className="nomargin">{item.product.title}</h4>
-                      <p className="cart-description">{item.product.description}</p>
-                    </div>
-                  </div>
                 </div>
-              </td>
+                <div className="col-sm-10">
+                    <div>
+                        <h4 className={`nomargin ${item.product.stock === 0 ? 'out-of-stock' : ''}`}>
+                            {item.product.title}
+                            {item.product.stock === 0 && <span className="stock-label"> Sin stock</span>}
+                        </h4>
+                        <p className="cart-description">{item.product.description}</p>
+                    </div>
+                </div>
+            </div>
+        </td>
               <td>{convertToPesos(item.product.price)}</td>
               <td>
                 <select
