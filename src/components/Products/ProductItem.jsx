@@ -118,12 +118,6 @@ const ProductItem = ({ product, favorites }) => {
           <Card.Text className='productCard__description'>
             {product.description}
           </Card.Text>
-          <Card.Text className='productCard__category'>
-            Categoría: {product.category.name}
-          </Card.Text>
-          <Card.Text className='productCard__stock'>
-            Stock disponible: {product.stock}
-          </Card.Text>
         </Card.Body>
         <div className='productCard__footer'>
           <button className='btn btn-primary productCard__button' onClick={handleAddToCart}>
@@ -133,6 +127,6 @@ const ProductItem = ({ product, favorites }) => {
       </Card>
     </>
   );
-};
+}
 
 export default ProductItem;
