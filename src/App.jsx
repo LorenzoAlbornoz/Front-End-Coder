@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Navigation from './components/Navigation/Navigation';
+import Home from './pages/Home.jsx';
+import Navigation from './components/Navigation/Navigation.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import RecoverPasswordPage from './pages/RecoverPasswordPage.jsx'
