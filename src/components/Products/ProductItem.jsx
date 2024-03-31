@@ -127,6 +127,6 @@ const ProductItem = ({ product, favorites }) => {
       </Card>
     </>
   );
-};
+}
 
 export default ProductItem;
