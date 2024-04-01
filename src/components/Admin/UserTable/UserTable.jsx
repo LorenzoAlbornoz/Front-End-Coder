@@ -180,7 +180,7 @@ const UserTable = () => {
     const timeout = setTimeout(() => {
       setRows(allUsers);
       setPending(false);
-    }, 2000);
+    }, 3000);
     return () => clearTimeout(timeout);
   }, [allUsers]);
 

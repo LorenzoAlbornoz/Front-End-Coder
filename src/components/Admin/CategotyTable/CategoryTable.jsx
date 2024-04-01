@@ -168,7 +168,7 @@ const CategoryTable = () => {
     const timeout = setTimeout(() => {
       setRows(allCategories);
       setPending(false);
-    }, 2000);
+    }, 3000);
     return () => clearTimeout(timeout);
   }, [allCategories]);
 

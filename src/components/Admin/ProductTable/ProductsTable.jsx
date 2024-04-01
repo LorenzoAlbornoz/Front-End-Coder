@@ -286,7 +286,7 @@ const ProductsTable = ({ allProducts, getProducts }) => {
         const timeout = setTimeout(() => {
             setRows(allProducts);
             setPending(false);
-        }, 2000);
+        }, 3000);
         return () => clearTimeout(timeout);
     }, [allProducts]);
     return (
