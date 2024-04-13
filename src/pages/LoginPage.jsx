@@ -14,12 +14,12 @@ const LoginPage = () => {
             <Login />
             <div className="loginPage__iconos">
               <div className="loginPage__borderIconFacebook">
-                <a href="https://proyect-back-end-coder-8.onrender.com/api/auth/facebook" className="loginPage__facebook">
+                <a href="https://proyect-back-end-coder-8.onrender.com/api/facebook" className="loginPage__facebook">
                   <BsFacebook size={20} /> Ingresar con Facebook
                 </a>
               </div>
               <div className="loginPage__borderIconGoogle">
-                <a href="https://proyect-back-end-coder-8.onrender.com/api/auth/google" className="loginPage__google">
+                <a href="https://proyect-back-end-coder-8.onrender.com/api/google" className="loginPage__google">
                   <FcGoogle size={20} /> Ingresar con Google
                 </a>
               </div>
