@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const axiosInstance = axios.create({
-  baseURL: `https://proyect-back-end-coder-production.up.railway.app/api`,
+  baseURL: `https://proyect-back-end-coder-8.onrender.com/api`,
   withCredentials: true,
 })
 
