@@ -12,7 +12,7 @@ const LoginPage = () => {
           <div className="loginPage__form">
             <h2 className="loginPage__createAccount">Iniciar Sesión</h2>
             <Login />
-            <div className="loginPage__iconos">
+            {/* <div className="loginPage__iconos">
               <div className="loginPage__borderIconFacebook">
                 <a href="https://proyect-back-end-coder-8.onrender.com/api/facebook" className="loginPage__facebook">
                   <BsFacebook size={20} /> Ingresar con Facebook
@@ -22,7 +22,7 @@ const LoginPage = () => {
                 <a href="https://proyect-back-end-coder-8.onrender.com/api/google" className="loginPage__google">
                   <FcGoogle size={20} /> Ingresar con Google
                 </a>
-              </div>
+              </div> */}
             </div>
             <div className="login__enlace">
               <span>
