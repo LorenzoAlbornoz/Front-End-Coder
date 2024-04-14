@@ -7,7 +7,8 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem("codertoken");
-  if (token) {
+  const userDataCookie = Cookies.get('user_data');
+  if (token  || userDataCookie) {
     config.headers.Authorization = `Bearer ${token}`
   }
   return config
