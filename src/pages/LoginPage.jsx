@@ -22,8 +22,8 @@ const LoginPage = () => {
                 <a href="https://proyect-back-end-coder-8.onrender.com/api/google" className="loginPage__google">
                   <FcGoogle size={20} /> Ingresar con Google
                 </a>
-              </div> */}
-            </div>
+              </div>
+            </div> */}
             <div className="login__enlace">
               <span>
                 <Link to="/repassword" className="login__link">
